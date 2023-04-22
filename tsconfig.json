@@ -1,11 +1,21 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es6",
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
     "outDir": "./dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "./src/@types"
+    ],
+    "paths": {
+      "@swagger/*": ["./src/routes/swagger/*"]
+    }
   },
   "ts-node": {
     "files": true
