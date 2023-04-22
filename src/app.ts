@@ -6,6 +6,8 @@ import cors from "cors";
 
 import indexRouter from "./routes/index";
 
+import "./connections";
+
 const app: express.Application = express();
 
 app.use(cors());
