@@ -5,7 +5,7 @@ const swaggerOptions = {
     openapi: '3.0.0',
     info: {
       title: 'TicketHaven API',
-      version: '1.0.0',
+      version: '0.1.0',
       description: 'API documentation using Swagger',
     },
   },
