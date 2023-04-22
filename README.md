@@ -16,11 +16,11 @@ Before running this project, you must have the following installed:
 ## NPM scripts
 Available development scripts:
 
-- yarn dev： Start the development server.
-- yarn build：Build the production version
-- yarn start：Start the production server.
-- yarn lint：Run ESLint for syntax checking.
-- yarn format: Run Prettier to format code.
+- `yarn dev`： Start the development server.
+- `yarn build`：Build the production version
+- `yarn start`：Start the production server.
+- `yarn lint`：Run ESLint for syntax checking.
+- `yarn format`: Run Prettier to format code.
 
 ## Tech Stack
 Technologies used in this project
