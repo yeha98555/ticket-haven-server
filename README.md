@@ -1,3 +1,5 @@
+![CICD Status](https://github.com/yeha98555/ticket-haven-server/actions/workflows/render.yml/badge.svg)
+
 # Ticket Haven Server
 A server for managing concert tickets.
 
@@ -36,6 +38,7 @@ Technologies used in this project
 ```
 .
 ├── .git                     // Folder for Git version control system
+├── .github                  // Folder for GitHub Actions
 ├── node_modules             // Node.js module folder, storing all dependencies
 ├── src                      // Source code folder
 │   ├── connections          // Folder for connection
