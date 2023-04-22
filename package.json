@@ -7,7 +7,8 @@
     "build": "tsc",
     "start": "node ./bin/www",
     "lint": "eslint src/**/*.ts --fix",
-    "format": "prettier --write '**/*.{ts,js,json,md}'"
+    "format": "prettier --write '**/*.{ts,js,json,md}'",
+    "prepare": "husky install"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -23,6 +24,8 @@
     "swagger-ui-express": "^4.6.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.1",
+    "@commitlint/config-conventional": "^17.6.1",
     "@coolizz/eslint-config": "^1.0.14",
     "@types/cookie-parser": "^1.4.3",
     "@types/cors": "^2.8.13",
@@ -38,6 +41,7 @@
     "concurrently": "^8.0.1",
     "eslint": "^8.39.0",
     "eslint-plugin-import": "^2.27.5",
+    "husky": "^8.0.3",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.7",
     "ts-node": "^10.9.1",
