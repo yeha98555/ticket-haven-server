@@ -11,10 +11,18 @@ Before running this project, you must have the following installed:
 - Docker (v23.0.1 or later, if development with docker env)
 
 ## Installation
+### Local environment:
+
 1. Clone this repository to your local machine.
 2. Run `yarn` in the project directory to install all required dependencies.
-3. Create a `.env` file at the root directory of the project and add the necessary environment variables. See the `.env.sample` file for reference.
+3. Create a `.env` file at the root directory of the project and add the necessary environment variables. Refer to the `.env.sample` file for guidance.
 4. Run `yarn start` or `yarn dev` to start the application.
+
+### Docker environment:
+
+1. Clone this repository to your local machine.
+2. Create a `.env` file at the root directory of the project and add the necessary environment variables. Refer to the `.env.sample` file for guidance.
+3. Run `make up file=prod` or `make up file=dev` to start the application.
 
 ## NPM scripts
 Available development scripts:
