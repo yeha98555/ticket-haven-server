@@ -17,7 +17,7 @@ const headers = {
  * tags:
  *   name: Example
  *   description: Example API
- * 
+ *
  * /:
  *   get:
  *     summary: Example endpoint
@@ -41,8 +41,8 @@ const headers = {
 router.get('/', (req: Request, res: Response) => {
   res.writeHead(200, headers);
   res.write(JSON.stringify({
-      "status": "success",
-      "message": "Welcome to the API"
+    "status": "success",
+    "message": "Welcome to the API"
   }));
   res.end();
   // res.send('Welcome to the API');

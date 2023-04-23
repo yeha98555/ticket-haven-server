@@ -14,12 +14,20 @@
       "./src/@types"
     ],
     "paths": {
-      "@swagger/*": ["./src/routes/swagger/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
   "ts-node": {
     "files": true
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "build"
+  ]
 }
