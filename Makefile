@@ -1,7 +1,7 @@
 DOCKER_COMPOSE= docker compose
 CONTAINER_NAME= node-server
 
-.PHONY: up down restart rm
+.PHONY: up down restart rm shell
 
 
 up:
