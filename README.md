@@ -8,6 +8,7 @@ Before running this project, you must have the following installed:
 
 - Node.js (v16.18.0 or later)
 - Yarn (v3.5.0 or later)
+- Docker (v23.0.1 or later, if development with docker env)
 
 ## Installation
 1. Clone this repository to your local machine.
@@ -25,6 +26,17 @@ Available development scripts:
 - `yarn format`: Run Prettier to format code.
 - `yarn prepare`: Install Husky.
 - `yarn test`: Run Jest for automated tests.
+
+## Make scripts
+If you want to use Docker environment for development, you can use the following command:
+
+- `make up file=dev/prod`: Start the Docker environment using the `dev.yml` or `prod.yml` configuration file, depending on the value of the `file` parameter.
+- `make down file=dev/prod`: Stop and remove the Docker environment using the `dev.yml` or `prod.yml` configuration file, depending on the value of the `file` parameter.
+- `make restart file=dev/prod`: Stop and remove the current Docker environment before starting a new one using the `dev.yml` or `prod.yml` configuration file, depending on the value of the `file` parameter.
+- `make shell`: Enter a running Docker container with an interactive terminal session.
+
+If you want to switch from using a Docker environment to a local environment, you may need to remove the `node_modules` directory with the  `sudo rm -rf node_modules` command and then run `yarn install` to install the dependencies locally. This is necessary because the Docker environment and the local environment may have different configurations and dependencies, and therefore the dependencies installed in one environment may not be compatible with the other environment.
+
 
 ## Tech Stack
 Technologies used in this project
@@ -64,6 +76,10 @@ Technologies used in this project
 ├── .gitignore               // Git ignore configuration, specifying files that don't need version control
 ├── .prettierignore          // Prettier ignore configuration, specifying files that don't need code formatting
 ├── .prettierrc              // Prettier configuration file, used for setting code formatting rules
+├── jest.config.js           // Project configuration file, used by Jest testing framework for JavaScript projects
+├── dev.yml                  // Docker Compose file, defining the development environment for a project
+├── prod.yml                 // Docker Compose file, defining the production environment for a project
+├── Makefile                 // File defining the make command for the execution of Docker Compose commands
 ├── README.md                // Project description file
 ├── package.json             // Project configuration file, containing project information, scripts, and dependencies
 └── yarn.lock                // Yarn lock file, ensuring consistent dependency versions
