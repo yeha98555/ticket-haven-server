@@ -23,6 +23,7 @@ Available development scripts:
 - `yarn start`：Start the production server.
 - `yarn lint`：Run ESLint for syntax checking.
 - `yarn format`: Run Prettier to format code.
+- `yarn prepare`: Install Husky.
 
 ## Tech Stack
 Technologies used in this project
@@ -32,13 +33,15 @@ Technologies used in this project
 - TypeScript: A strongly-typed JavaScript extension, making the development process more reliable and maintainable.
 - ESLint: A static analysis tool for maintaining code quality.
 - Prettier: an opinionated code formatter that automatically formats code to make it more consistent and easier to read.
+- Husky: A tool for managing Git hooks.
 - Swagger: a set of open-source tools for designing, building, documenting, and consuming RESTful web services.
 
 ## Project structure
-```
+```javascript
 .
 ├── .git                     // Folder for Git version control system
 ├── .github                  // Folder for GitHub Actions
+├── .vscode                  // Visual Studio Code configuration folder
 ├── node_modules             // Node.js module folder, storing all dependencies
 ├── src                      // Source code folder
 │   ├── connections          // Folder for connection
