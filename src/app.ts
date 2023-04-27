@@ -1,6 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
 import logger from 'morgan';
-import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
 import { HttpException } from './exceptions/HttpException';
@@ -14,7 +13,6 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 app.use('/', indexRouter);
 
