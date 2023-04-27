@@ -38,4 +38,4 @@ app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
   next(err);
 });
 
-module.exports = app;
+export default app;
