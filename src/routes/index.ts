@@ -9,7 +9,7 @@ const headers = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'PATCH, POST, GET, OPTIONS, DELETE',
   'Content-Type': 'application/json'
-};
+}
 
 /* GET home page. */
 /**
@@ -41,8 +41,8 @@ const headers = {
 router.get('/', (req: Request, res: Response) => {
   res.writeHead(200, headers);
   res.write(JSON.stringify({
-    'status': 'success',
-    'message': 'Welcome to the API'
+    "status": "success",
+    "message": "Welcome to the API"
   }));
   res.end();
   // res.send('Welcome to the API');
