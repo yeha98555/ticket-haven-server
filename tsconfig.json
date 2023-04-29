@@ -9,30 +9,15 @@
     "sourceMap": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "typeRoots": [
-      "node_modules/@types",
-      "./src/@types"
-    ],
-    "types": [
-      "jest",
-      "@types/jest",
-      "node"
-    ],
+    "typeRoots": ["node_modules/@types", "./src/@types"],
+    "types": ["jest", "@types/jest", "node"],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   "ts-node": {
     "files": true
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts",
-    "build"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts", "build"]
 }

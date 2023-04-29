@@ -7,6 +7,9 @@ describe('GET /', () => {
   it('responds with a json message', async () => {
     const response = await request.get('/');
     expect(response.status).toBe(200);
-    expect(response.body).toEqual({ status: 'success', message: 'Welcome to the API' });
+    expect(response.body).toEqual({
+      status: 'success',
+      message: 'Welcome to the API',
+    });
   });
 });
