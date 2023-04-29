@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"tsc -w\" \"nodemon ./bin/www\"",
+    "dev": "nodemon src/index.ts",
     "build": "tsc",
-    "start": "node ./bin/www",
+    "start": "node dist/index",
     "lint": "eslint src/**/*.ts --fix",
     "format": "prettier --write '**/*.{ts,js,json,md}'",
     "prepare": "husky install",
