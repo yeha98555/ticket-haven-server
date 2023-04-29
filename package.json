@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon -r dotenv/config src/index.ts",
     "build": "tsc",
-    "start": "node dist/index",
+    "start": "node -r dotenv/config dist/index",
     "lint": "eslint src/**/*.ts --fix",
     "format": "prettier --write '**/*.{ts,js,json,md}'",
     "prepare": "husky install",

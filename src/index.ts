@@ -3,11 +3,9 @@
  */
 
 import http from 'http';
-import dotenv from 'dotenv';
 import _debug from 'debug';
 import app from './app';
 
-dotenv.config({ path: './.env' });
 const debug = _debug('ticket-haven-server:server');
 
 /**
