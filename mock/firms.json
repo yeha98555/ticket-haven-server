@@ -1,0 +1,52 @@
+[
+  {
+    "id": "644e4370fc13ae30a8842e36",
+    "name": "大情人湖企業有限公司",
+    "bank_code": "812",
+    "bank_account": "24411010067147",
+    "tax_id": "00680409",
+    "created_at": "2021-12-26T18:41:12Z",
+    "updated_at": "2022-04-18T02:24:32Z",
+    "delete_at": null
+  },
+  {
+    "id": "644e4370fc13ae30a8842e38",
+    "name": "大基隆中央戲院股份有限公司",
+    "bank_code": "822",
+    "bank_account": "24411022067116",
+    "tax_id": "00281402",
+    "created_at": "2022-04-24T06:55:12Z",
+    "updated_at": "2022-09-30T17:18:27Z",
+    "delete_at": null
+  },
+  {
+    "id": "644e4370fc13ae30a8842e3e",
+    "name": "小大聯報關行有限公司",
+    "bank_code": "812",
+    "bank_account": "00411010067141",
+    "tax_id": "00004195",
+    "created_at": "2022-04-01T03:57:59Z",
+    "updated_at": "2023-02-12T04:48:35Z",
+    "delete_at": null
+  },
+  {
+    "id": "644e4370fc13ae30a8842e3a",
+    "name": "大基隆大世界戲院事業股份有限公司",
+    "bank_code": "700",
+    "bank_account": "24411010077146",
+    "tax_id": "00282508",
+    "created_at": "2022-05-01T17:52:57Z",
+    "updated_at": "2023-02-17T12:11:38Z",
+    "delete_at": null
+  },
+  {
+    "id": "644e4370fc13ae30a8842e3c",
+    "name": "大震楠有限公司",
+    "bank_code": "700",
+    "bank_account": "12411810067146",
+    "tax_id": "00664442",
+    "created_at": "2022-02-01T21:14:55Z",
+    "updated_at": "2022-03-26T00:53:56Z",
+    "delete_at": null
+  }
+]

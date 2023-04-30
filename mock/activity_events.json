@@ -1,0 +1,189 @@
+[
+  {
+    "id": "61577d3bbd2b96f7e225c055",
+    "activity_id": "61697b11c0cb54d45f7c8dcf",
+    "sell_at": "2023-04-20T10:00:00.000Z",
+    "sellend_at": "2023-05-20T18:00:00.000Z",
+    "vip": {
+      "early_sell_at": "2023-04-18T10:00:00.000Z",
+      "vip_token": [
+        {
+          "token": "K8B9X",
+          "status": false
+        },
+        {
+          "token": "Z3F6P",
+          "status": false
+        },
+        {
+          "token": "L2J9H",
+          "status": false
+        },
+        {
+          "token": "N5R6M",
+          "status": false
+        },
+        {
+          "token": "H3C2N",
+          "status": false
+        }
+      ]
+    },
+    "start_at": "2023-05-20T19:30:00.000Z",
+    "end_at": "2023-05-20T22:30:00.000Z",
+    "qrcode_verify_link": "https://ticket-haven.onrender.com/admin/61577d3bbd2b96f7e225c055/scan",
+    "created_at": "2021-10-01T00:00:00.000Z",
+    "updated_at": "2023-04-30T00:00:00.000Z",
+    "deleted_at": null
+  },
+  {
+    "id": "61577d3bbd2b96f7e225c056",
+    "activity_id": "61697b11c0cb54d45f7c8dcf",
+    "sell_at": "2023-04-21T10:00:00.000Z",
+    "sellend_at": "2023-05-21T18:00:00.000Z",
+    "vip": {
+      "early_sell_at": "2023-04-19T10:00:00.000Z",
+      "vip_token": [
+        {
+          "token": "P2J9L",
+          "status": false
+        },
+        {
+          "token": "E3B2Q",
+          "status": false
+        },
+        {
+          "token": "C7Z3F",
+          "status": false
+        },
+        {
+          "token": "K9R6L",
+          "status": false
+        },
+        {
+          "token": "T8N2M",
+          "status": false
+        }
+      ]
+    },
+    "start_at": "2023-05-21T19:30:00.000Z",
+    "end_at": "2023-05-21T22:30:00.000Z",
+    "qrcode_verify_link": "https://ticket-haven.onrender.com/admin/61577d3bbd2b96f7e225c056/scan",
+    "created_at": "2021-10-01T00:00:00.000Z",
+    "updated_at": "2023-04-30T00:00:00.000Z",
+    "deleted_at": null
+  },
+  {
+    "id": "626b39228a8b53d25a32e760",
+    "activity_id": "61697b11c0cb54d45f7c8dcb",
+    "sell_at": "2023-06-10 12:00:00",
+    "sellend_at": "2023-08-20 23:59:59",
+    "vip": {
+      "early_sell_at": "2023-05-21 12:00:00",
+      "vip_token": [
+        {
+          "token": "Q4AA5",
+          "status": false
+        },
+        {
+          "token": "SD5Q9",
+          "status": false
+        },
+        {
+          "token": "DQ45E",
+          "status": false
+        }
+      ]
+    },
+    "start_at": "2023-11-11 20:00:00",
+    "end_at": "2023-11-11 23:00:00",
+    "qrcode_verify_link": "https://ticket-haven.onrender.com/admin/626b39228a8b53d25a32e760/scan",
+    "created_at": "2022-12-31 08:30:00",
+    "updated_at": "2022-12-31 08:30:00",
+    "deleted_at": null
+  },
+  {
+    "id": "622a74a98a8b53d25a32e75e",
+    "activity_id": "61697b11c0cb54d45f7c8dd0",
+    "sell_at": "2023-06-10 12:00:00",
+    "sellend_at": "2023-08-20 23:59:59",
+    "vip": {
+      "early_sell_at": "2023-05-21 12:00:00",
+      "vip_token": [
+        {
+          "token": "HDF9D",
+          "status": false
+        },
+        {
+          "token": "FKDF4",
+          "status": false
+        },
+        {
+          "token": "MD4NE",
+          "status": false
+        }
+      ]
+    },
+    "start_at": "2023-11-10 20:00:00",
+    "end_at": "2023-11-10 23:00:00",
+    "qrcode_verify_link": "https://ticket-haven.onrender.com/admin/622a74a98a8b53d25a32e75e/scan",
+    "created_at": "2022-12-31 08:30:00",
+    "updated_at": "2022-12-31 08:30:00",
+    "deleted_at": null
+  },
+  {
+    "id": "626b39228a8b53d25a32e760",
+    "activity_id": "61697b11c0cb54d45f7c8dd0",
+    "sell_at": "2023-06-10 12:00:00",
+    "sellend_at": "2023-08-20 23:59:59",
+    "vip": {
+      "early_sell_at": "2023-05-21 12:00:00",
+      "vip_token": [
+        {
+          "token": "N4JG5",
+          "status": false
+        },
+        {
+          "token": "SD5E9",
+          "status": false
+        },
+        {
+          "token": "DG45E",
+          "status": false
+        }
+      ]
+    },
+    "start_at": "2023-11-11 20:00:00",
+    "end_at": "2023-11-11 23:00:00",
+    "qrcode_verify_link": "https://ticket-haven.onrender.com/admin/626b39228a8b53d25a32e760/scan",
+    "created_at": "2022-12-31 08:30:00",
+    "updated_at": "2022-12-31 08:30:00",
+    "deleted_at": null
+  },
+  {
+    "id": "622a74a98a8b53d25a32e75e",
+    "activity_id": "61697b11c0cb54d45f7c8dd2",
+    "sell_at": "2023-06-10 12:00:00",
+    "sellend_at": "2023-08-20 23:59:59",
+    "vip": null,
+    "start_at": "2023-11-10 20:00:00",
+    "end_at": "2023-11-10 23:00:00",
+    "qrcode_verify_link": "https://ticket-haven.onrender.com/admin/622a74a98a8b53d25a32e75e/scan",
+    "created_at": "2022-12-31 08:30:00",
+    "updated_at": "2022-12-31 08:30:00",
+    "deleted_at": null
+  },
+  {
+    "id": "626b39228a8b53d25a32e760",
+    "activity_id": "61697b11c0cb54d45f7c8dd2",
+    "sell_at": "2023-06-10 12:00:00",
+    "sellend_at": "2023-08-20 23:59:59",
+    "vip": null,
+    "start_at": "2023-11-11 20:00:00",
+    "end_at": "2023-11-11 23:00:00",
+    "qrcode_verify_link": "https://ticket-haven.onrender.com/admin/626b39228a8b53d25a32e760/scan",
+    "created_at": "2022-12-31 08:30:00",
+    "updated_at": "2022-12-31 08:30:00",
+    "deleted_at": null
+  }
+]

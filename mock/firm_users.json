@@ -1,0 +1,70 @@
+[
+  {
+    "id": "644e4370fc13ae30a8842e35",
+    "username": "cpembery0",
+    "email": "hshurman0@sogou.com",
+    "phone": "(886) 930555222",
+    "password": "78sMiIsns",
+    "role": "Viewer",
+    "firm_id": "644e4370fc13ae30a8842e36",
+    "created_at": "2022-08-10T10:03:56Z",
+    "updated_at": "2022-12-02T12:25:46Z",
+    "delete_at": null
+  },
+  {
+    "id": "644e4370fc13ae30a8842e37",
+    "username": "ncranney1",
+    "email": "llongford1@spotify.com",
+    "phone": "(886) 930455112",
+    "password": "uHJLou9",
+    "role": "Administrator",
+    "firm_id": {
+      "$oid": "644e4370fc13ae30a8842e38"
+    },
+    "created_at": "2022-08-14T17:58:34Z",
+    "updated_at": "2023-04-11T02:35:17Z",
+    "delete_at": null
+  },
+  {
+    "id": "644e4370fc13ae30a8842e39",
+    "username": "wholligan2",
+    "email": "dchurch2@creativecommons.org",
+    "phone": "(886) 910115552",
+    "password": "mVVNKB86",
+    "role": "Administrator",
+    "firm_id": {
+      "$oid": "644e4370fc13ae30a8842e3a"
+    },
+    "created_at": "2021-12-14T20:26:52Z",
+    "updated_at": "2022-03-09T09:02:13Z",
+    "delete_at": null
+  },
+  {
+    "id": "644e4370fc13ae30a8842e3b",
+    "username": "grounsefell3",
+    "email": "jluety3@mit.edu",
+    "phone": "(886) 990555252",
+    "password": "Qalm77aaa",
+    "role": "Editor",
+    "firm_id": {
+      "$oid": "644e4370fc13ae30a8842e3c"
+    },
+    "created_at": "2022-08-21T01:23:27Z",
+    "updated_at": "2023-01-14T03:32:34Z",
+    "delete_at": null
+  },
+  {
+    "id": "644e4370fc13ae30a8842e3d",
+    "username": "nscamerden4",
+    "email": "bmcomish4@statcounter.com",
+    "phone": "(886) 988255222",
+    "password": "rorTbfn1rM",
+    "role": "Editor",
+    "firm_id": {
+      "$oid": "644e4370fc13ae30a8842e3e"
+    },
+    "created_at": "2022-11-25T01:34:18Z",
+    "updated_at": "2022-12-19T12:54:27Z",
+    "delete_at": null
+  }
+]
