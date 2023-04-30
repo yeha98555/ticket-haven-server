@@ -1,6 +1,8 @@
 [
   {
-    "id": "644e4370fc13ae30a8842e36",
+    "_id": {
+      "$oid": "644e4370fc13ae30a8842e36"
+    },
     "name": "大情人湖企業有限公司",
     "bank_code": "812",
     "bank_account": "24411010067147",
@@ -10,7 +12,9 @@
     "delete_at": null
   },
   {
-    "id": "644e4370fc13ae30a8842e38",
+    "_id": {
+      "$oid": "644e4370fc13ae30a8842e38"
+    },
     "name": "大基隆中央戲院股份有限公司",
     "bank_code": "822",
     "bank_account": "24411022067116",
@@ -20,7 +24,9 @@
     "delete_at": null
   },
   {
-    "id": "644e4370fc13ae30a8842e3e",
+    "_id": {
+      "$oid": "644e4370fc13ae30a8842e3e"
+    },
     "name": "小大聯報關行有限公司",
     "bank_code": "812",
     "bank_account": "00411010067141",
@@ -30,7 +36,9 @@
     "delete_at": null
   },
   {
-    "id": "644e4370fc13ae30a8842e3a",
+    "_id": {
+      "$oid": "644e4370fc13ae30a8842e3a"
+    },
     "name": "大基隆大世界戲院事業股份有限公司",
     "bank_code": "700",
     "bank_account": "24411010077146",
@@ -40,7 +48,9 @@
     "delete_at": null
   },
   {
-    "id": "644e4370fc13ae30a8842e3c",
+    "_id": {
+      "$oid": "644e4370fc13ae30a8842e3c"
+    },
     "name": "大震楠有限公司",
     "bank_code": "700",
     "bank_account": "12411810067146",

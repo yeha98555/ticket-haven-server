@@ -1,6 +1,8 @@
 [
   {
-    "id": "644e4370fc13ae30a8842e35",
+    "_id": {
+      "$oid": "644e4370fc13ae30a8842e35"
+    },
     "username": "cpembery0",
     "email": "hshurman0@sogou.com",
     "phone": "(886) 930555222",
@@ -12,7 +14,9 @@
     "delete_at": null
   },
   {
-    "id": "644e4370fc13ae30a8842e37",
+    "_id": {
+      "$oid": "644e4370fc13ae30a8842e37"
+    },
     "username": "ncranney1",
     "email": "llongford1@spotify.com",
     "phone": "(886) 930455112",
@@ -26,7 +30,9 @@
     "delete_at": null
   },
   {
-    "id": "644e4370fc13ae30a8842e39",
+    "_id": {
+      "$oid": "644e4370fc13ae30a8842e39"
+    },
     "username": "wholligan2",
     "email": "dchurch2@creativecommons.org",
     "phone": "(886) 910115552",
@@ -40,7 +46,9 @@
     "delete_at": null
   },
   {
-    "id": "644e4370fc13ae30a8842e3b",
+    "_id": {
+      "$oid": "644e4370fc13ae30a8842e3b"
+    },
     "username": "grounsefell3",
     "email": "jluety3@mit.edu",
     "phone": "(886) 990555252",
@@ -54,7 +62,9 @@
     "delete_at": null
   },
   {
-    "id": "644e4370fc13ae30a8842e3d",
+    "_id": {
+      "$oid": "644e4370fc13ae30a8842e3d"
+    },
     "username": "nscamerden4",
     "email": "bmcomish4@statcounter.com",
     "phone": "(886) 988255222",

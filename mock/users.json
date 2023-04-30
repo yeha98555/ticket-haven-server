@@ -1,6 +1,8 @@
 [
   {
-    "id": "644e3f3afc13ae317e842dd1",
+    "_id": {
+      "$oid": "644e3f3afc13ae317e842dd1"
+    },
     "uid": null,
     "username": "lmacalroy0",
     "email": "ahuyge0@amazon.com",
@@ -16,7 +18,9 @@
     "delete_at": null
   },
   {
-    "id": "644e3f3afc13ae317e842dd2",
+    "_id": {
+      "$oid": "644e3f3afc13ae317e842dd2"
+    },
     "uid": null,
     "username": "dseid1",
     "email": "fmatskiv1@slate.com",
@@ -32,7 +36,9 @@
     "delete_at": "2022-06-23T22:36:02Z"
   },
   {
-    "id": "644e3f3afc13ae317e842dd3",
+    "_id": {
+      "$oid": "644e3f3afc13ae317e842dd3"
+    },
     "uid": "01GZ8TDZG0MVSCGVHQ7Z26J5Y1",
     "username": "atoping2",
     "email": "vbernardez2@time.com",
@@ -48,7 +54,9 @@
     "delete_at": null
   },
   {
-    "id": "644e3f3afc13ae317e842dd4",
+    "_id": {
+      "$oid": "644e3f3afc13ae317e842dd4"
+    },
     "uid": "111121883540430300310",
     "username": "tborrill3",
     "email": "abengall3@ft.com",
@@ -64,7 +72,9 @@
     "delete_at": null
   },
   {
-    "id": "644e3f3afc13ae317e842dd5",
+    "_id": {
+      "$oid": "644e3f3afc13ae317e842dd5"
+    },
     "uid": null,
     "username": "lfluin4",
     "email": "flobley4@baidu.com",
