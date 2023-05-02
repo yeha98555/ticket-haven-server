@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon -r dotenv/config src/index.ts",
+    "dev": "nodemon -r dotenv/config -r tsconfig-paths/register src/index.ts",
     "build": "tsc",
-    "start": "node -r dotenv/config dist/index",
+    "start": "TS_NODE_PROJECT=tsconfig.prod.json node -r dotenv/config -r tsconfig-paths/register dist/index",
     "lint": "eslint src/**/*.ts --fix",
     "format": "prettier --write '**/*.{ts,js,json,md}'",
     "prepare": "husky install",
@@ -53,6 +53,7 @@
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.4"
   },
   "packageManager": "yarn@3.5.0"
