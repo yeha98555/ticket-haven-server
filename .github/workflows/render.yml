@@ -1,9 +1,10 @@
-name: Deploy to Render (Production)
+name: Deploy to Render
 
 on:
   push:
     branches:
       - main
+      - develop
 
 jobs:
   build-and-deploy:
@@ -32,7 +33,7 @@ jobs:
         if: ${{ success() && github.event_name == 'push' }}
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-          service-id: ${{ secrets.SERVICE_ID_PROD }} # Can be found as part of the Deploy Hook
+          service-id: ${{ secrets.SERVICE_ID_${{ github.ref#refs/heads/ }} }} # Can be found as part of the Deploy Hook
           api-key: ${{ secrets.RENDER_API_KEY }} # Create your API key in Render Dashboard > Account Settings
 
       - name: Rollback
