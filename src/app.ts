@@ -1,11 +1,10 @@
+import './connections';
 import express, { Request, Response, NextFunction } from 'express';
 import logger from 'morgan';
 import cors from 'cors';
 
 import { HttpException } from './exceptions/HttpException';
 import indexRouter from './routes/index';
-
-import './connections';
 
 const app: express.Application = express();
 
