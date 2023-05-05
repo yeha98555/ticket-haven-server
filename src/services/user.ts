@@ -1,8 +1,46 @@
-import UserModel from '@/models/user';
+import UserModel, { IUser } from '@/models/user';
 
 const userService = {
   findUserById: async (id: string) => {
-    const user = await UserModel.findById(id).lean({ virtuals: true });
+    const user = await UserModel.findById(id)
+      .select([
+        'username',
+        'email',
+        'phone',
+        'gender',
+        'email_verify',
+        'phone_verify',
+        'bank_code',
+        'bank_account',
+        'activity_region',
+      ])
+      .lean({ virtuals: true });
+    return user;
+  },
+  updateUserById: async (
+    id: string,
+    data: Pick<
+      IUser,
+      | 'username'
+      | 'email'
+      | 'phone'
+      | 'gender'
+      | 'bank_code'
+      | 'bank_account'
+      | 'activity_region'
+    >,
+  ) => {
+    const user = await UserModel.findByIdAndUpdate(id, data, {
+      runValidators: true,
+    }).select([
+      'username',
+      'email',
+      'phone',
+      'gender',
+      'bank_code',
+      'bank_account',
+      'activity_region',
+    ]);
     return user;
   },
 };
