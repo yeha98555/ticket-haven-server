@@ -1,92 +1,83 @@
 [
   {
-    "_id": {
-      "$oid": "644e3f3afc13ae317e842dd1"
-    },
-    "uid": null,
-    "username": "lmacalroy0",
-    "email": "ahuyge0@amazon.com",
-    "phone": "(886) 920123123",
-    "gender": "Female",
-    "email_verify": 0,
-    "phone_verify": 0,
-    "password": "ThkuU1HVU1",
-    "bank_code": "822",
+    "_id": "644e3f3afc13ae317e842dd1",
+    "activity_area": 1,
     "bank_account": "153001000331",
+    "bank_code": "822",
     "created_at": "2022-12-05T13:44:18Z",
+    "delete_at": null,
+    "email": "ahuyge0@amazon.com",
+    "email_verify": false,
+    "gender": 0,
+    "password": "ThkuU1HVU1",
+    "phone": "(886) 920123123",
+    "phone_verify": false,
+    "uid": null,
     "updated_at": "2023-03-17T22:31:14Z",
-    "delete_at": null
+    "username": "lmacalroy0"
   },
   {
-    "_id": {
-      "$oid": "644e3f3afc13ae317e842dd2"
-    },
-    "uid": null,
-    "username": "dseid1",
-    "email": "fmatskiv1@slate.com",
-    "phone": "(886) 920122122",
-    "gender": "Female",
-    "email_verify": 1,
-    "phone_verify": 1,
-    "password": "elijOo5E",
-    "bank_code": "812",
+    "_id": "644e3f3afc13ae317e842dd2",
     "bank_account": "00410011905612",
+    "bank_code": "812",
     "created_at": "2022-03-07T00:05:11Z",
-    "updated_at": "2022-05-02T17:09:41Z",
-    "delete_at": "2022-06-23T22:36:02Z"
-  },
-  {
-    "_id": {
-      "$oid": "644e3f3afc13ae317e842dd3"
-    },
-    "uid": "01GZ8TDZG0MVSCGVHQ7Z26J5Y1",
-    "username": "atoping2",
-    "email": "vbernardez2@time.com",
-    "phone": "(886) 977123123",
-    "gender": null,
-    "email_verify": 0,
-    "phone_verify": 0,
-    "password": "xVc16ALXu",
-    "bank_code": null,
-    "bank_account": null,
-    "created_at": "2021-12-22T05:14:09Z",
-    "updated_at": "2022-11-16T05:11:44Z",
-    "delete_at": null
-  },
-  {
-    "_id": {
-      "$oid": "644e3f3afc13ae317e842dd4"
-    },
-    "uid": "111121883540430300310",
-    "username": "tborrill3",
-    "email": "abengall3@ft.com",
-    "phone": "(886) 920123555",
-    "gender": null,
-    "email_verify": 1,
-    "phone_verify": 0,
-    "password": "uuEsb7CTgoO",
-    "bank_code": null,
-    "bank_account": null,
-    "created_at": "2022-12-30T15:00:38Z",
-    "updated_at": "2023-04-29T20:26:55Z",
-    "delete_at": null
-  },
-  {
-    "_id": {
-      "$oid": "644e3f3afc13ae317e842dd5"
-    },
+    "delete_at": "2022-06-23T22:36:02Z",
+    "email": "fmatskiv1@slate.com",
+    "email_verify": true,
+    "gender": 0,
+    "password": "elijOo5E",
+    "phone": "(886) 920122122",
+    "phone_verify": true,
     "uid": null,
-    "username": "lfluin4",
-    "email": "flobley4@baidu.com",
-    "phone": "(886) 920878123",
-    "gender": "Male",
-    "email_verify": 1,
-    "phone_verify": 1,
-    "password": "Mw5bTaFfaR8K",
-    "bank_code": "700",
+    "updated_at": "2022-05-02T17:09:41Z",
+    "username": "dseid1"
+  },
+  {
+    "_id": "644e3f3afc13ae317e842dd3",
+    "bank_account": null,
+    "bank_code": null,
+    "created_at": "2021-12-22T05:14:09Z",
+    "delete_at": null,
+    "email": "vbernardez2@time.com",
+    "email_verify": false,
+    "gender": null,
+    "password": "xVc16ALXu",
+    "phone": "(886) 977123123",
+    "phone_verify": false,
+    "uid": "01GZ8TDZG0MVSCGVHQ7Z26J5Y1",
+    "updated_at": "2022-11-16T05:11:44Z",
+    "username": "atoping2"
+  },
+  {
+    "_id": "644e3f3afc13ae317e842dd4",
+    "bank_account": null,
+    "bank_code": null,
+    "created_at": "2022-12-30T15:00:38Z",
+    "delete_at": null,
+    "email": "abengall3@ft.com",
+    "email_verify": true,
+    "gender": null,
+    "password": "uuEsb7CTgoO",
+    "phone": "(886) 920123555",
+    "phone_verify": false,
+    "uid": "111121883540430300310",
+    "updated_at": "2023-04-29T20:26:55Z",
+    "username": "tborrill3"
+  },
+  {
+    "_id": "644e3f3afc13ae317e842dd5",
     "bank_account": "24411010067146",
+    "bank_code": "700",
     "created_at": "2022-11-22T04:52:06Z",
+    "delete_at": null,
+    "email": "flobley4@baidu.com",
+    "email_verify": true,
+    "gender": 1,
+    "password": "Mw5bTaFfaR8K",
+    "phone": "(886) 920878123",
+    "phone_verify": true,
+    "uid": null,
     "updated_at": "2023-03-26T12:09:32Z",
-    "delete_at": null
+    "username": "lfluin4"
   }
 ]
