@@ -1974,6 +1974,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"array.prototype.flat@npm:1.2.3":
+  version: 1.2.3
+  resolution: "array.prototype.flat@npm:1.2.3"
+  dependencies:
+    define-properties: ^1.1.3
+    es-abstract: ^1.17.0-next.1
+  checksum: ba4cf6e53871902a09fa7f56ff097e836f18d59de0219fe271e3d1a895a7ea98a62fa946cbdae95e73b774991206a32a26822227d081bd2cc5c771b95f851753
+  languageName: node
+  linkType: hard
+
 "array.prototype.flat@npm:^1.3.1":
   version: 1.3.1
   resolution: "array.prototype.flat@npm:1.3.1"
@@ -3114,7 +3124,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es-abstract@npm:^1.19.0, es-abstract@npm:^1.20.4":
+"es-abstract@npm:^1.17.0-next.1, es-abstract@npm:^1.19.0, es-abstract@npm:^1.20.4":
   version: 1.21.2
   resolution: "es-abstract@npm:1.21.2"
   dependencies:
@@ -6106,6 +6116,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mongoose-lean-virtuals@npm:^0.9.1":
+  version: 0.9.1
+  resolution: "mongoose-lean-virtuals@npm:0.9.1"
+  dependencies:
+    array.prototype.flat: 1.2.3
+    mpath: ^0.8.4
+  peerDependencies:
+    mongoose: ">=5.11.10"
+  checksum: 2b884782c4e30122fe5a99930c9abe78c27ef6738b96743642986152583e5903615e16074f834d8d97182d6c7e4fedff9812cecd6c3fcd3e2ee2aa75db2f1b6a
+  languageName: node
+  linkType: hard
+
 "mongoose@npm:^7.0.4":
   version: 7.0.4
   resolution: "mongoose@npm:7.0.4"
@@ -6138,6 +6160,13 @@ __metadata:
   version: 0.9.0
   resolution: "mpath@npm:0.9.0"
   checksum: 1052f1f926db04502440f76164ae16ed53aa41f3ce34e7e64e3ed451b7d91ede295c3b600801c5f9eb862f03d9d59b7aa5aaf690c341fc521bef025d0f5cd773
+  languageName: node
+  linkType: hard
+
+"mpath@npm:^0.8.4":
+  version: 0.8.4
+  resolution: "mpath@npm:0.8.4"
+  checksum: 06ad1d443766626fa361b67a4eca9cd4c36a71e475e92e8a5c242dbbc9a911adac00ce971177843b48475356df609f847342548da7701a976a2ab4116135caf0
   languageName: node
   linkType: hard
 
@@ -7857,6 +7886,7 @@ __metadata:
     jest: ^29.5.0
     lint-staged: ^13.2.2
     mongoose: ^7.0.4
+    mongoose-lean-virtuals: ^0.9.1
     morgan: ~1.9.1
     nodemon: ^2.0.22
     prettier: ^2.8.7
@@ -7867,6 +7897,8 @@ __metadata:
     ts-node: ^10.9.1
     tsconfig-paths: ^4.2.0
     typescript: ^5.0.4
+    zod: ^3.21.4
+    zod-express-middleware: ^1.4.0
   languageName: unknown
   linkType: soft
 
@@ -8503,5 +8535,23 @@ __metadata:
   bin:
     z-schema: bin/z-schema
   checksum: f1a5d0e0bc1096009f406420f330381bbe0770ef81a053512c16696c44c6993d6ce86b5157a51cb951bd7d1e802f03dc0cd94aadf030d77c9fb4a3a268617b06
+  languageName: node
+  linkType: hard
+
+"zod-express-middleware@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "zod-express-middleware@npm:1.4.0"
+  peerDependencies:
+    "@types/express": ^4.17.12
+    express: ^4.17.1
+    zod: ^3.2.0
+  checksum: cbce7e548b94834ffb47f8ff3a52dc5f81514f760c5aed562b2915ee6187c3bb5933bbc498ad2477cb302ab8944440b92436ecfe73d3f7e5890dbcea2ce3f51c
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.21.4":
+  version: 3.21.4
+  resolution: "zod@npm:3.21.4"
+  checksum: f185ba87342ff16f7a06686767c2b2a7af41110c7edf7c1974095d8db7a73792696bcb4a00853de0d2edeb34a5b2ea6a55871bc864227dace682a0a28de33e1f
   languageName: node
   linkType: hard

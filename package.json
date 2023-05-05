@@ -20,9 +20,11 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "mongoose": "^7.0.4",
+    "mongoose-lean-virtuals": "^0.9.1",
     "morgan": "~1.9.1",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^4.6.2"
+    "swagger-ui-express": "^4.6.2",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.1",
@@ -54,7 +56,8 @@
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "zod-express-middleware": "^1.4.0"
   },
   "packageManager": "yarn@3.5.0"
 }
