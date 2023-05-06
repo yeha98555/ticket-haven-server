@@ -1,4 +1,5 @@
 import { Gender } from '@/enums/gender';
+import toValidate from '@/utils/toValidate';
 import { Schema, model } from 'mongoose';
 import z from 'zod';
 
@@ -26,7 +27,7 @@ const userSchema = new Schema<IUser>(
     phone: String,
     gender: {
       type: Number,
-      validate: z.nativeEnum(Gender).optional().parse,
+      validate: toValidate(z.nativeEnum(Gender).optional().nullable()),
     },
     email_verify: Boolean,
     phone_verify: Boolean,
