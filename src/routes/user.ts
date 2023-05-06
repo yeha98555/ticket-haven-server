@@ -12,8 +12,7 @@ userRouter.patch(
   '/',
   validateRequest({
     body: z.object({
-      name: z.string().optional(),
-      email: z.string().optional(),
+      username: z.string().optional(),
       phone: z.string().optional(),
       gender: z.nativeEnum(Gender).optional(),
       emailVerify: z.boolean().optional(),

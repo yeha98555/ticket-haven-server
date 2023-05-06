@@ -12,7 +12,7 @@ const userController = {
       // TODO: 使用真正的 user id
       const userId = parseToken(token);
       const user = await userService.findUserById(userId);
-      res.json(successBody({ data: user }));
+      res.send(successBody({ data: user }));
     } else {
       res.status(401);
       // TODO: 更新錯誤訊息定義的方式
@@ -33,8 +33,7 @@ const userController = {
       // TODO: 更新錯誤處理方法
       try {
         const user = await userService.updateUserById(userId, {
-          username: body.name,
-          email: body.email,
+          username: body.username,
           phone: body.phone,
           gender: body.gender,
           bank_code: body.bankCode,
