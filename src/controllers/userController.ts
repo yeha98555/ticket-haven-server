@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-export const signupController = async (req: Request, res: Response) => {
+export const signup = async (req: Request, res: Response) => {
   try {
     const { userName, email, password } = req.body;
     console.log(userName, email, password);
@@ -12,7 +12,7 @@ export const signupController = async (req: Request, res: Response) => {
   }
 }
 
-export const signinController = (req: Request, res: Response) => {
+export const signin = (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     console.log(email, password);
