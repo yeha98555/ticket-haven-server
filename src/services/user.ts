@@ -22,7 +22,6 @@ const userService = {
     data: Pick<
       IUser,
       | 'username'
-      | 'email'
       | 'phone'
       | 'gender'
       | 'bank_code'
@@ -34,7 +33,6 @@ const userService = {
       runValidators: true,
     }).select([
       'username',
-      'email',
       'phone',
       'gender',
       'bank_code',
