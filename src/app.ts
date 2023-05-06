@@ -5,7 +5,7 @@ import cors from 'cors';
 import { HttpException } from './exceptions/HttpException';
 import indexRouter from './routes/index';
 
-// import './connections';
+import './connections';
 
 const app: express.Application = express();
 
