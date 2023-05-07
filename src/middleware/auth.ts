@@ -1,7 +1,8 @@
-
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import userService from '@/services/user';
+import { appError } from '@/services/appError';
+import { StatusCode } from '@/enums/statusCode';
 
 interface Payload {
   id: string;
@@ -21,16 +22,16 @@ export const isAuth = async (req: RequestWithUser, res: Response, next: NextFunc
   }
 
   if (!token) {
-    // TODO: error處理
-    return next('未填寫Token');
+    const err = appError(400, StatusCode.FORBIDDEN, 'Permission Deined');  // 未傳送Token
+    return next(err);
   }
 
   // check token accuracy
   const decoded = await new Promise<Payload>((resolve, reject) => {
     jwt.verify(token!, process.env.JWT_SECRET!, (err, payload) => {
       if (err) {
-        // TODO: error處理
-        // reject(err);
+        const err = appError(400, StatusCode.FORBIDDEN, 'Permission Deined');  // Token錯誤
+        next(err)
       } else {
         resolve(payload as Payload);
       }
@@ -41,8 +42,8 @@ export const isAuth = async (req: RequestWithUser, res: Response, next: NextFunc
   if (currentUser) {
     req.userId = currentUser._id.toString();
   } else {
-    // TODO: error處理
-    // reject("用戶不存在");
+    const err = appError(400, StatusCode.FORBIDDEN, 'Permission Deined');  // 用戶不存在
+    return next(err);
   }
   next();
 };
