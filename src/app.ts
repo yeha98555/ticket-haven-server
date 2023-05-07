@@ -19,7 +19,7 @@ app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {
-  const err = appError(404, StatusCode.Fail, 'NOT FOUND');
+  const err = appError(404, StatusCode.NOT_FOUND, 'NOT FOUND');
   next(err);
 });
 

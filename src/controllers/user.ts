@@ -56,7 +56,7 @@ const userController = {
 
         res.json(successBody({ data: user }));
       } catch (error) {
-        const err = appError(400, StatusCode.Fail, 'Parameter error');
+        const err = appError(400, StatusCode.FAIL, 'Parameter error');
         next(err);
       }
     }
