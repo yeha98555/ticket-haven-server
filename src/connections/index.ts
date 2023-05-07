@@ -1,4 +1,7 @@
 import mongoose from 'mongoose';
+import mongooseLeanVirtuals from 'mongoose-lean-virtuals';
+
+mongoose.plugin(mongooseLeanVirtuals);
 
 const DB = process.env.MONGODB_CONNECT_STRING.replace(
   '<user>',
