@@ -22,7 +22,7 @@ export const isAuth = async (req: RequestWithUser, res: Response, next: NextFunc
   }
 
   if (!token) {
-    const err = appError(400, StatusCode.FORBIDDEN, 'Permission Deined');  // 未傳送Token
+    const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined');  // 未傳送Token
     return next(err);
   }
 
@@ -30,7 +30,7 @@ export const isAuth = async (req: RequestWithUser, res: Response, next: NextFunc
   const decoded = await new Promise<Payload>((resolve, reject) => {
     jwt.verify(token!, process.env.JWT_SECRET!, (err, payload) => {
       if (err) {
-        const err = appError(400, StatusCode.FORBIDDEN, 'Permission Deined');  // Token錯誤
+        const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined');  // Token錯誤
         next(err)
       } else {
         resolve(payload as Payload);
@@ -42,7 +42,7 @@ export const isAuth = async (req: RequestWithUser, res: Response, next: NextFunc
   if (currentUser) {
     req.userId = currentUser._id.toString();
   } else {
-    const err = appError(400, StatusCode.FORBIDDEN, 'Permission Deined');  // 用戶不存在
+    const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined');  // 用戶不存在
     return next(err);
   }
   next();
