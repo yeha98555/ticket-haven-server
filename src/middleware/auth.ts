@@ -26,24 +26,23 @@ export const isAuth = async (req: RequestWithUser, res: Response, next: NextFunc
     return next(err);
   }
 
-  // check token accuracy
-  const decoded = await new Promise<Payload>((resolve, reject) => {
-    jwt.verify(token!, process.env.JWT_SECRET!, (err, payload) => {
-      if (err) {
-        const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined');  // Token錯誤
-        next(err)
-      } else {
-        resolve(payload as Payload);
-      }
-    });
-  });
-  // check userId exist
-  const currentUser = await userService.findUserById(decoded.id);
-  if (currentUser) {
-    req.userId = currentUser._id.toString();
-  } else {
+  try {
+    // check token accuracy
+    const decoded = jwt.verify(token!, process.env.JWT_SECRET!) as Payload;
+
+    // check userId exist
+    const currentUser = await userService.findUserById(decoded.id);
+
+    if (currentUser) {
+      req.userId = currentUser._id.toString();
+      return next();
+    }
+
     const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined');  // 用戶不存在
     return next(err);
+
+  } catch (error) {
+    const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined');  // Token錯誤
+    return next(err);
   }
-  next();
 };
