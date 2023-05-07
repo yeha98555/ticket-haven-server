@@ -5,6 +5,8 @@ import cors from 'cors';
 
 import { HttpException } from './exceptions/HttpException';
 import indexRouter from './routes/index';
+import { StatusCode } from './enums/statusCode';
+import { appError } from './services/appError';
 
 const app: express.Application = express();
 
@@ -17,7 +19,7 @@ app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {
-  const err = new HttpException(404, 'Not Found');
+  const err = appError(404, StatusCode.Fail, 'NOT FOUND');
   next(err);
 });
 
@@ -30,7 +32,10 @@ app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
 
     // render the error page
     res.status(err.status || 500);
-    res.send('error');
+    res.json({
+      status: err.statusCode,
+      message: err.message
+    });
   }
   next(err);
 });
