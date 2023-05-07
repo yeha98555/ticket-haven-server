@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './swagger/swagger';
-import userRoute from './userRoute';
+import userRoute from './user';
 
 const router = Router();
 
