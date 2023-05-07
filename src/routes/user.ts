@@ -7,6 +7,10 @@ import { isAuth } from '@/middleware/auth';
 
 const userRouter = Router();
 
+userRouter.post('/signup', userController.signup);
+
+userRouter.post('/signin', userController.signin);
+
 userRouter.get('/', isAuth, userController.getUser);
 
 userRouter.patch(
