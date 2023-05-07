@@ -3,10 +3,11 @@ import { Router } from 'express';
 import { validateRequest } from 'zod-express-middleware';
 import z from 'zod';
 import { Gender } from '@/enums/gender';
+import { isAuth } from '@/middleware/auth';
 
 const userRouter = Router();
 
-userRouter.get('/', userController.getUser);
+userRouter.get('/', isAuth, userController.getUser);
 
 userRouter.patch(
   '/',
@@ -23,6 +24,7 @@ userRouter.patch(
       activityRegion: z.number().optional(),
     }),
   }),
+  isAuth,
   userController.updateUser,
 );
 
