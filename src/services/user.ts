@@ -31,6 +31,7 @@ const userService = {
   ) => {
     const user = await UserModel.findByIdAndUpdate(id, data, {
       runValidators: true,
+      new: true
     }).select([
       'username',
       'phone',
