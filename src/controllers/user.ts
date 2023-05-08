@@ -8,7 +8,9 @@ import { StatusCode } from '@/enums/statusCode';
 const userController = {
   signup: async (req: Request, res: Response) => {
     try {
-      await userService.signup(req.body);
+      const {status, message}= await userService.signup(req.body);
+      res.status(status);
+      res.send({message});
     } catch (error) {
       res.status(500);
       res.send({ message: '好像哪裡出錯了!' });
@@ -16,9 +18,9 @@ const userController = {
   },
   signin: async (req: Request, res: Response) => {
     try {
-      const data = await userService.signin(req.body);
-      res.status(200);
-      res.send(data);
+      const {status, message} = await userService.signin(req.body);
+      res.status(status);
+      res.send({message});
     } catch (error) {
       res.status(500);
       res.send({ message: '好像哪裡出錯了!' });
