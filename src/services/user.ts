@@ -33,6 +33,7 @@ const userService = {
       runValidators: true,
       new: true
     }).select([
+      '-_id',
       'username',
       'phone',
       'gender',
