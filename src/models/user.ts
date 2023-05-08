@@ -5,13 +5,13 @@ import z from 'zod';
 
 export interface IUser {
   uid?: string;
-  username?: string;
-  email?: string;
+  username: string;
+  email: string;
+  password: string;
   phone?: string;
   gender?: Gender;
   email_verify?: boolean;
   phone_verify?: boolean;
-  password?: string;
   bank_code?: string;
   bank_account?: string;
   avatar_url?: string;
@@ -21,22 +21,51 @@ export interface IUser {
 
 const userSchema = new Schema<IUser>(
   {
-    uid: String,
-    username: String,
-    email: String,
-    phone: String,
+    uid: {
+      type: String,
+      default: null,
+    },
+    username: {
+      type:String,
+      required: [true, 'username invalid'],
+      default: "",
+    },
+    email: {
+      type: String,
+      required: [true, 'email invalid'],
+      default: "",
+    },
+    phone: {
+      type: String,
+      default: "",
+    },
     gender: {
       type: Number,
       validate: toValidate(z.nativeEnum(Gender).optional().nullable()),
     },
-    email_verify: Boolean,
-    phone_verify: Boolean,
-    password: String,
+    email_verify: {
+      type: Boolean,
+      default: false,
+    },
+    phone_verify: {
+      type: Boolean,
+      default: false,
+    },
+    password: {
+      type:String,
+      required: [true, 'password invalid'],
+    },
     bank_code: String,
     bank_account: String,
     avatar_url: String,
-    activity_region: Number,
-    delete_at: Date,
+    activity_region: {
+      type: Number,
+      dafault: 1
+    },
+    delete_at: {
+      type: Date,
+      default: null,
+    },
   },
   {
     timestamps: {
