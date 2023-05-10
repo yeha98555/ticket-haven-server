@@ -6,6 +6,8 @@ import http from 'http';
 import _debug from 'debug';
 import app from './app';
 
+import './handleUncaughtError';
+
 const debug = _debug('ticket-haven-server:server');
 
 /**
