@@ -1,17 +1,34 @@
 import './connections';
 import express, { Request, Response, NextFunction } from 'express';
-import logger from 'morgan';
+import morgan from 'morgan';
 import cors from 'cors';
 
 import { HttpException } from './exceptions/HttpException';
 import indexRouter from './routes/index';
 import { StatusCode } from './enums/statusCode';
 import { appError } from './services/appError';
+import logger, { logError } from './services/logger';
 
 const app: express.Application = express();
 
 app.use(cors());
-app.use(logger('dev'));
+
+// log success request
+app.use(
+  morgan('dev', {
+    skip: (req, res) => res.statusCode >= 500,
+    stream: { write: (message) => logger.http(message.trim()) },
+  }),
+);
+
+// fail success request
+app.use(
+  morgan('dev', {
+    skip: (req, res) => res.statusCode < 500,
+    stream: { write: (message) => logger.error(message.trim()) },
+  }),
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -24,20 +41,25 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 // error handler
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
+  if (!(err instanceof Error)) {
+    err = new Error(`Server error: ${err}`);
+  }
   if (err instanceof HttpException) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
+    res.status(err.status);
     res.json({
       status: err.statusCode,
-      message: err.message
+      message: err.message,
     });
+  } else if (err instanceof Error) {
+    res.status(500);
+    res.json({
+      status: StatusCode.SERVER_ERROR,
+      message: '系統錯誤，請聯繫系統管理員。',
+    });
+    logError(err);
   }
-  next(err);
 });
 
 export default app;
