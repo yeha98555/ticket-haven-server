@@ -3,11 +3,11 @@ import express, { Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 
-import { HttpException } from './exceptions/HttpException';
 import indexRouter from './routes/index';
 import { StatusCode } from './enums/statusCode';
 import { appError } from './services/appError';
-import logger, { logError } from './services/logger';
+import logger from './services/logger';
+import errorHandler from './middleware/errorHandler';
 
 const app: express.Application = express();
 
@@ -40,26 +40,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next(err);
 });
 
-// error handler
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
-  if (!(err instanceof Error)) {
-    err = new Error(`Server error: ${err}`);
-  }
-  if (err instanceof HttpException) {
-    res.status(err.status);
-    res.json({
-      status: err.statusCode,
-      message: err.message,
-    });
-  } else if (err instanceof Error) {
-    res.status(500);
-    res.json({
-      status: StatusCode.SERVER_ERROR,
-      message: '系統錯誤，請聯繫系統管理員。',
-    });
-    logError(err);
-  }
-});
+app.use(errorHandler);
 
 export default app;
