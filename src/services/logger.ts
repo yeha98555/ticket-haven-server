@@ -16,7 +16,7 @@ const fileTransport: DailyRotateFile = new DailyRotateFile({
   maxFiles: '14d',
 });
 
-const httpConsoleTransport = new winston.transports.Console({
+const ConsoleTransport = new winston.transports.Console({
   format: format.combine(
     format.colorize(),
     format.printf((info) => {
@@ -28,8 +28,8 @@ const httpConsoleTransport = new winston.transports.Console({
 const logger = winston.createLogger({
   level: 'http',
   transports: [
-    fileTransport,
-    process.env.NODE_ENV === 'development' && httpConsoleTransport,
+    process.env.NODE_ENV === 'production' && fileTransport,
+    process.env.NODE_ENV === 'development' && ConsoleTransport,
   ].filter(Boolean) as winston.transport[],
 });
 
