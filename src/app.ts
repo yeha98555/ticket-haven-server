@@ -13,17 +13,18 @@ const app: express.Application = express();
 
 app.use(cors());
 
+const morganFormat = process.env.NODE_ENV === 'production' ? 'combined' : 'dev';
 // log success request
 app.use(
-  morgan('dev', {
+  morgan(morganFormat, {
     skip: (req, res) => res.statusCode >= 500,
     stream: { write: (message) => logger.http(message.trim()) },
   }),
 );
 
-// fail success request
+// log fail request
 app.use(
-  morgan('dev', {
+  morgan(morganFormat, {
     skip: (req, res) => res.statusCode < 500,
     stream: { write: (message) => logger.error(message.trim()) },
   }),
