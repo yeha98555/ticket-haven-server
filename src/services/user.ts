@@ -13,6 +13,7 @@ const userService = {
         'bank_code',
         'bank_account',
         'activity_region',
+        'birthday',
       ])
       .lean({ virtuals: true });
     return user;
@@ -27,6 +28,7 @@ const userService = {
       | 'bank_code'
       | 'bank_account'
       | 'activity_region'
+      | 'birthday'
     >,
   ) => {
     const user = await UserModel.findByIdAndUpdate(id, data, {
@@ -40,6 +42,7 @@ const userService = {
       'bank_code',
       'bank_account',
       'activity_region',
+      'birthday',
     ]);
     return user;
   },

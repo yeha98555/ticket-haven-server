@@ -15,6 +15,7 @@ userRouter.get('/', isAuth, userController.getUser);
 
 userRouter.patch(
   '/',
+  isAuth,
   validateRequest({
     body: z.object({
       username: z.string().optional(),
@@ -26,9 +27,9 @@ userRouter.patch(
       bankCode: z.string().optional(),
       bankAccount: z.string().optional(),
       activityRegion: z.number().optional(),
+      birthday: z.coerce.date().optional(),
     }),
   }),
-  isAuth,
   userController.updateUser,
 );
 
