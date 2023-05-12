@@ -2,20 +2,18 @@ import UserModel, { IUser } from '@/models/user';
 
 const userService = {
   findUserById: async (id: string) => {
-    const user = await UserModel.findById(id)
-      .select([
-        'username',
-        'email',
-        'phone',
-        'gender',
-        'email_verify',
-        'phone_verify',
-        'bank_code',
-        'bank_account',
-        'activity_region',
-        'birthday',
-      ])
-      .lean({ virtuals: true });
+    const user = await UserModel.findById(id).select([
+      'username',
+      'email',
+      'phone',
+      'gender',
+      'email_verify',
+      'phone_verify',
+      'bank_code',
+      'bank_account',
+      'activity_region',
+      'birthday',
+    ]);
     return user;
   },
   updateUserById: async (
@@ -33,12 +31,14 @@ const userService = {
   ) => {
     const user = await UserModel.findByIdAndUpdate(id, data, {
       runValidators: true,
-      new: true
+      new: true,
     }).select([
-      '-_id',
       'username',
+      'email',
       'phone',
       'gender',
+      'email_verify',
+      'phone_verify',
       'bank_code',
       'bank_account',
       'activity_region',
