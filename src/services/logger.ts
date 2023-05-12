@@ -3,7 +3,7 @@ import winston, { format } from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 
 const fileTransport: DailyRotateFile = new DailyRotateFile({
-  filename: path.join(process.env.LOG_FILE_PATH, '%DATE%.log'),
+  filename: path.join(process.env.LOG_FILE_DIR, '%DATE%.log'),
   datePattern: 'YYYY-MM-DD',
   format: format.combine(
     format.uncolorize(),

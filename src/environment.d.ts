@@ -8,7 +8,7 @@ declare global {
       MONGODB_DATABASE: string;
       MONGODB_CONNECT_STRING: string;
       JWT_SECRET: string;
-      LOG_FILE_PATH: string;
+      LOG_FILE_DIR: string;
     }
   }
 }
