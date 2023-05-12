@@ -15,7 +15,6 @@ const errorHandler = (
       status: err.statusCode,
       message: err.message,
     });
-    logError(err, 'info');
   } else {
     if (!(err instanceof Error)) {
       err = new Error(`Server error: ${err}`);
