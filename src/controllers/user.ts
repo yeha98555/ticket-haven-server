@@ -35,7 +35,11 @@ const userController = {
     res.send(successBody({ data: user }));
   },
 
-  updateUser: async (req: RequestWithUser, res: Response, next: NextFunction) => {
+  updateUser: async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction,
+  ) => {
     const body = req.body;
 
     try {
@@ -46,6 +50,7 @@ const userController = {
         bank_code: body.bankCode,
         bank_account: body.bankAccount,
         activity_region: body.activityRegion,
+        birthday: body.birthday,
       });
 
       res.json(successBody({ data: user }));
