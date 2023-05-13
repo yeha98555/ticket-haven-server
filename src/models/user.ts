@@ -25,21 +25,15 @@ const userSchema = new Schema<IUser>(
     username: {
       type:String,
       required: [true, 'username invalid'],
-      default: null,
     },
     email: {
       type: String,
       required: [true, 'email invalid'],
-      default: null,
     },
-    phone: {
-      type: String,
-      default: null,
-    },
+    phone: String,
     gender: {
       type: Number,
       validate: toValidate(z.nativeEnum(Gender).optional().nullable()),
-      default: null,
     },
     email_verify: {
       type: Boolean,
@@ -52,28 +46,12 @@ const userSchema = new Schema<IUser>(
     password: {
       type:String,
       required: [true, 'password invalid'],
-      default: null,
     },
-    bank_code: {
-      type: String,
-      default: null,
-    },
-    bank_account: {
-      type: String,
-      default: null,
-    },
-    avatar_url: {
-      type: String,
-      default: null,
-    },
-    activity_region: {
-      type: Number,
-      dafault: null,
-    },
-    delete_at: {
-      type: Date,
-      default: null,
-    },
+    bank_code: String,
+    bank_account: String,
+    avatar_url: String,
+    activity_region: Number,
+    delete_at:Date,
   },
   {
     timestamps: {
