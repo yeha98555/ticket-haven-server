@@ -1,17 +1,35 @@
 import './connections';
 import express, { Request, Response, NextFunction } from 'express';
-import logger from 'morgan';
+import morgan from 'morgan';
 import cors from 'cors';
 
-import { HttpException } from './exceptions/HttpException';
 import indexRouter from './routes/index';
 import { StatusCode } from './enums/statusCode';
 import { appError } from './services/appError';
+import logger from './services/logger';
+import errorHandler from './middleware/errorHandler';
 
 const app: express.Application = express();
 
 app.use(cors());
-app.use(logger('dev'));
+
+const morganFormat = process.env.NODE_ENV === 'production' ? 'combined' : 'dev';
+// log success request
+app.use(
+  morgan(morganFormat, {
+    skip: (req, res) => res.statusCode >= 500,
+    stream: { write: (message) => logger.http(message.trim()) },
+  }),
+);
+
+// log fail request
+app.use(
+  morgan(morganFormat, {
+    skip: (req, res) => res.statusCode < 500,
+    stream: { write: (message) => logger.error(message.trim()) },
+  }),
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -23,21 +41,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next(err);
 });
 
-// error handler
-app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
-  if (err instanceof HttpException) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
-    res.json({
-      status: err.statusCode,
-      message: err.message
-    });
-  }
-  next(err);
-});
+app.use(errorHandler);
 
 export default app;

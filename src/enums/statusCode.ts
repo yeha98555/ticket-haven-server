@@ -8,4 +8,5 @@ export const enum StatusCode {
   NO_AVAILABLE_SEATS = '0006',
   ORDER_CANNOT_ADD_TICKETS = '0007',
   ORDER_CANNOT_BE_PAID = '0008',
+  SERVER_ERROR = '0009', // 500
 }

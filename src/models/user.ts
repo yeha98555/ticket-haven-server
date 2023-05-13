@@ -16,6 +16,7 @@ export interface IUser {
   bank_account?: string;
   avatar_url?: string;
   activity_region?: number;
+  birthday?: Date;
   delete_at?: Date;
 }
 
@@ -51,7 +52,8 @@ const userSchema = new Schema<IUser>(
     bank_account: String,
     avatar_url: String,
     activity_region: Number,
-    delete_at:Date,
+    birthday: Date,
+    delete_at: Date,
   },
   {
     timestamps: {

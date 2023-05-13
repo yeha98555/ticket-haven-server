@@ -4,6 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 import { RequestWithUser } from '@/middleware/auth';
 import { appError } from '@/services/appError';
 import { StatusCode } from '@/enums/statusCode';
+import { camelizeKeys, decamelizeKeys } from 'humps';
 
 const userController = {
   signup: async (req: Request, res: Response) => {
@@ -29,23 +30,25 @@ const userController = {
 
   getUser: async (req: RequestWithUser, res: Response) => {
     const user = await userService.findUserById(req.userId!);
-    res.send(successBody({ data: user }));
+    res.send(
+      successBody({ data: camelizeKeys(user?.toJSON({ virtuals: true })) }),
+    );
   },
 
-  updateUser: async (req: RequestWithUser, res: Response, next: NextFunction) => {
-    const body = req.body;
-
+  updateUser: async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction,
+  ) => {
     try {
-      const user = await userService.updateUserById(req.userId!, {
-        username: body.username,
-        phone: body.phone,
-        gender: body.gender,
-        bank_code: body.bankCode,
-        bank_account: body.bankAccount,
-        activity_region: body.activityRegion,
-      });
+      const user = await userService.updateUserById(
+        req.userId!,
+        decamelizeKeys(req.body),
+      );
 
-      res.json(successBody({ data: user }));
+      res.json(
+        successBody({ data: camelizeKeys(user?.toJSON({ virtuals: true })) }),
+      );
     } catch (error) {
       const err = appError(400, StatusCode.FAIL, 'Parameter error');
       next(err);
