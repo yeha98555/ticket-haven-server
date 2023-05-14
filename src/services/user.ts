@@ -1,13 +1,13 @@
 import UserModel, { IUser } from '@/models/user';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import passport from 'passport';
-import localStrategy from 'passport-local';
-import { resolve } from 'path';
+import { appError } from '@/services/appError';
+import { StatusCode } from '@/enums/statusCode'
 const saltRounds = 10;
 
 interface Message {
   status: number;
+  statusCode: string;
   message: string;
   token?: string;
 }
@@ -30,15 +30,17 @@ const userService = {
   },
   updateUserById: async (
     id: string,
-    data: Pick<
-      IUser,
-      | 'username'
-      | 'phone'
-      | 'gender'
-      | 'bank_code'
-      | 'bank_account'
-      | 'activity_region'
-      | 'birthday'
+    data: Partial<
+      Pick<
+        IUser,
+        | 'username'
+        | 'phone'
+        | 'gender'
+        | 'bank_code'
+        | 'bank_account'
+        | 'activity_region'
+        | 'birthday'
+      >
     >,
   ) => {
     const user = await UserModel.findByIdAndUpdate(id, data, {
@@ -65,21 +67,26 @@ const userService = {
         const msg = new Promise<Message>((resolve) => {
           bcrypt.compare(password, foundUser.password, (err, result)=>{
           if(err || !result){
-            return resolve({status: 404, message: '帳號/密碼錯誤！'});
+            const error = appError(401, StatusCode.FORBIDDEN, '帳號/密碼錯誤！')
+            resolve(error);
+          }else{
+            const tokenObj = {id: foundUser._id, email: foundUser.email};
+            const SECRET: string = process.env.JWT_SECRET!;
+            const token = jwt.sign(tokenObj, SECRET, { expiresIn: '10m' });
+            const res = {status: 200, statusCode: StatusCode.SUCCESS, message: '登入成功！', token: `Bearer ${token}`};
+            resolve(res);
           }
-          const tokenObj = {_id: foundUser._id, email: foundUser.email};
-          const SECRET: string = process.env.JWT_SECRET ?? 'jwttokensecret'
-          const token = jwt.sign(tokenObj, SECRET)
-          return resolve({status: 200, message: '登入成功！', token: `JWT ${token}`});
           });
         });
         return await msg;
       }else{
-        return {status: 404, message: '帳號不存在！'};
+        const error = appError(404, StatusCode.NOT_FOUND, '帳號不存在！')
+        return error;
       }
-    }catch(error){
-      console.log(error);
-      return {status: 500, message: '發生錯誤，請稍後再試'}
+    }catch(err){
+      console.log(err);
+      const error = appError(500, StatusCode.SERVER_ERROR, '發生錯誤，請稍後再試')
+      return error
     }
   },
   signup: async (req: {username: string, email: string, password: string}) => {
@@ -93,15 +100,18 @@ const userService = {
       const msg = new Promise<Message>((resolve) => {
         bcrypt.hash(password, saltRounds, async (err, hash)=>{
           if(err) {
-            resolve({status: 500, message: err.message});
+            const error = appError(500, StatusCode.SERVER_ERROR, err.message)
+            resolve(error);
           }else{
             const newUser = new UserModel({ username, email, password: hash});
             const message = await newUser.save().then(() => {
               UserModel.find({}).then((data)=> console.log(data));
-              return Promise.resolve({status: 200, message: '註冊成功，請重新登入'});
+              const res = {status: 200, statusCode: StatusCode.SUCCESS, message: '註冊成功，請重新登入'}
+              return Promise.resolve(res);
               })
-              .catch((error: Error)=>{
-                return Promise.reject({status: 500, message: error.message});
+              .catch((err: Error)=>{
+                const error = appError(500, StatusCode.SERVER_ERROR, err.message)
+                return Promise.reject(error);
               });
             resolve(message);
           }
@@ -109,7 +119,7 @@ const userService = {
       });
       return await msg;
     }else{
-      return {status: 400, message: '此帳號已存在，請重新輸入！'}
+      return appError(401, StatusCode.FORBIDDEN, '此帳號已存在，請重新輸入！');
     }
   }
 };
