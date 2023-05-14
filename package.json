@@ -8,7 +8,7 @@
     "start": "TS_NODE_PROJECT=tsconfig.prod.json node -r dotenv/config -r tsconfig-paths/register dist/index",
     "lint": "eslint src/**/*.ts --fix",
     "format": "prettier --write '**/*.{ts,js,json,md}'",
-    "prepare": "husky install",
+    "postinstall": "husky install",
     "test": "jest --coverage"
   },
   "dependencies": {
