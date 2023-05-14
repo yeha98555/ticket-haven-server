@@ -9,22 +9,19 @@ import { camelizeKeys, decamelizeKeys } from 'humps';
 const userController = {
   signup: async (req: Request, res: Response) => {
     try {
-      const { userName, email, password } = req.body;
-      console.log(userName, email, password);
-      res.status(200);
-      res.send({ message: '註冊成功!' });
+      const result = await userService.signup(req.body);
+      res.status(result.status);
+      res.send(result);
     } catch (error) {
       res.status(500);
       res.send({ message: '好像哪裡出錯了!' });
     }
   },
-
-  signin: (req: Request, res: Response) => {
+  signin: async (req: Request, res: Response) => {
     try {
-      const { email, password } = req.body;
-      console.log(email, password);
-      res.status(200);
-      res.send({ message: '登入成功!' });
+      const result = await userService.signin(req.body);
+      res.status(result.status);
+      res.send(result);
     } catch (error) {
       res.status(500);
       res.send({ message: '好像哪裡出錯了!' });

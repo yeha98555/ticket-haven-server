@@ -4,14 +4,14 @@ import { Schema, model } from 'mongoose';
 import z from 'zod';
 
 export interface IUser {
-  uid?: string;
-  username?: string;
-  email?: string;
+  g_uid?: string;
+  username: string;
+  email: string;
+  password: string;
   phone?: string;
   gender?: Gender;
   email_verify?: boolean;
   phone_verify?: boolean;
-  password?: string;
   bank_code?: string;
   bank_account?: string;
   avatar_url?: string;
@@ -22,17 +22,32 @@ export interface IUser {
 
 const userSchema = new Schema<IUser>(
   {
-    uid: String,
-    username: String,
-    email: String,
+    g_uid: String,
+    username: {
+      type:String,
+      required: [true, 'username invalid'],
+    },
+    email: {
+      type: String,
+      required: [true, 'email invalid'],
+    },
     phone: String,
     gender: {
       type: Number,
       validate: toValidate(z.nativeEnum(Gender).optional().nullable()),
     },
-    email_verify: Boolean,
-    phone_verify: Boolean,
-    password: String,
+    email_verify: {
+      type: Boolean,
+      default: false,
+    },
+    phone_verify: {
+      type: Boolean,
+      default: false,
+    },
+    password: {
+      type:String,
+      required: [true, 'password invalid'],
+    },
     bank_code: String,
     bank_account: String,
     avatar_url: String,

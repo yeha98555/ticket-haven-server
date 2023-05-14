@@ -6,6 +6,7 @@ import { StatusCode } from '@/enums/statusCode';
 
 interface Payload {
   id: string;
+  email: string;
 }
 
 export interface RequestWithUser extends Request {
