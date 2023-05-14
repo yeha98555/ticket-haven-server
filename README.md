@@ -34,7 +34,7 @@ Available development scripts:
 - `yarn start`：Start the production server.
 - `yarn lint`：Run ESLint for syntax checking.
 - `yarn format`: Run Prettier to format code.
-- `yarn prepare`: Install Husky.
+- `yarn postinstall`: Install Husky.
 - `yarn test`: Run Jest for automated tests.
 
 ## Make scripts
