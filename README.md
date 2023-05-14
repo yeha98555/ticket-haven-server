@@ -3,7 +3,9 @@
 # Ticket Haven Server
 A server for managing concert tickets.
 - development(develop): https://ticket-haven-dev.onrender.com
-- production(main): https://ticket-haven.onrender.com
+- production(main):
+  - https://ticket-haven-dev.onrender.com
+  - http://ticket-haven-appenv.eba-4cmr3dzu.us-east-2.elasticbeanstalk.com/
 
 ## Prerequisites
 Before running this project, you must have the following installed:
