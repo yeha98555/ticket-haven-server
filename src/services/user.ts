@@ -91,7 +91,7 @@ const userService = {
   },
   signup: async (req: {username: string, email: string, password: string}) => {
     const {username, email, password} = req;
-    const isExistUser = await UserModel.findOneAndDelete({email})
+    const isExistUser = await UserModel.findOne({email})
       .then((data)=>{
         if(data) return Promise.resolve(true)
         else return Promise.resolve(false);
@@ -105,7 +105,6 @@ const userService = {
           }else{
             const newUser = new UserModel({ username, email, password: hash});
             const message = await newUser.save().then(() => {
-              UserModel.find({}).then((data)=> console.log(data));
               const res = {status: 200, statusCode: StatusCode.SUCCESS, message: '註冊成功，請重新登入'}
               return Promise.resolve(res);
               })
