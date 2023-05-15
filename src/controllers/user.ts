@@ -1,8 +1,7 @@
 import userService from '@/services/user';
-import { successBody } from '@/utils/response';
+import catchAsyncError from '@/utils/catchAsyncError';
+import { Body } from '@/utils/response';
 import { Request, Response, NextFunction } from 'express';
-import { appError } from '@/services/appError';
-import { StatusCode } from '@/enums/statusCode';
 import { decamelizeKeys } from 'humps';
 
 const userController = {
@@ -27,24 +26,20 @@ const userController = {
     }
   },
 
-  getUser: async (req: Request, res: Response) => {
+  getUser: catchAsyncError(async (req: Request, res: Response) => {
     const user = await userService.findUserById(req.userId!);
-    res.send(successBody({ data: user?.toJSON({ virtuals: true }) }));
-  },
+    res.json(Body.success(user?.toJSON({ virtuals: true })));
+  }),
 
-  updateUser: async (req: Request, res: Response, next: NextFunction) => {
-    try {
+  updateUser: catchAsyncError(
+    async (req: Request, res: Response, next: NextFunction) => {
       const user = await userService.updateUserById(
         req.userId!,
         decamelizeKeys(req.body),
       );
-
-      res.json(successBody({ data: user?.toJSON({ virtuals: true }) }));
-    } catch (error) {
-      const err = appError(400, StatusCode.FAIL, 'Parameter error');
-      next(err);
-    }
-  },
+      res.json(Body.success(user?.toJSON({ virtuals: true })));
+    },
+  ),
 };
 
 export default userController;
