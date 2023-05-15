@@ -9,11 +9,11 @@ interface Payload {
   email: string;
 }
 
-export interface RequestWithUser extends Request {
-  userId?: string;
-}
-
-export const isAuth = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+export const isAuth = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   let token: string | undefined;
   if (
     req.headers.authorization &&
@@ -23,7 +23,7 @@ export const isAuth = async (req: RequestWithUser, res: Response, next: NextFunc
   }
 
   if (!token) {
-    const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined');  // 未傳送Token
+    const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined'); // 未傳送Token
     return next(err);
   }
 
@@ -39,11 +39,10 @@ export const isAuth = async (req: RequestWithUser, res: Response, next: NextFunc
       return next();
     }
 
-    const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined');  // 用戶不存在
+    const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined'); // 用戶不存在
     return next(err);
-
   } catch (error) {
-    const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined');  // Token錯誤
+    const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined'); // Token錯誤
     return next(err);
   }
 };
