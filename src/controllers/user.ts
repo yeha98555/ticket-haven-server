@@ -30,9 +30,7 @@ const userController = {
 
   getUser: async (req: RequestWithUser, res: Response) => {
     const user = await userService.findUserById(req.userId!);
-    res.send(
-      successBody({ data: camelizeKeys(user?.toJSON({ virtuals: true })) }),
-    );
+    res.send(successBody({ data: user?.toJSON({ virtuals: true }) }));
   },
 
   updateUser: async (
@@ -46,9 +44,7 @@ const userController = {
         decamelizeKeys(req.body),
       );
 
-      res.json(
-        successBody({ data: camelizeKeys(user?.toJSON({ virtuals: true })) }),
-      );
+      res.json(successBody({ data: user?.toJSON({ virtuals: true }) }));
     } catch (error) {
       const err = appError(400, StatusCode.FAIL, 'Parameter error');
       next(err);

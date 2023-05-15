@@ -1,3 +1,4 @@
+import './registerMongoosePlugins';
 import './connections';
 import express, { Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
