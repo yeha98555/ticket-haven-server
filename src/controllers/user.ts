@@ -1,10 +1,9 @@
 import userService from '@/services/user';
 import { successBody } from '@/utils/response';
 import { Request, Response, NextFunction } from 'express';
-import { RequestWithUser } from '@/middleware/auth';
 import { appError } from '@/services/appError';
 import { StatusCode } from '@/enums/statusCode';
-import { camelizeKeys, decamelizeKeys } from 'humps';
+import { decamelizeKeys } from 'humps';
 
 const userController = {
   signup: async (req: Request, res: Response) => {
@@ -28,16 +27,12 @@ const userController = {
     }
   },
 
-  getUser: async (req: RequestWithUser, res: Response) => {
+  getUser: async (req: Request, res: Response) => {
     const user = await userService.findUserById(req.userId!);
     res.send(successBody({ data: user?.toJSON({ virtuals: true }) }));
   },
 
-  updateUser: async (
-    req: RequestWithUser,
-    res: Response,
-    next: NextFunction,
-  ) => {
+  updateUser: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const user = await userService.updateUserById(
         req.userId!,
