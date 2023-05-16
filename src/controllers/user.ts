@@ -1,10 +1,8 @@
 import userService from '@/services/user';
-import { successBody } from '@/utils/response';
+import catchAsyncError from '@/utils/catchAsyncError';
+import { Body } from '@/utils/response';
 import { Request, Response, NextFunction } from 'express';
-import { RequestWithUser } from '@/middleware/auth';
-import { appError } from '@/services/appError';
-import { StatusCode } from '@/enums/statusCode';
-import { camelizeKeys, decamelizeKeys } from 'humps';
+import { decamelizeKeys } from 'humps';
 
 const userController = {
   signup: async (req: Request, res: Response, next: NextFunction,) => {
@@ -29,32 +27,20 @@ const userController = {
     }
   },
 
-  getUser: async (req: RequestWithUser, res: Response) => {
+  getUser: catchAsyncError(async (req: Request, res: Response) => {
     const user = await userService.findUserById(req.userId!);
-    res.send(
-      successBody({ data: camelizeKeys(user?.toJSON({ virtuals: true })) }),
-    );
-  },
+    res.json(Body.success(user?.toJSON({ virtuals: true })));
+  }),
 
-  updateUser: async (
-    req: RequestWithUser,
-    res: Response,
-    next: NextFunction,
-  ) => {
-    try {
+  updateUser: catchAsyncError(
+    async (req: Request, res: Response, next: NextFunction) => {
       const user = await userService.updateUserById(
         req.userId!,
         decamelizeKeys(req.body),
       );
-
-      res.json(
-        successBody({ data: camelizeKeys(user?.toJSON({ virtuals: true })) }),
-      );
-    } catch (error) {
-      const err = appError(400, StatusCode.FAIL, 'Parameter error');
-      next(err);
-    }
-  },
+      res.json(Body.success(user?.toJSON({ virtuals: true })));
+    },
+  ),
 };
 
 export default userController;

@@ -9,12 +9,8 @@ interface Payload {
   email: string;
 }
 
-export interface RequestWithUser extends Request {
-  userId?: string;
-}
-
 export const isAuth = async (
-  req: RequestWithUser,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
