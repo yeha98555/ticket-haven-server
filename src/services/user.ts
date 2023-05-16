@@ -54,27 +54,14 @@ const userService = {
     return user;
   },
   signin: async ({ email, password }: { email: string; password: string }) => {
-    try {
-      const foundUser = await UserModel.findOne({ email });
-      if (!foundUser) throw appError(400, StatusCode.NOT_FOUND, '帳號不存在！');
-
-      const result = await bcrypt.compare(password, foundUser.password);
-      if (!result) throw appError(400, StatusCode.FORBIDDEN, '帳號/密碼錯誤！');
-
-      const tokenObj = { id: foundUser._id, email: foundUser.email };
-      const SECRET: string = process.env.JWT_SECRET;
-      const token = jwt.sign(tokenObj, SECRET, { expiresIn: '1d' });
-      const res = {
-        status: 200,
-        statusCode: StatusCode.SUCCESS,
-        message: '登入成功！',
-        token: `Bearer ${token}`,
-      };
-      return res;
-    } catch (err) {
-      console.log('signup',err);
-      throw err;
-    }
+    const foundUser = await UserModel.findOne({ email });
+    if (!foundUser) throw appError(400, StatusCode.NOT_FOUND, 'Invalid request');
+    const result = await bcrypt.compare(password, foundUser.password);
+    if (!result) throw appError(400, StatusCode.FAIL, 'Invalid request');
+    const tokenObj = { id: foundUser._id, email: foundUser.email };
+    const SECRET: string = process.env.JWT_SECRET;
+    const token = jwt.sign(tokenObj, SECRET, { expiresIn: '1d' });
+    return `Bearer ${token}`;
   },
   signup: async (req: {
     username: string;
@@ -83,22 +70,11 @@ const userService = {
   }) => {
     const { username, email, password } = req;
     const isExistUser = await UserModel.findOne({ email });
-    if (isExistUser) throw appError(400, StatusCode.FORBIDDEN, '此帳號已存在，請重新輸入！');
-    try {
-      const hash = await bcrypt.hash(password, saltRounds);
-      const newUser = new UserModel({ username, email, password: hash });
-      await newUser.save();
-      await UserModel.find({}).then((data) => console.log(data));
-      const res = {
-        status: 200,
-        statusCode: StatusCode.SUCCESS,
-        message: '註冊成功，請重新登入',
-      };
-      return res;
-    } catch (err) {
-      console.log(err);
-      throw appError(500, StatusCode.SERVER_ERROR, '發生錯誤，請稍後再試');
-    }
+    if (isExistUser) throw appError(400, StatusCode.FAIL, 'Email already exists');
+    const hash = await bcrypt.hash(password, saltRounds);
+    const newUser = new UserModel({ username, email, password: hash });
+    await newUser.save();
+    return true;
   },
 };
 

@@ -9,21 +9,27 @@ import { camelizeKeys, decamelizeKeys } from 'humps';
 const userController = {
   signup: async (req: Request, res: Response, next: NextFunction,) => {
     try {
-      const result = await userService.signup(req.body);
-      console.log(result);
-      res.status(result.status);
-      res.send(result);
+      const isSignup = await userService.signup(req.body);
+      if(isSignup){
+        res.status(200).send({
+          statusCode: StatusCode.SUCCESS,
+          message: '註冊成功，請重新登入',
+        });
+      }
     } catch (error) {
       next(error);
     }
   },
   signin: async (req: Request, res: Response, next: NextFunction,) => {
     try {
-      const result = await userService.signin(req.body);
-      const {status, message, token } = result
-      console.log(result);
-      res.status(status);
-      res.send(successBody({message, data: {token}}));
+      const token = await userService.signin(req.body);
+      if(token){
+        res.status(200).send({
+          statusCode: StatusCode.SUCCESS,
+          message: 'Success',
+          token,
+        });
+      }
     } catch (error) {
       next(error);
     }

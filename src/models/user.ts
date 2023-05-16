@@ -47,7 +47,6 @@ const userSchema = new Schema<IUser>(
     password: {
       type: String,
       required: [true, 'password invalid'],
-      minlength: 8,
     },
     bank_code: String,
     bank_account: String,
