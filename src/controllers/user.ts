@@ -2,30 +2,29 @@ import userService from '@/services/user';
 import catchAsyncError from '@/utils/catchAsyncError';
 import { Body } from '@/utils/response';
 import { Request, Response, NextFunction } from 'express';
+import { appError } from '@/services/appError';
+import { StatusCode } from '@/enums/statusCode';
 import { decamelizeKeys } from 'humps';
 
 const userController = {
-  signup: async (req: Request, res: Response, next: NextFunction,) => {
+  signup: catchAsyncError(async (req: Request, res: Response, next: NextFunction,) => {
     try {
-      const result = await userService.signup(req.body);
-      console.log(result);
-      res.status(result.status);
-      res.send(result);
+      const isSignup = await userService.signup(req.body);
+      if(!isSignup) throw appError(400, StatusCode.FAIL, 'User already exists');
+      res.status(200).json(Body.success(''));
     } catch (error) {
       next(error);
     }
-  },
-  signin: async (req: Request, res: Response, next: NextFunction,) => {
+  }),
+  signin: catchAsyncError(async (req: Request, res: Response, next: NextFunction,) => {
     try {
-      const result = await userService.signin(req.body);
-      const {status, message, token } = result
-      console.log(result);
-      res.status(status);
-      res.send(successBody({message, data: {token}}));
+      const token = await userService.signin(req.body);
+      if(!token) throw appError(400, StatusCode.FAIL, 'Invalid request');
+      res.status(200).json(Body.success({token}));
     } catch (error) {
       next(error);
     }
-  },
+  }),
 
   getUser: catchAsyncError(async (req: Request, res: Response) => {
     const user = await userService.findUserById(req.userId!);
