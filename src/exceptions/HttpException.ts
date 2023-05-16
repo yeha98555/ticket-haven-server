@@ -1,11 +1,21 @@
+import { StatusCode } from '@/enums/statusCode';
+
+interface HttpError {
+  httpCode: number;
+  statusCode: StatusCode;
+  message: string;
+}
+
 export class HttpException extends Error {
-  public status: number;
+  public readonly status: number;
+  public readonly statusCode: string;
 
-  public message: string;
+  constructor(args: HttpError) {
+    super(args.message);
 
-  constructor(status: number, message: string) {
-    super(message);
-    this.status = status;
-    this.message = message;
+    Object.setPrototypeOf(this, new.target.prototype);
+
+    this.status = args.httpCode;
+    this.statusCode = args.statusCode;
   }
 }

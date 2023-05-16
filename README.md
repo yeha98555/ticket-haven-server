@@ -3,7 +3,9 @@
 # Ticket Haven Server
 A server for managing concert tickets.
 - development(develop): https://ticket-haven-dev.onrender.com
-- production(main): https://ticket-haven.onrender.com
+- production(main):
+  - https://ticket-haven-dev.onrender.com
+  - http://ticket-haven-appenv.eba-4cmr3dzu.us-east-2.elasticbeanstalk.com/
 
 ## Prerequisites
 Before running this project, you must have the following installed:
@@ -34,7 +36,7 @@ Available development scripts:
 - `yarn start`：Start the production server.
 - `yarn lint`：Run ESLint for syntax checking.
 - `yarn format`: Run Prettier to format code.
-- `yarn prepare`: Install Husky.
+- `yarn postinstall`: Install Husky.
 - `yarn test`: Run Jest for automated tests.
 
 ## Make scripts
