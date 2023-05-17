@@ -24,7 +24,7 @@ const userSchema = new Schema<IUser>(
   {
     g_uid: String,
     username: {
-      type:String,
+      type: String,
       required: [true, 'username invalid'],
     },
     email: {
@@ -45,7 +45,7 @@ const userSchema = new Schema<IUser>(
       default: false,
     },
     password: {
-      type:String,
+      type: String,
       required: [true, 'password invalid'],
     },
     bank_code: String,
