@@ -64,8 +64,7 @@
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.0.4",
-    "zod-express-middleware": "^1.4.0"
+    "typescript": "^5.0.4"
   },
   "packageManager": "yarn@3.5.0"
 }
