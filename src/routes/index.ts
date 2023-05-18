@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './swagger/swagger';
 import userRouter from './user';
+import activityRouter from './activity';
 
 const router = Router();
 
@@ -56,5 +57,6 @@ router.get('/', (req: Request, res: Response) => {
 router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 router.use('/user', userRouter);
+router.use('/activities', activityRouter);
 
 export default router;

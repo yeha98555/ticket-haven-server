@@ -1564,6 +1564,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/ramda@npm:^0.29.1":
+  version: 0.29.1
+  resolution: "@types/ramda@npm:0.29.1"
+  dependencies:
+    types-ramda: ^0.29.2
+  checksum: e8473504d62aeb430345d20ef776209f2cc3a7b19e683f1c59130cb0a876556dd88a380bfde01ea64edc7daeac8dad838b7f6693850181039da83132356d78fb
+  languageName: node
+  linkType: hard
+
 "@types/range-parser@npm:*":
   version: 1.2.4
   resolution: "@types/range-parser@npm:1.2.4"
@@ -7255,6 +7264,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ramda@npm:^0.29.0":
+  version: 0.29.0
+  resolution: "ramda@npm:0.29.0"
+  checksum: 9ab26c06eb7545cbb7eebcf75526d6ee2fcaae19e338f165b2bf32772121e7b28192d6664d1ba222ff76188ba26ab307342d66e805dbb02c860560adc4d5dd57
+  languageName: node
+  linkType: hard
+
 "range-parser@npm:~1.2.0":
   version: 1.2.1
   resolution: "range-parser@npm:1.2.1"
@@ -8330,6 +8346,7 @@ __metadata:
     "@types/jsonwebtoken": ^9.0.2
     "@types/morgan": ^1.9.4
     "@types/node": ^18.15.13
+    "@types/ramda": ^0.29.1
     "@types/supertest": ^2.0.12
     "@types/swagger-jsdoc": ^6.0.1
     "@types/swagger-ui-express": ^4.1.3
@@ -8357,6 +8374,7 @@ __metadata:
     morgan: ~1.9.1
     nodemon: ^2.0.22
     prettier: ^2.8.7
+    ramda: ^0.29.0
     supertest: ^6.3.3
     swagger-jsdoc: ^6.2.8
     swagger-ui-express: ^4.6.2
@@ -8521,6 +8539,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ts-toolbelt@npm:^9.6.0":
+  version: 9.6.0
+  resolution: "ts-toolbelt@npm:9.6.0"
+  checksum: 9f35fd95d895a5d32ea9fd2e532a695b0bae6cbff6832b77292efa188a0ed1ed6e54f63f74a8920390f3d909a7a3adb20a144686372a8e78b420246a9bd3d58a
+  languageName: node
+  linkType: hard
+
 "tsconfig-paths@npm:^3.14.1":
   version: 3.14.2
   resolution: "tsconfig-paths@npm:3.14.2"
@@ -8638,6 +8663,15 @@ __metadata:
     for-each: ^0.3.3
     is-typed-array: ^1.1.9
   checksum: 2228febc93c7feff142b8c96a58d4a0d7623ecde6c7a24b2b98eb3170e99f7c7eff8c114f9b283085cd59dcd2bd43aadf20e25bba4b034a53c5bb292f71f8956
+  languageName: node
+  linkType: hard
+
+"types-ramda@npm:^0.29.2":
+  version: 0.29.2
+  resolution: "types-ramda@npm:0.29.2"
+  dependencies:
+    ts-toolbelt: ^9.6.0
+  checksum: 0b394d4be7d7f110eff2b3c13fe1a648dc14ac22da2acb5575f6621230d43e6bb1067d5a61b9793ba122efe46cda85b9e5eff7bb23d82ffa436e1f24140fff79
   languageName: node
   linkType: hard
 
