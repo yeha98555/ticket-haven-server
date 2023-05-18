@@ -1,14 +1,7 @@
+import { Region } from '@/enums/region';
+import toValidate from '@/utils/toValidate';
 import { InferSchemaType, Schema, Types, model } from 'mongoose';
-
-const vipSchema = new Schema({
-  early_sell_at: { type: Date, required: true },
-  vip_token: [
-    {
-      token: { type: String, required: true, unique: true, sparse: true },
-      isUsed: { type: Boolean, default: false },
-    },
-  ],
-});
+import { z } from 'zod';
 
 const eventSchema = new Schema({
   sell_at: { type: Date, required: true },
@@ -16,7 +9,6 @@ const eventSchema = new Schema({
   start_at: { type: Date, required: true },
   end_at: { type: Date, required: true },
   qrcode_verify_link: String,
-  vip: [vipSchema],
 });
 
 const activitySchema = new Schema(
@@ -34,7 +26,17 @@ const activitySchema = new Schema(
     seat_big_img_url: String,
     seat_small_img_url: String,
     firm_id: { type: Types.ObjectId, required: true },
-    events: [eventSchema],
+    start_at: { type: Date, required: true },
+    end_at: { type: Date, required: true },
+    sell_at: { type: Date, required: true },
+    events: {
+      type: [eventSchema],
+      validate: (v: unknown) => Array.isArray(v) && v.length > 0,
+    },
+    region: {
+      type: Number,
+      validate: toValidate(z.nativeEnum(Region).optional().nullable()),
+    },
     deleted_at: Date,
   },
   {
