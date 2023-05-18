@@ -28,6 +28,7 @@ const activityService = {
       region?: Region;
       start_at?: { $gt: Date };
       end_at?: { $lt: Date };
+      name?: { $regex: string };
     } = {};
 
     if (isNotNil(region)) {
@@ -38,6 +39,16 @@ const activityService = {
     }
     if (endAt) {
       filter.end_at = { $lt: endAt };
+    }
+    if (q) {
+      const exp =
+        '.*' +
+        q
+          .split(' ')
+          .map((s) => `(?=.*${s})`)
+          .join('') +
+        '.*';
+      filter.name = { $regex: exp };
     }
 
     const sortRule: { [key: string]: 1 | -1 } = {};
