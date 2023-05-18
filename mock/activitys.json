@@ -8,6 +8,17 @@
     "cover_img_url": "/images/61697b11c0cb54d45f7c8dcb_cover.jpg",
     "created_at": "2022-10-15T12:30:00.000Z",
     "deleted_at": null,
+    "end_at": "2023-05-20T22:30:00.000Z",
+    "events": [
+      {
+        "end_at": "2023-05-20T22:30:00.000Z",
+        "qrcode_verify_link": "https://ticket-haven.onrender.com/admin/61577d3bbd2b96f7e225c055/scan",
+        "sell_at": "2023-04-20T10:00:00.000Z",
+        "sellend_at": "2023-05-20T18:00:00.000Z",
+        "start_at": "2023-05-20T19:30:00.000Z",
+        "updated_at": "2023-04-30T00:00:00.000Z"
+      }
+    ],
     "firm_id": {
       "$oid": "644e4370fc13ae30a8842e35"
     },
@@ -15,8 +26,11 @@
     "location": "台北小巨蛋",
     "name": "周杰倫 2023 熱情演唱會",
     "notice": "1. 本場演唱會場地將會有嚴格的安檢措施，請攜帶身份證件進場。\n2. 禁止攜帶食物、酒精、寵物進場，會場內亦不得吸菸。\n3. 請提前到場，以免影響到您的入場體驗。",
+    "region": 1,
     "seat_big_img_url": "/images/61697b11c0cb54d45f7c8dcb_seat_big.png",
     "seat_small_img_url": "/images/61697b11c0cb54d45f7c8dcb_seat_small.png",
+    "sell_at": "2023-04-20T10:00:00.000Z",
+    "start_at": "2023-05-20T19:30:00.000Z",
     "updated_at": "2022-10-15T12:30:00.000Z"
   },
   {
@@ -28,6 +42,24 @@
     "cover_img_url": "/images/61697b11c0cb54d45f7c8dcf_cover.jpg",
     "created_at": "2023-04-30T15:00:00.000Z",
     "deleted_at": null,
+    "end_at": "2023-05-21T22:30:00.000Z",
+    "events": [
+      {
+        "end_at": "2023-05-20T22:30:00.000Z",
+        "qrcode_verify_link": "https://ticket-haven.onrender.com/admin/61577d3bbd2b96f7e225c055/scan",
+        "sell_at": "2023-04-20T10:00:00.000Z",
+        "sellend_at": "2023-05-20T18:00:00.000Z",
+        "start_at": "2023-05-20T19:30:00.000Z",
+        "updated_at": "2023-04-30T00:00:00.000Z"
+      },
+      {
+        "end_at": "2023-05-21T22:30:00.000Z",
+        "qrcode_verify_link": "https://ticket-haven.onrender.com/admin/61577d3bbd2b96f7e225c056/scan",
+        "sell_at": "2023-04-21T10:00:00.000Z",
+        "sellend_at": "2023-05-21T18:00:00.000Z",
+        "start_at": "2023-05-21T19:30:00.000Z"
+      }
+    ],
     "firm_id": {
       "$oid": "644e4370fc13ae30a8842e39"
     },
@@ -35,8 +67,11 @@
     "location": "高雄市義大世界戶外音樂劇場",
     "name": "五月天 2023 Just Rock It 天空之城演唱會",
     "notice": "1. 請勿攜帶食物、酒精、寵物進場，會場內亦不得吸菸。\n2. 請勿攜帶照相機、攝影機等器材進場，以免影響到其他觀眾的欣賞體驗。\n3. 請在指定時間內入場，逾時將無法入場。",
+    "region": 0,
     "seat_big_img_url": "/images/61697b11c0cb54d45f7c8dcf_seat_big.png",
     "seat_small_img_url": "/images/61697b11c0cb54d45f7c8dcf_seat_small.png",
+    "sell_at": "2023-04-20T10:00:00.000Z",
+    "start_at": "2023-05-20T19:30:00.000Z",
     "updated_at": "2023-04-30T15:00:00.000Z"
   },
   {
@@ -48,6 +83,16 @@
     "cover_img_url": "/images/61697b11c0cb54d45f7c8dd0_cover.jpg",
     "created_at": "2023-04-30T15:00:00.000Z",
     "deleted_at": null,
+    "end_at": "2023-05-21T22:30:00.000Z",
+    "events": [
+      {
+        "end_at": "2023-05-21T22:30:00.000Z",
+        "qrcode_verify_link": "https://ticket-haven.onrender.com/admin/61577d3bbd2b96f7e225c056/scan",
+        "sell_at": "2023-04-21T10:00:00.000Z",
+        "sellend_at": "2023-05-21T18:00:00.000Z",
+        "start_at": "2023-05-21T19:30:00.000Z"
+      }
+    ],
     "firm_id": {
       "$oid": "644e4370fc13ae30a8842e3b"
     },
@@ -55,8 +100,11 @@
     "location": "台北小巨蛋",
     "name": "林宥嘉 2023 動次打次演唱會",
     "notice": "1. 活動當天禁止攜帶食物、酒精、寵物進場，會場內亦不得吸菸。\n2. 請勿攜帶照相機、攝影機等器材進場，以免影響到其他觀眾的欣賞體驗。\n3. 未滿 12 歲之兒童，應由家長陪同進場。",
+    "region": 2,
     "seat_big_img_url": "/images/61697b11c0cb54d45f7c8dd0_seat_big.png",
     "seat_small_img_url": "/images/61697b11c0cb54d45f7c8dd0_seat_small.png",
+    "sell_at": "2023-04-15T10:00:00.000Z",
+    "start_at": "2023-05-21T19:30:00.000Z",
     "updated_at": "2023-04-30T15:00:00.000Z"
   },
   {
@@ -68,6 +116,24 @@
     "cover_img_url": "/images/61697b11c0cb54d45f7c8dd2_cover.jpg",
     "created_at": "2023-04-30T15:00:00.000Z",
     "deleted_at": null,
+    "end_at": "2023-05-21T22:30:00.000Z",
+    "events": [
+      {
+        "end_at": "2023-05-20T22:30:00.000Z",
+        "qrcode_verify_link": "https://ticket-haven.onrender.com/admin/61577d3bbd2b96f7e225c055/scan",
+        "sell_at": "2023-04-20T10:00:00.000Z",
+        "sellend_at": "2023-05-20T18:00:00.000Z",
+        "start_at": "2023-05-20T19:30:00.000Z",
+        "updated_at": "2023-04-30T00:00:00.000Z"
+      },
+      {
+        "end_at": "2023-05-21T22:30:00.000Z",
+        "qrcode_verify_link": "https://ticket-haven.onrender.com/admin/61577d3bbd2b96f7e225c056/scan",
+        "sell_at": "2023-04-21T10:00:00.000Z",
+        "sellend_at": "2023-05-21T18:00:00.000Z",
+        "start_at": "2023-05-21T19:30:00.000Z"
+      }
+    ],
     "firm_id": {
       "$oid": "644e4370fc13ae30a8842e3d"
     },
@@ -75,8 +141,11 @@
     "location": "高雄巨蛋",
     "name": "蔡依林 2023 Ugly Beauty 世界巡迴演唱會 [高雄站]",
     "notice": "1. 活動當天禁止攜帶食物、酒精、寵物進場，會場內亦不得吸菸。\n2. 請勿攜帶照相機、攝影機等器材進場，以免影響到其他觀眾的欣賞體驗。\n3. 未滿 12 歲之兒童，應由家長陪同進場。",
+    "region": 0,
     "seat_big_img_url": "/images/61697b11c0cb54d45f7c8dd2_seat_big.png",
     "seat_small_img_url": "/images/61697b11c0cb54d45f7c8dd2_seat_small.png",
+    "sell_at": "2023-04-25T10:00:00.000Z",
+    "start_at": "2023-05-20T19:30:00.000Z",
     "updated_at": "2023-04-30T15:00:00.000Z"
   }
 ]
