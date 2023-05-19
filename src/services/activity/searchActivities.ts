@@ -174,40 +174,31 @@ const searchActivities = async ({
     filter.name = { $regex: exp };
   }
 
-  const sortRule: { [key: string]: 1 | -1 } = {};
+  let sortRule: { [key: string]: 1 | -1 } | undefined;
   sort?.forEach((r) => {
     const field = decamelize(r[0]);
+    !sortRule && (sortRule = {});
     sortRule[field] = r[1] === '-' ? -1 : 1;
   });
 
-  const activities = await ActivityModel.aggregate([
-    { $match: filter },
-    ...aggregateStages,
-    {
-      $sort: sortRule,
-    },
-    {
-      $skip: (page - 1) * pageSize,
-    },
-    {
-      $limit: pageSize,
-    },
-  ]);
+  const activities = await ActivityModel.aggregate(
+    [
+      { $match: filter },
+      ...aggregateStages,
+      sortRule && {
+        $sort: sortRule,
+      },
+      {
+        $skip: (page - 1) * pageSize,
+      },
+      {
+        $limit: pageSize,
+      },
+    ].filter(Boolean) as PipelineStage[],
+  );
 
   const totalCount = await ActivityModel.countDocuments(filter);
   const totalPages = Math.floor(totalCount / pageSize) || 1;
-
-  // console.log({
-  //   page,
-  //   pageSize,
-  //   totalCount,
-  //   totalPages,
-  //   activities: activities.map((v) => ({
-  //     id: (v.toJSON() as any).id,
-  //     startAt: v.start_at,
-  //     endAt: v.end_at,
-  //   })),
-  // });
 
   return {
     page,
@@ -217,14 +208,5 @@ const searchActivities = async ({
     activities,
   };
 };
-
-// activityService.searchActivities({
-//   page: 1,
-//   pageSize: 10,
-// region: 0,
-// startAt: new Date('2023-05-21'),
-// endAt: new Date('2023-05-21'),
-//   sort: parseSortString('-startAt, -endAt'),
-// });
 
 export default searchActivities;
