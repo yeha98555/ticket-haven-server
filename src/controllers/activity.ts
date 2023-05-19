@@ -1,6 +1,7 @@
 import activityService from '@/services/activity';
 import catchAsyncError from '@/utils/catchAsyncError';
 import { Body } from '@/utils/response';
+import { camelizeKeys } from 'humps';
 
 const activityController = {
   searchActivities: catchAsyncError(async (req, res) => {
@@ -8,7 +9,9 @@ const activityController = {
       await activityService.searchActivities(req.query as any);
 
     res.json(
-      Body.success(activities.map((v) => v.toJSON())).pagination(pagination),
+      Body.success(
+        camelizeKeys(JSON.parse(JSON.stringify(activities))),
+      ).pagination(pagination),
     );
   }),
 };

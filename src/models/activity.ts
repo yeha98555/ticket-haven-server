@@ -3,6 +3,21 @@ import toValidate from '@/utils/toValidate';
 import { InferSchemaType, Schema, Types, model } from 'mongoose';
 import { z } from 'zod';
 
+const areaSchema = new Schema({
+  name: { type: String, required: true },
+  price: { type: Number, required: true },
+  subareas: [
+    {
+      name: { type: String, required: true },
+      start_row: { type: Number, required: true },
+      rows: {
+        type: [{ type: Number, required: true }],
+        validate: (v: unknown) => Array.isArray(v) && v.length > 0,
+      },
+    },
+  ],
+});
+
 const eventSchema = new Schema({
   sell_at: { type: Date, required: true },
   sellend_at: { type: Date, required: true },
@@ -36,6 +51,10 @@ const activitySchema = new Schema(
     region: {
       type: Number,
       validate: toValidate(z.nativeEnum(Region).optional().nullable()),
+    },
+    areas: {
+      type: [areaSchema],
+      validate: (v: unknown) => Array.isArray(v) && v.length > 0,
     },
     deleted_at: Date,
   },
