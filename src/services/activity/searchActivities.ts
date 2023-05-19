@@ -74,7 +74,14 @@ const aggregateStages: PipelineStage[] = [
     $group: {
       _id: '$_id',
       seat_count: {
-        $sum: '$subarea_count',
+        $sum: {
+          $multiply: [
+            '$subarea_count',
+            {
+              $size: '$activity_data.events',
+            },
+          ],
+        },
       },
       name: {
         $first: '$$ROOT.activity_data.name',
@@ -117,12 +124,6 @@ const aggregateStages: PipelineStage[] = [
   },
   {
     $unset: ['ticket_count', 'seatCount'],
-  },
-  {
-    $sort: {
-      sell_at: 1,
-      sold_out: 1,
-    },
   },
 ];
 
