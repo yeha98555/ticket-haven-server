@@ -18,8 +18,8 @@ activityRouter.get(
         .transform((v) => v && parseInt(v))
         .pipe(z.nativeEnum(Region))
         .optional(),
-      startAt: z.coerce.date().optional(),
-      endAt: z.coerce.date().optional(),
+      startAfter: z.coerce.date().optional(),
+      startBefore: z.coerce.date().optional(),
       q: z.string().optional(),
       sort: z
         .string()

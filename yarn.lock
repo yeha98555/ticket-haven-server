@@ -2992,7 +2992,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.29.3":
+"date-fns@npm:^2.29.3, date-fns@npm:^2.30.0":
   version: 2.30.0
   resolution: "date-fns@npm:2.30.0"
   dependencies:
@@ -8356,6 +8356,7 @@ __metadata:
     concurrently: ^8.0.1
     cookie-parser: ~1.4.4
     cors: ^2.8.5
+    date-fns: ^2.30.0
     debug: ~2.6.9
     dotenv: ^16.0.3
     ejs: ~2.6.1
