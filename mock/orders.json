@@ -1,121 +1,124 @@
-[{
-  "_id": {
-    "$oid": "6466812d6a4040db3709fc0c"
-  },
-  "user_id": {
-    "$oid": "646110049b73801379a88b8b"
-  },
-  "activity_id": {
-    "$oid": "61697b11c0cb54d45f7c8dcb"
-  },
-  "event_id": {
-    "$oid": "6466812d6a4040db3709fc08"
-  },
-  "seats": [
-    {
-      "area_id": {
-        "$oid": "646780cb2d0f3b114c2ee2dc"
-      },
-      "subarea_id": {
-        "$oid": "646780cb2d0f3b114c2ee2dd"
-      },
-      "row": 1,
-      "seat": 2,
-      "_id": {
-        "$oid": "6466812d6a4040db3709fc0d"
-      }
+[
+  {
+    "_id": {
+      "$oid": "6466812d6a4040db3709fc0c"
     },
-    {
-      "area_id": {
-        "$oid": "646780cb2d0f3b114c2ee2dc"
-      },
-      "subarea_id": {
-        "$oid": "646780cb2d0f3b114c2ee2dd"
-      },
-      "row": 1,
-      "seat": 3,
-      "_id": {
-        "$oid": "6466812d6a4040db3709fc0e"
-      }
+    "activity_id": {
+      "$oid": "61697b11c0cb54d45f7c8dcb"
     },
-    {
-      "area_id": {
-        "$oid": "646780cb2d0f3b114c2ee2dc"
+    "create_at": {
+      "$date": "2023-05-18T19:49:01.400Z"
+    },
+    "event_id": {
+      "$oid": "6466812d6a4040db3709fc08"
+    },
+    "seats": [
+      {
+        "_id": {
+          "$oid": "6466812d6a4040db3709fc0d"
+        },
+        "area_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dc"
+        },
+        "row": 1,
+        "seat": 2,
+        "subarea_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dd"
+        }
       },
-      "subarea_id": {
-        "$oid": "646780cb2d0f3b114c2ee2dd"
+      {
+        "_id": {
+          "$oid": "6466812d6a4040db3709fc0e"
+        },
+        "area_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dc"
+        },
+        "row": 1,
+        "seat": 3,
+        "subarea_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dd"
+        }
       },
-      "row": 1,
-      "seat": 4,
-      "_id": {
-        "$oid": "6466812d6a4040db3709fc0f"
+      {
+        "_id": {
+          "$oid": "6466812d6a4040db3709fc0f"
+        },
+        "area_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dc"
+        },
+        "row": 1,
+        "seat": 4,
+        "subarea_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dd"
+        }
       }
+    ],
+    "update_at": {
+      "$date": "2023-05-18T19:49:01.400Z"
+    },
+    "user_id": {
+      "$oid": "644e3f3afc13ae317e842dd1"
     }
-  ],
-  "create_at": {
-    "$date": "2023-05-18T19:49:01.400Z"
   },
-  "update_at": {
-    "$date": "2023-05-18T19:49:01.400Z"
-  }
-},{
-  "_id": {
-    "$oid": "6466812d6a4040db3709fc10"
-  },
-  "user_id": {
-    "$oid": "646110049b73801379a88b8b"
-  },
-  "activity_id": {
-    "$oid": "61697b11c0cb54d45f7c8dcb"
-  },
-  "event_id": {
-    "$oid": "6466812d6a4040db3709fc08"
-  },
-  "seats": [
-    {
-      "area_id": {
-        "$oid": "646780cb2d0f3b114c2ee2dc"
-      },
-      "subarea_id": {
-        "$oid": "646780cb2d0f3b114c2ee2dd"
-      },
-      "row": 1,
-      "seat": 1,
-      "_id": {
-        "$oid": "6466812d6a4040db3709fc11"
-      }
+  {
+    "_id": {
+      "$oid": "6466812d6a4040db3709fc10"
     },
-    {
-      "area_id": {
-        "$oid": "646780cb2d0f3b114c2ee2dc"
-      },
-      "subarea_id": {
-        "$oid": "646780cb2d0f3b114c2ee2dd"
-      },
-      "row": 1,
-      "seat": 5,
-      "_id": {
-        "$oid": "6466812d6a4040db3709fc12"
-      }
+    "activity_id": {
+      "$oid": "61697b11c0cb54d45f7c8dcb"
     },
-    {
-      "area_id": {
-        "$oid": "646780cb2d0f3b114c2ee2dc"
+    "create_at": {
+      "$date": "2023-05-18T19:49:01.401Z"
+    },
+    "event_id": {
+      "$oid": "6466812d6a4040db3709fc08"
+    },
+    "seats": [
+      {
+        "_id": {
+          "$oid": "6466812d6a4040db3709fc11"
+        },
+        "area_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dc"
+        },
+        "row": 1,
+        "seat": 1,
+        "subarea_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dd"
+        }
       },
-      "subarea_id": {
-        "$oid": "646780cb2d0f3b114c2ee2dd"
+      {
+        "_id": {
+          "$oid": "6466812d6a4040db3709fc12"
+        },
+        "area_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dc"
+        },
+        "row": 1,
+        "seat": 5,
+        "subarea_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dd"
+        }
       },
-      "row": 1,
-      "seat": 6,
-      "_id": {
-        "$oid": "6466812d6a4040db3709fc13"
+      {
+        "_id": {
+          "$oid": "6466812d6a4040db3709fc13"
+        },
+        "area_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dc"
+        },
+        "row": 1,
+        "seat": 6,
+        "subarea_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dd"
+        }
       }
+    ],
+    "update_at": {
+      "$date": "2023-05-18T19:49:01.401Z"
+    },
+    "user_id": {
+      "$oid": "644e3f3afc13ae317e842dd1"
     }
-  ],
-  "create_at": {
-    "$date": "2023-05-18T19:49:01.401Z"
-  },
-  "update_at": {
-    "$date": "2023-05-18T19:49:01.401Z"
   }
-}]
+]
