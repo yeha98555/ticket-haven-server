@@ -12,7 +12,7 @@
     "event_id": {
       "$oid": "6466812d6a4040db3709fc08"
     },
-    "isUsed": false,
+    "is_used": false,
     "order_id": {
       "$oid": "6466812d6a4040db3709fc0c"
     },
@@ -37,7 +37,7 @@
     "event_id": {
       "$oid": "6466812d6a4040db3709fc08"
     },
-    "isUsed": false,
+    "is_used": false,
     "order_id": {
       "$oid": "6466812d6a4040db3709fc0c"
     },
@@ -62,7 +62,7 @@
     "event_id": {
       "$oid": "6466812d6a4040db3709fc08"
     },
-    "isUsed": false,
+    "is_used": false,
     "order_id": {
       "$oid": "6466812d6a4040db3709fc0c"
     },
@@ -87,7 +87,7 @@
     "event_id": {
       "$oid": "6466812d6a4040db3709fc08"
     },
-    "isUsed": false,
+    "is_used": false,
     "order_id": {
       "$oid": "6466812d6a4040db3709fc10"
     },
@@ -112,7 +112,7 @@
     "event_id": {
       "$oid": "6466812d6a4040db3709fc08"
     },
-    "isUsed": false,
+    "is_used": false,
     "order_id": {
       "$oid": "6466812d6a4040db3709fc10"
     },
@@ -137,7 +137,7 @@
     "event_id": {
       "$oid": "6466812d6a4040db3709fc08"
     },
-    "isUsed": false,
+    "is_used": false,
     "order_id": {
       "$oid": "6466812d6a4040db3709fc10"
     },
