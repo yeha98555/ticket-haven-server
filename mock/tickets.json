@@ -1,0 +1,152 @@
+[
+  {
+    "_id": {
+      "$oid": "646898ff79910b936877c18a"
+    },
+    "activity_id": {
+      "$oid": "61697b11c0cb54d45f7c8dcb"
+    },
+    "area_id": {
+      "$oid": "646780cb2d0f3b114c2ee2dc"
+    },
+    "event_id": {
+      "$oid": "6466812d6a4040db3709fc08"
+    },
+    "isUsed": false,
+    "order_id": {
+      "$oid": "6466812d6a4040db3709fc0c"
+    },
+    "price": 1000,
+    "row": 1,
+    "seat": 2,
+    "subarea_id": {
+      "$oid": "646780cb2d0f3b114c2ee2dd"
+    },
+    "ticket_no": "ticket_no_1"
+  },
+  {
+    "_id": {
+      "$oid": "646898ff79910b936877c18b"
+    },
+    "activity_id": {
+      "$oid": "61697b11c0cb54d45f7c8dcb"
+    },
+    "area_id": {
+      "$oid": "646780cb2d0f3b114c2ee2dc"
+    },
+    "event_id": {
+      "$oid": "6466812d6a4040db3709fc08"
+    },
+    "isUsed": false,
+    "order_id": {
+      "$oid": "6466812d6a4040db3709fc0c"
+    },
+    "price": 1000,
+    "row": 1,
+    "seat": 3,
+    "subarea_id": {
+      "$oid": "646780cb2d0f3b114c2ee2dd"
+    },
+    "ticket_no": "ticket_no_2"
+  },
+  {
+    "_id": {
+      "$oid": "646898ff79910b936877c18c"
+    },
+    "activity_id": {
+      "$oid": "61697b11c0cb54d45f7c8dcb"
+    },
+    "area_id": {
+      "$oid": "646780cb2d0f3b114c2ee2dc"
+    },
+    "event_id": {
+      "$oid": "6466812d6a4040db3709fc08"
+    },
+    "isUsed": false,
+    "order_id": {
+      "$oid": "6466812d6a4040db3709fc0c"
+    },
+    "price": 1000,
+    "row": 1,
+    "seat": 4,
+    "subarea_id": {
+      "$oid": "646780cb2d0f3b114c2ee2dd"
+    },
+    "ticket_no": "ticket_no_3"
+  },
+  {
+    "_id": {
+      "$oid": "646898ff79910b936877c18d"
+    },
+    "activity_id": {
+      "$oid": "61697b11c0cb54d45f7c8dcb"
+    },
+    "area_id": {
+      "$oid": "646780cb2d0f3b114c2ee2dc"
+    },
+    "event_id": {
+      "$oid": "6466812d6a4040db3709fc08"
+    },
+    "isUsed": false,
+    "order_id": {
+      "$oid": "6466812d6a4040db3709fc10"
+    },
+    "price": 1000,
+    "row": 1,
+    "seat": 1,
+    "subarea_id": {
+      "$oid": "646780cb2d0f3b114c2ee2dd"
+    },
+    "ticket_no": "ticket_no_4"
+  },
+  {
+    "_id": {
+      "$oid": "646898ff79910b936877c18e"
+    },
+    "activity_id": {
+      "$oid": "61697b11c0cb54d45f7c8dcb"
+    },
+    "area_id": {
+      "$oid": "646780cb2d0f3b114c2ee2dc"
+    },
+    "event_id": {
+      "$oid": "6466812d6a4040db3709fc08"
+    },
+    "isUsed": false,
+    "order_id": {
+      "$oid": "6466812d6a4040db3709fc10"
+    },
+    "price": 1000,
+    "row": 1,
+    "seat": 5,
+    "subarea_id": {
+      "$oid": "646780cb2d0f3b114c2ee2dd"
+    },
+    "ticket_no": "ticket_no_5"
+  },
+  {
+    "_id": {
+      "$oid": "646898ff79910b936877c18f"
+    },
+    "activity_id": {
+      "$oid": "61697b11c0cb54d45f7c8dcb"
+    },
+    "area_id": {
+      "$oid": "646780cb2d0f3b114c2ee2dc"
+    },
+    "event_id": {
+      "$oid": "6466812d6a4040db3709fc08"
+    },
+    "isUsed": false,
+    "order_id": {
+      "$oid": "6466812d6a4040db3709fc10"
+    },
+    "price": 1000,
+    "row": 1,
+    "seat": 6,
+    "subarea_id": {
+      "$oid": "646780cb2d0f3b114c2ee2dd"
+    },
+    "ticket_no": "ticket_no_6"
+  }
+]
