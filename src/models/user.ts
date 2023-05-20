@@ -4,6 +4,7 @@ import { Schema, model } from 'mongoose';
 import z from 'zod';
 
 export interface IUser {
+  _id: Schema.Types.ObjectId;
   g_uid?: string;
   username: string;
   email: string;

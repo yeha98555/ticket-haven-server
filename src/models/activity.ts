@@ -4,10 +4,18 @@ import { InferSchemaType, Schema, Types, model } from 'mongoose';
 import { z } from 'zod';
 
 const areaSchema = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    auto: true,
+  },
   name: { type: String, required: true },
   price: { type: Number, required: true },
   subareas: [
     {
+      _id: {
+        type: Schema.Types.ObjectId,
+        auto: true,
+      },
       name: { type: String, required: true },
       start_row: { type: Number, required: true },
       rows: {
@@ -19,6 +27,10 @@ const areaSchema = new Schema({
 });
 
 const eventSchema = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    auto: true,
+  },
   sell_at: { type: Date, required: true },
   sellend_at: { type: Date, required: true },
   start_at: { type: Date, required: true },
@@ -28,6 +40,10 @@ const eventSchema = new Schema({
 
 const activitySchema = new Schema(
   {
+    _id: {
+      type: Schema.Types.ObjectId,
+      auto: true,
+    },
     name: {
       type: String,
       required: true,
@@ -40,7 +56,7 @@ const activitySchema = new Schema(
     address: String,
     seat_big_img_url: String,
     seat_small_img_url: String,
-    firm_id: { type: Types.ObjectId, required: true },
+    firm_id: { type: Schema.Types.ObjectId, required: true },
     start_at: { type: Date, required: true },
     end_at: { type: Date, required: true },
     sell_at: { type: Date, required: true },
