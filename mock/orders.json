@@ -12,6 +12,12 @@
     "event_id": {
       "$oid": "6466812d6a4040db3709fc08"
     },
+    "order_no": "order_no_1",
+    "original_ticket_ids": [
+      "646898ff79910b936877c18a",
+      "646898ff79910b936877c18b",
+      "646898ff79910b936877c18c"
+    ],
     "seat_reservation_id": {
       "$oid": "6468a29579910b936877c194"
     },
@@ -35,6 +41,12 @@
     "event_id": {
       "$oid": "6466812d6a4040db3709fc08"
     },
+    "order_no": "order_no_2",
+    "original_ticket_ids": [
+      "646898ff79910b936877c18d",
+      "646898ff79910b936877c18e",
+      "646898ff79910b936877c18f"
+    ],
     "seat_reservation_id": {
       "$oid": "6468a29579910b936877c195"
     },
