@@ -4,7 +4,10 @@ import { Body } from '@/utils/response';
 
 const orderController = {
   getOrderInfo: catchAsyncError(async (req, res) => {
-    const order = await orderService.getOrderInfo(req.params.orderNo);
+    const order = await orderService.getOrderInfo(
+      req.userId!,
+      req.params.orderNo,
+    );
     res.json(Body.success(order));
   }),
 };

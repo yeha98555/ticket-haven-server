@@ -1,15 +1,19 @@
+import { NotFoundException } from '@/exceptions/NotFoundException';
 import { IActivity } from '@/models/activity';
 import OrderModel from '@/models/order';
 import TicketModel from '@/models/ticket';
 import { IUser } from '@/models/user';
 
 const orderService = {
-  getOrderInfo: async (orderNo: string) => {
-    const order = await OrderModel.findOne({ order_no: orderNo })
+  getOrderInfo: async (userId: string, orderNo: string) => {
+    const order = await OrderModel.findOne({
+      order_no: orderNo,
+      user_id: userId,
+    })
       .populate<{ user_id: IUser }>('user_id')
       .populate<{ activity_id: IActivity }>('activity_id');
 
-    if (!order) return;
+    if (!order) throw new NotFoundException();
 
     const tickets = await TicketModel.find({ order_id: order?._id });
 
