@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import userService from '@/services/user';
-import { appError } from '@/services/appError';
-import { StatusCode } from '@/enums/statusCode';
+import { PermissionDeniedException } from '@/exceptions/PermissionDeniedException';
 
 interface Payload {
   id: string;
@@ -23,7 +22,7 @@ export const isAuth = async (
   }
 
   if (!token) {
-    const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined'); // 未傳送Token
+    const err = new PermissionDeniedException(); // 未傳送Token
     return next(err);
   }
 
@@ -39,10 +38,10 @@ export const isAuth = async (
       return next();
     }
 
-    const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined'); // 用戶不存在
+    const err = new PermissionDeniedException(); // 用戶不存在
     return next(err);
   } catch (error) {
-    const err = appError(401, StatusCode.FORBIDDEN, 'Permission Deined'); // Token錯誤
+    const err = new PermissionDeniedException(); // Token錯誤
     return next(err);
   }
 };
