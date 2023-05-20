@@ -12,47 +12,9 @@
     "event_id": {
       "$oid": "6466812d6a4040db3709fc08"
     },
-    "seats": [
-      {
-        "_id": {
-          "$oid": "6466812d6a4040db3709fc0d"
-        },
-        "area_id": {
-          "$oid": "646780cb2d0f3b114c2ee2dc"
-        },
-        "row": 1,
-        "seat": 2,
-        "subarea_id": {
-          "$oid": "646780cb2d0f3b114c2ee2dd"
-        }
-      },
-      {
-        "_id": {
-          "$oid": "6466812d6a4040db3709fc0e"
-        },
-        "area_id": {
-          "$oid": "646780cb2d0f3b114c2ee2dc"
-        },
-        "row": 1,
-        "seat": 3,
-        "subarea_id": {
-          "$oid": "646780cb2d0f3b114c2ee2dd"
-        }
-      },
-      {
-        "_id": {
-          "$oid": "6466812d6a4040db3709fc0f"
-        },
-        "area_id": {
-          "$oid": "646780cb2d0f3b114c2ee2dc"
-        },
-        "row": 1,
-        "seat": 4,
-        "subarea_id": {
-          "$oid": "646780cb2d0f3b114c2ee2dd"
-        }
-      }
-    ],
+    "seat_reservation_id": {
+      "$oid": "6468a29579910b936877c194"
+    },
     "update_at": {
       "$date": "2023-05-18T19:49:01.400Z"
     },
@@ -73,47 +35,9 @@
     "event_id": {
       "$oid": "6466812d6a4040db3709fc08"
     },
-    "seats": [
-      {
-        "_id": {
-          "$oid": "6466812d6a4040db3709fc11"
-        },
-        "area_id": {
-          "$oid": "646780cb2d0f3b114c2ee2dc"
-        },
-        "row": 1,
-        "seat": 1,
-        "subarea_id": {
-          "$oid": "646780cb2d0f3b114c2ee2dd"
-        }
-      },
-      {
-        "_id": {
-          "$oid": "6466812d6a4040db3709fc12"
-        },
-        "area_id": {
-          "$oid": "646780cb2d0f3b114c2ee2dc"
-        },
-        "row": 1,
-        "seat": 5,
-        "subarea_id": {
-          "$oid": "646780cb2d0f3b114c2ee2dd"
-        }
-      },
-      {
-        "_id": {
-          "$oid": "6466812d6a4040db3709fc13"
-        },
-        "area_id": {
-          "$oid": "646780cb2d0f3b114c2ee2dc"
-        },
-        "row": 1,
-        "seat": 6,
-        "subarea_id": {
-          "$oid": "646780cb2d0f3b114c2ee2dd"
-        }
-      }
-    ],
+    "seat_reservation_id": {
+      "$oid": "6468a29579910b936877c195"
+    },
     "update_at": {
       "$date": "2023-05-18T19:49:01.401Z"
     },
