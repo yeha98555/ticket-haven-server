@@ -29,7 +29,7 @@ const activityService = {
       address: activity.address,
       content: activity.content,
       notice: activity.notice,
-      seatMapUrl: activity.seat_small_img_url,
+      seatMapUrl: activity.seat_big_img_url,
       events: returnEvents,
     }
   },
