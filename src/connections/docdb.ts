@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import fs from 'fs';
 import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-secrets-manager";
+import { appError } from '@/services/appError';
+import { StatusCode } from '@/enums/statusCode';
 
 const connectToDocDB = async () => {
   const region = 'us-east-2';
@@ -13,8 +15,7 @@ const connectToDocDB = async () => {
     if ('SecretString' in data) {
       secret = data.SecretString as string;
     } else {
-      console.error("Binary secrets are not supported");
-      return;
+      throw appError(500, StatusCode.SERVER_ERROR, 'Binary secrets are not supported');
     }
 
     const credentials = JSON.parse(secret);
@@ -30,11 +31,11 @@ const connectToDocDB = async () => {
       sslCA: tempCertFile,
     }).then(() => {
       console.log("Connected to DocumentDB");
-    }).catch((error) => {
-      console.error("Failed to connect to DocumentDB", error);
+    }).catch((err) => {
+      throw appError(500, StatusCode.SERVER_ERROR, 'Failed to connect to DocumentDB', err);
     });
   }).catch(err => {
-    console.error(err);
+    throw appError(500, StatusCode.SERVER_ERROR, 'Failed to connect to DocumentDB', err);
   });
 
 };
