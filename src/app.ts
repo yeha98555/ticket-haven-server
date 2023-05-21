@@ -5,10 +5,9 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import indexRouter from './routes/index';
-import { StatusCode } from './enums/statusCode';
-import { appError } from './services/appError';
 import logger from './services/logger';
 import errorHandler from './middleware/errorHandler';
+import { NotFoundException } from './exceptions/NotFoundException';
 
 const app: express.Application = express();
 
@@ -38,7 +37,7 @@ app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {
-  const err = appError(404, StatusCode.NOT_FOUND, 'NOT FOUND');
+  const err = new NotFoundException();
   next(err);
 });
 

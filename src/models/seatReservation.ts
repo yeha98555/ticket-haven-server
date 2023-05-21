@@ -1,13 +1,13 @@
 import { InferSchemaType, Schema, Types, model } from 'mongoose';
 
 const seatReservationSchema = new Schema({
-  activity_id: { type: Types.ObjectId, required: true },
-  event_id: { type: Types.ObjectId, required: true },
+  activity_id: { type: Schema.Types.ObjectId, required: true },
+  event_id: { type: Schema.Types.ObjectId, required: true },
   seats: {
     type: [
       {
-        area_id: { type: Types.ObjectId, required: true },
-        subarea_id: { type: Types.ObjectId, required: true },
+        area_id: { type: Schema.Types.ObjectId, required: true },
+        subarea_id: { type: Schema.Types.ObjectId, required: true },
         row: { type: Number, require: true },
         seat: { type: Number, require: true },
       },
