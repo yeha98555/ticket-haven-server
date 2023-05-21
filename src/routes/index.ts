@@ -3,6 +3,7 @@ import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './swagger/swagger';
 import userRouter from './user';
 import activityRouter from './activity';
+import eventRouter from './event';
 import orderRouter from './order';
 
 const router = Router();
@@ -59,6 +60,7 @@ router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 router.use('/user', userRouter);
 router.use('/activities', activityRouter);
+router.use('/events', eventRouter);
 router.use('/orders', orderRouter);
 
 export default router;
