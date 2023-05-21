@@ -1,0 +1,48 @@
+[
+  {
+    "_id": {
+      "$oid": "6466812d6a4040db3709fc0c"
+    },
+    "activity_id": {
+      "$oid": "61697b11c0cb54d45f7c8dcb"
+    },
+    "create_at": {
+      "$date": "2023-05-18T19:49:01.400Z"
+    },
+    "event_id": {
+      "$oid": "6466812d6a4040db3709fc08"
+    },
+    "seat_reservation_id": {
+      "$oid": "6468a29579910b936877c194"
+    },
+    "update_at": {
+      "$date": "2023-05-18T19:49:01.400Z"
+    },
+    "user_id": {
+      "$oid": "644e3f3afc13ae317e842dd1"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6466812d6a4040db3709fc10"
+    },
+    "activity_id": {
+      "$oid": "61697b11c0cb54d45f7c8dcb"
+    },
+    "create_at": {
+      "$date": "2023-05-18T19:49:01.401Z"
+    },
+    "event_id": {
+      "$oid": "6466812d6a4040db3709fc08"
+    },
+    "seat_reservation_id": {
+      "$oid": "6468a29579910b936877c195"
+    },
+    "update_at": {
+      "$date": "2023-05-18T19:49:01.401Z"
+    },
+    "user_id": {
+      "$oid": "644e3f3afc13ae317e842dd1"
+    }
+  }
+]

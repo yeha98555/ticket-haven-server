@@ -62,6 +62,24 @@ export class Body {
     return this;
   }
 
+  pagination({
+    page,
+    pageSize,
+    totalCount,
+    totalPages,
+  }: {
+    page: number | undefined;
+    pageSize: number | undefined;
+    totalCount: number | undefined;
+    totalPages: number | undefined;
+  }) {
+    this.#page = page;
+    this.#pageSize = pageSize;
+    this.#totalCount = totalCount;
+    this.#totalPages = totalPages;
+    return this;
+  }
+
   toJSON() {
     return {
       status: this.#status,
