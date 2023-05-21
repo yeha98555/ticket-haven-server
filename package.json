@@ -13,8 +13,10 @@
   },
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.335.0",
+    "bcrypt": "^5.1.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
+    "date-fns": "^2.30.0",
     "debug": "~2.6.9",
     "dotenv": "^16.0.3",
     "ejs": "~2.6.1",
@@ -26,6 +28,7 @@
     "mongoose": "^7.0.4",
     "mongoose-lean-virtuals": "^0.9.1",
     "morgan": "~1.9.1",
+    "ramda": "^0.29.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.2",
     "winston": "^3.8.2",
@@ -36,6 +39,7 @@
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^17.6.1",
     "@coolizz/eslint-config": "^1.0.14",
+    "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.3",
     "@types/cors": "^2.8.13",
     "@types/debug": "^4.1.7",
@@ -47,6 +51,7 @@
     "@types/jsonwebtoken": "^9.0.2",
     "@types/morgan": "^1.9.4",
     "@types/node": "^18.15.13",
+    "@types/ramda": "^0.29.1",
     "@types/supertest": "^2.0.12",
     "@types/swagger-jsdoc": "^6.0.1",
     "@types/swagger-ui-express": "^4.1.3",
@@ -65,8 +70,7 @@
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.0.4",
-    "zod-express-middleware": "^1.4.0"
+    "typescript": "^5.0.4"
   },
   "packageManager": "yarn@3.5.0"
 }
