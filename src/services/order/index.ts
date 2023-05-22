@@ -4,6 +4,7 @@ import OrderModel from '@/models/order';
 import TicketModel from '@/models/ticket';
 import { IUser } from '@/models/user';
 import addOrder from './addOrder';
+import createOrderNo from './createOrderNo';
 
 const orderService = {
   getOrderInfo: async (userId: string, orderNo: string) => {
@@ -62,6 +63,7 @@ const orderService = {
     };
   },
   addOrder,
+  createOrderNo,
 };
 
 export default orderService;

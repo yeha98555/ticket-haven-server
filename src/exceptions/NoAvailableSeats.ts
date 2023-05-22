@@ -1,11 +1,11 @@
 import { StatusCode } from '@/enums/statusCode';
 import { HttpException } from './HttpException';
 
-export class NotFoundException extends HttpException {
+export class NoAvailableSeatsException extends HttpException {
   constructor(message = 'Not Found') {
     super({
-      httpCode: 404,
-      statusCode: StatusCode.NOT_FOUND,
+      httpCode: 409,
+      statusCode: StatusCode.NO_AVAILABLE_SEATS,
       message,
     });
   }
