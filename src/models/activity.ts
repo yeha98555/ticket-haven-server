@@ -1,6 +1,6 @@
 import { Region } from '@/enums/region';
 import toValidate from '@/utils/toValidate';
-import { InferSchemaType, Schema, Types, model } from 'mongoose';
+import { InferSchemaType, Schema, model } from 'mongoose';
 import { z } from 'zod';
 
 const areaSchema = new Schema({
@@ -67,6 +67,10 @@ const activitySchema = new Schema(
     region: {
       type: Number,
       validate: toValidate(z.nativeEnum(Region).optional().nullable()),
+    },
+    seatTotal: {
+      type: Number,
+      require: true,
     },
     areas: {
       type: [areaSchema],
