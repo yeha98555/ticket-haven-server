@@ -1,6 +1,6 @@
 import { OrderStatus } from '@/enums/orderStatus';
 import toValidate from '@/utils/toValidate';
-import { InferSchemaType, Schema, Types, model } from 'mongoose';
+import { InferSchemaType, Schema, model } from 'mongoose';
 import { z } from 'zod';
 
 const orderSchema = new Schema(
@@ -14,12 +14,10 @@ const orderSchema = new Schema(
     event_id: { type: Schema.Types.ObjectId, required: true },
     order_no: { type: String, required: true, unique: true },
     transfer_from_order: Schema.Types.ObjectId,
-    original_ticket_ids: [
-      {
-        type: Schema.Types.ObjectId,
-        validate: (v: unknown) => Array.isArray(v) && v.length > 0,
-      },
-    ],
+    original_ticket_ids: {
+      type: [Schema.Types.ObjectId],
+      validate: (v: unknown) => Array.isArray(v) && v.length > 0,
+    },
     seat_reservation_id: {
       type: Schema.Types.ObjectId,
       required: true,

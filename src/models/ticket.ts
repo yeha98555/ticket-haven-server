@@ -1,8 +1,8 @@
-import { InferSchemaType, Schema, Types, model } from 'mongoose';
+import { InferSchemaType, Schema, model } from 'mongoose';
 
 const ticketSchema = new Schema(
   {
-    ticket_no: { type: String, require: true },
+    ticket_no: { type: String, require: true, unique: true },
     order_id: { type: Schema.Types.ObjectId, required: true },
     activity_id: { type: Schema.Types.ObjectId, required: true },
     event_id: { type: Schema.Types.ObjectId, required: true },
