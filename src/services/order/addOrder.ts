@@ -10,7 +10,6 @@ import { Document, Types } from 'mongoose';
 import { MongoServerError } from 'mongodb';
 import createOrderNo from './createOrderNo';
 import ticketService from '../ticket';
-import { SeatsAutoSelectionFailException } from '@/exceptions/SeatsAutoSelectFail';
 import UserModel from '@/models/user';
 import * as d from 'date-fns';
 import { EventNotOnSaleException } from '@/exceptions/EventNotOnSale';
@@ -49,50 +48,47 @@ const addOrder = async (
 
   const areaSeatTotal = subarea.rows.reduce((total, num) => total + num, 0);
 
-  const seatReservations = await SeatReservationModel.find({
-    event_id: data.eventId,
-  }).select('seats');
-
-  const reservedSeats = seatReservations
-    .flatMap((a) => a.seats)
-    .filter((s) => s.subarea_id.equals(data.subAreaId));
-
-  if (reservedSeats.length + data.seatAmount > areaSeatTotal)
-    throw new RemainingSeatsInsufficientException();
-
-  const availableSeats: { row: number; seat: number }[] = [];
-
-  for (let i = 0; i < subarea.rows.length; i++) {
-    const row = subarea.start_row + i;
-    const rowSeatAmount = subarea.rows[i];
-
-    for (let seat = 1; seat <= rowSeatAmount; seat++) {
-      if (!reservedSeats.find((rs) => rs.row === row && rs.seat === seat))
-        availableSeats.push({ row, seat });
-    }
-  }
-
-  const orderSeats = availableSeats.slice(0, data.seatAmount);
-
+  let orderSeats: { row: number; seat: number }[] = [];
   let reservationResult: Document<any, any, ISeatReservation>;
-
-  try {
-    reservationResult = new SeatReservationModel({
-      activity_id: data.activityId,
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    const seatReservations = await SeatReservationModel.find({
       event_id: data.eventId,
-      seats: orderSeats.map((s) => ({
-        area_id: data.areaId,
-        subarea_id: data.subAreaId,
-        row: s.row,
-        seat: s.seat,
-      })),
-    });
-    await reservationResult.save();
-  } catch (error) {
-    if (error instanceof MongoServerError && error.code === '11000') {
-      throw new SeatsAutoSelectionFailException();
-    } else {
-      throw error;
+    }).select('seats');
+
+    const reservedSeats = seatReservations
+      .flatMap((a) => a.seats)
+      .filter((s) => s.subarea_id.equals(data.subAreaId));
+
+    if (reservedSeats.length + data.seatAmount > areaSeatTotal)
+      throw new RemainingSeatsInsufficientException();
+
+    const availableSeats: { row: number; seat: number }[] = findAvailableSeats(
+      { start: subarea.start_row, rows: subarea.rows },
+      reservedSeats,
+    );
+
+    orderSeats = selectRandomSeats(data.seatAmount, availableSeats);
+
+    try {
+      reservationResult = new SeatReservationModel({
+        activity_id: data.activityId,
+        event_id: data.eventId,
+        seats: orderSeats.map((s) => ({
+          area_id: data.areaId,
+          subarea_id: data.subAreaId,
+          row: s.row,
+          seat: s.seat,
+        })),
+      });
+      await reservationResult.save();
+      break;
+    } catch (error) {
+      if (error instanceof MongoServerError && error.code === 11000) {
+        continue;
+      } else {
+        throw error;
+      }
     }
   }
 
@@ -166,9 +162,47 @@ const addOrder = async (
       subAreaId: t.subarea_id,
       subAreaName: subarea.name,
       price: t.price,
+      row: t.row,
       seat: t.seat,
     })),
   };
 };
+
+function findAvailableSeats(
+  {
+    start,
+    rows,
+  }: {
+    start: number;
+    rows: number[];
+  },
+  reservedSeats: { row: number; seat: number }[],
+) {
+  const availableSeats = [];
+
+  for (let i = 0; i < rows.length; i++) {
+    const row = start + i;
+    const rowSeatAmount = rows[i];
+
+    for (let seat = 1; seat <= rowSeatAmount; seat++) {
+      if (!reservedSeats.find((rs) => rs.row === row && rs.seat === seat))
+        availableSeats.push({ row, seat });
+    }
+  }
+
+  return availableSeats;
+}
+
+function selectRandomSeats(
+  selectNum: number,
+  seats: { row: number; seat: number }[],
+) {
+  const startSeat = random(0, seats.length - selectNum);
+  return seats.slice(startSeat, startSeat + selectNum);
+}
+
+function random(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 
 export default addOrder;

@@ -25,7 +25,7 @@ orderRouter.post(
       eventId: z.string(),
       areaId: z.string(),
       subAreaId: z.string(),
-      seatAmount: z.number(),
+      seatAmount: z.number().max(4),
     }),
   ),
   orderController.addOrder,
