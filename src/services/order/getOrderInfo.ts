@@ -14,7 +14,9 @@ const getOrderInfo = async (userId: string, orderNo: string) => {
 
   if (!order) throw new NotFoundException();
 
-  const tickets = await TicketModel.find({ order_id: order?._id });
+  const tickets = await TicketModel.find({
+    $or: [{ order_id: order?._id }, { original_order_id: order?.id }],
+  });
 
   const event = order.activity_id.events.find((e) =>
     e._id?.equals(order.event_id),
