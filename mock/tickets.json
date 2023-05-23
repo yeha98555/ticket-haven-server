@@ -16,6 +16,9 @@
     "order_id": {
       "$oid": "6466812d6a4040db3709fc0c"
     },
+    "original_order_id": {
+      "$oid": "6466812d6a4040db3709fc0c"
+    },
     "price": 1000,
     "row": 1,
     "seat": 2,
@@ -39,6 +42,9 @@
     },
     "is_used": false,
     "order_id": {
+      "$oid": "6466812d6a4040db3709fc0c"
+    },
+    "original_order_id": {
       "$oid": "6466812d6a4040db3709fc0c"
     },
     "price": 1000,
@@ -66,6 +72,9 @@
     "order_id": {
       "$oid": "6466812d6a4040db3709fc0c"
     },
+    "original_order_id": {
+      "$oid": "6466812d6a4040db3709fc0c"
+    },
     "price": 1000,
     "row": 1,
     "seat": 4,
@@ -89,6 +98,9 @@
     },
     "is_used": false,
     "order_id": {
+      "$oid": "6466812d6a4040db3709fc10"
+    },
+    "original_order_id": {
       "$oid": "6466812d6a4040db3709fc10"
     },
     "price": 1000,
@@ -116,6 +128,9 @@
     "order_id": {
       "$oid": "6466812d6a4040db3709fc10"
     },
+    "original_order_id": {
+      "$oid": "6466812d6a4040db3709fc10"
+    },
     "price": 1000,
     "row": 1,
     "seat": 5,
@@ -139,6 +154,9 @@
     },
     "is_used": false,
     "order_id": {
+      "$oid": "6466812d6a4040db3709fc10"
+    },
+    "original_order_id": {
       "$oid": "6466812d6a4040db3709fc10"
     },
     "price": 1000,
