@@ -12,7 +12,8 @@
     "event_id": {
       "$oid": "646780cb2d0f3b114c2ee2db"
     },
-    "order_no": "order_no_1",
+    "order_no": "2023051809fc0c",
+    "price": 3000,
     "seat_reservation_id": {
       "$oid": "6468a29579910b936877c194"
     },
@@ -36,7 +37,8 @@
     "event_id": {
       "$oid": "646780cb2d0f3b114c2ee2db"
     },
-    "order_no": "order_no_2",
+    "order_no": "2023051809fc10",
+    "price": 3000,
     "seat_reservation_id": {
       "$oid": "6468a29579910b936877c195"
     },
