@@ -70,7 +70,7 @@ const activitySchema = new Schema(
     },
     seat_total: {
       type: Number,
-      require: true,
+      required: true,
     },
     areas: {
       type: [areaSchema],

@@ -8,8 +8,8 @@ const seatReservationSchema = new Schema({
       {
         area_id: { type: Schema.Types.ObjectId, required: true },
         subarea_id: { type: Schema.Types.ObjectId, required: true },
-        row: { type: Number, require: true },
-        seat: { type: Number, require: true },
+        row: { type: Number, required: true },
+        seat: { type: Number, required: true },
       },
     ],
     validate: (v: unknown) => Array.isArray(v) && v.length > 0,

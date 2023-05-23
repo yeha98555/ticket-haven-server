@@ -24,7 +24,7 @@ const orderSchema = new Schema(
       default: OrderStatus.UNPAID,
       validate: toValidate(z.nativeEnum(OrderStatus)),
     },
-    price: { type: Number, require: true },
+    price: { type: Number, required: true },
   },
   {
     timestamps: {
