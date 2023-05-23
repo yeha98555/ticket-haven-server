@@ -1,4 +1,4 @@
-import { InferSchemaType, Schema, Types, model } from 'mongoose';
+import { InferSchemaType, Schema, model } from 'mongoose';
 
 const seatReservationSchema = new Schema({
   activity_id: { type: Schema.Types.ObjectId, required: true },

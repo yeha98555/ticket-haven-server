@@ -14,10 +14,6 @@ const orderSchema = new Schema(
     event_id: { type: Schema.Types.ObjectId, required: true },
     order_no: { type: String, required: true, unique: true },
     transfer_from_order: Schema.Types.ObjectId,
-    original_ticket_ids: {
-      type: [Schema.Types.ObjectId],
-      validate: (v: unknown) => Array.isArray(v) && v.length > 0,
-    },
     seat_reservation_id: {
       type: Schema.Types.ObjectId,
       required: true,
