@@ -1,4 +1,4 @@
-import { NoAvailableSeatsException } from '@/exceptions/NoAvailableSeats';
+import { RemainingSeatsInsufficientException } from '@/exceptions/RemainingSeatsInsufficient';
 import { NotFoundException } from '@/exceptions/NotFoundException';
 import ActivityModel from '@/models/activity';
 import OrderModel from '@/models/order';
@@ -12,6 +12,8 @@ import createOrderNo from './createOrderNo';
 import ticketService from '../ticket';
 import { SeatsAutoSelectionFailException } from '@/exceptions/SeatsAutoSelectFail';
 import UserModel from '@/models/user';
+import * as d from 'date-fns';
+import { EventNotOnSaleException } from '@/exceptions/EventNotOnSale';
 
 const addOrder = async (
   userId: string,
@@ -23,13 +25,23 @@ const addOrder = async (
     seatAmount: number;
   },
 ) => {
-  const activity = await ActivityModel.findById(data.activityId).select(
-    'name location events areas',
-  );
+  const activity = await ActivityModel.findOne({
+    _id: data.activityId,
+    is_published: true,
+  }).select('name location events areas');
   if (!activity) throw new NotFoundException('activity not found');
 
+  const today = new Date();
+
   const event = activity.events.find((e) => e._id?.equals(data.eventId));
+  const isOnSell =
+    event &&
+    d.isWithinInterval(today, {
+      start: event.sell_at,
+      end: event.sellend_at,
+    });
   if (!event) throw new NotFoundException('event not found');
+  if (!isOnSell) throw new EventNotOnSaleException();
 
   const area = activity.areas.find((a) => a._id?.equals(data.areaId));
   const subarea = area?.subareas.find((a) => a._id?.equals(data.subAreaId));
@@ -46,7 +58,7 @@ const addOrder = async (
     .filter((s) => s.subarea_id.equals(data.subAreaId));
 
   if (reservedSeats.length + data.seatAmount > areaSeatTotal)
-    throw new NoAvailableSeatsException();
+    throw new RemainingSeatsInsufficientException();
 
   const availableSeats: { row: number; seat: number }[] = [];
 
@@ -61,8 +73,6 @@ const addOrder = async (
   }
 
   const orderSeats = availableSeats.slice(0, data.seatAmount);
-
-  const today = new Date();
 
   let reservationResult: Document<any, any, ISeatReservation>;
 

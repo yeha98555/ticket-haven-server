@@ -51,7 +51,7 @@ const activitySchema = new Schema(
     cover_img_url: String,
     content: String,
     notice: String,
-    isPublished: { type: Boolean, default: false },
+    is_published: { type: Boolean, default: false },
     location: String,
     address: String,
     seat_big_img_url: String,
@@ -68,7 +68,7 @@ const activitySchema = new Schema(
       type: Number,
       validate: toValidate(z.nativeEnum(Region).optional().nullable()),
     },
-    seatTotal: {
+    seat_total: {
       type: Number,
       require: true,
     },

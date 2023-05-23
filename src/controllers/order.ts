@@ -10,6 +10,10 @@ const orderController = {
     );
     res.json(Body.success(order));
   }),
+  addOrder: catchAsyncError(async (req, res) => {
+    const orderInfo = await orderService.addOrder(req.userId!, req.body);
+    res.json(Body.success(orderInfo));
+  }),
 };
 
 export default orderController;
