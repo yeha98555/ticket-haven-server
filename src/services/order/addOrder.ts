@@ -11,8 +11,9 @@ import { MongoServerError } from 'mongodb';
 import createOrderNo from './createOrderNo';
 import ticketService from '../ticket';
 import { SeatsAutoSelectionFailException } from '@/exceptions/SeatsAutoSelectFail';
+import UserModel from '@/models/user';
 
-type AddOrder = (
+const addOrder = async (
   userId: string,
   data: {
     activityId: string;
@@ -21,11 +22,9 @@ type AddOrder = (
     subAreaId: string;
     seatAmount: number;
   },
-) => Promise<any>;
-
-const addOrder: AddOrder = async (userId, data) => {
+) => {
   const activity = await ActivityModel.findById(data.activityId).select(
-    'events areas',
+    'name location events areas',
   );
   if (!activity) throw new NotFoundException('activity not found');
 
@@ -95,7 +94,9 @@ const addOrder: AddOrder = async (userId, data) => {
     activity_id: data.activityId,
     event_id: data.eventId,
     seat_reservation_id: reservationResult!._id,
+    totalPrice: orderSeats.length * area.price,
   });
+
   const tickets = orderSeats.map((s) => {
     const _id = new Types.ObjectId();
     return {
@@ -112,6 +113,7 @@ const addOrder: AddOrder = async (userId, data) => {
       subarea_id: data.subAreaId,
     };
   });
+
   try {
     await order.save();
     await TicketModel.insertMany(tickets);
@@ -125,6 +127,38 @@ const addOrder: AddOrder = async (userId, data) => {
     ]);
     throw error;
   }
+
+  const user = await UserModel.findById(userId);
+
+  return {
+    id: order._id,
+    orderNo: order.order_no,
+    status: order.status,
+    createAt: order.create_at,
+    price: order.totalPrice,
+    user: {
+      id: user!._id,
+      name: user!.username,
+      email: user!.email,
+      cellphone: user!.phone,
+    },
+    activity: {
+      id: activity._id,
+      name: activity.name,
+      location: activity.location,
+      eventId: event?._id,
+      eventStartTime: event?.start_at,
+      eventEndTime: event?.end_at,
+    },
+    tickets: tickets.map((t) => ({
+      id: t._id,
+      ticketNo: t.ticket_no,
+      subAreaId: t.subarea_id,
+      subAreaName: subarea.name,
+      price: t.price,
+      seat: t.seat,
+    })),
+  };
 };
 
 export default addOrder;
