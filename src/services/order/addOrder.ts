@@ -104,7 +104,7 @@ const addOrder = async (
     activity_id: data.activityId,
     event_id: data.eventId,
     seat_reservation_id: reservationResult!._id,
-    totalPrice: orderSeats.length * area.price,
+    price: orderSeats.length * area.price,
   });
 
   const tickets = orderSeats.map((s) => {
@@ -145,7 +145,7 @@ const addOrder = async (
     orderNo: order.order_no,
     status: order.status,
     createAt: order.create_at,
-    price: order.totalPrice,
+    price: order.price,
     user: {
       id: user!._id,
       name: user!.username,

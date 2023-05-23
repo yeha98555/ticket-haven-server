@@ -16,7 +16,6 @@ const getOrderInfo = async (userId: string, orderNo: string) => {
 
   const tickets = await TicketModel.find({ order_id: order?._id });
 
-  const totalPrice = tickets.reduce((accu, t) => accu + t.price, 0);
   const event = order.activity_id.events.find((e) =>
     e._id?.equals(order.event_id),
   );
@@ -41,7 +40,7 @@ const getOrderInfo = async (userId: string, orderNo: string) => {
     orderNo: order.order_no,
     createAt: order.create_at,
     status: order.status,
-    price: totalPrice,
+    price: order.price,
     user: {
       id: order.user_id._id,
       name: order.user_id.username,
