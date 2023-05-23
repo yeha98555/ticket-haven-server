@@ -2,11 +2,15 @@ import { NoAvailableSeatsException } from '@/exceptions/NoAvailableSeats';
 import { NotFoundException } from '@/exceptions/NotFoundException';
 import ActivityModel from '@/models/activity';
 import OrderModel from '@/models/order';
-import SeatReservationModel from '@/models/seatReservation';
+import SeatReservationModel, {
+  ISeatReservation,
+} from '@/models/seatReservation';
 import TicketModel from '@/models/ticket';
-import { Types } from 'mongoose';
+import { Document, Types } from 'mongoose';
+import { MongoServerError } from 'mongodb';
 import createOrderNo from './createOrderNo';
 import ticketService from '../ticket';
+import { SeatsAutoSelectionFailException } from '@/exceptions/SeatsAutoSelectFail';
 
 type AddOrder = (
   userId: string,
@@ -61,8 +65,10 @@ const addOrder: AddOrder = async (userId, data) => {
 
   const today = new Date();
 
+  let reservationResult: Document<any, any, ISeatReservation>;
+
   try {
-    const reservation = new SeatReservationModel({
+    reservationResult = new SeatReservationModel({
       activity_id: data.activityId,
       event_id: data.eventId,
       seats: orderSeats.map((s) => ({
@@ -72,45 +78,53 @@ const addOrder: AddOrder = async (userId, data) => {
         seat: s.seat,
       })),
     });
-    const result = await reservation.save();
-
-    const orderId = new Types.ObjectId();
-    const order = new OrderModel({
-      _id: orderId,
-      order_no: createOrderNo(orderId, today),
-      user_id: userId,
-      activity_id: data.activityId,
-      event_id: data.eventId,
-      seat_reservation_id: result._id,
-    });
-
-    const tickets = await TicketModel.insertMany(
-      orderSeats.map((s) => {
-        const _id = new Types.ObjectId();
-        return {
-          _id,
-          ticket_no: ticketService.createTicketNo(_id, today, s.row, s.seat),
-          order_id: order._id,
-          activity_id: data.activityId,
-          area_id: data.areaId,
-          event_id: data.eventId,
-          price: area.price,
-          row: s.row,
-          seat: s.seat,
-          subarea_id: data.subAreaId,
-        };
-      }),
-    );
-
-    order.original_ticket_ids = tickets.map((t) => t._id);
-    await order.save();
-
-    return order;
+    await reservationResult.save();
   } catch (error) {
-    console.error(error);
+    if (error instanceof MongoServerError && error.code === '11000') {
+      throw new SeatsAutoSelectionFailException();
+    } else {
+      throw error;
+    }
   }
 
-  return undefined;
+  const orderId = new Types.ObjectId();
+  const order = new OrderModel({
+    _id: orderId,
+    order_no: createOrderNo(orderId, today),
+    user_id: userId,
+    activity_id: data.activityId,
+    event_id: data.eventId,
+    seat_reservation_id: reservationResult!._id,
+  });
+  const tickets = orderSeats.map((s) => {
+    const _id = new Types.ObjectId();
+    return {
+      _id,
+      ticket_no: ticketService.createTicketNo(_id, today, s.row, s.seat),
+      order_id: orderId,
+      original_order_id: orderId,
+      activity_id: data.activityId,
+      area_id: data.areaId,
+      event_id: data.eventId,
+      price: area.price,
+      row: s.row,
+      seat: s.seat,
+      subarea_id: data.subAreaId,
+    };
+  });
+  try {
+    await order.save();
+    await TicketModel.insertMany(tickets);
+  } catch (error) {
+    Promise.all([
+      reservationResult.deleteOne(),
+      order.deleteOne(),
+      TicketModel.deleteMany()
+        .where('_id')
+        .in(tickets.map((t) => t._id)),
+    ]);
+    throw error;
+  }
 };
 
 export default addOrder;
