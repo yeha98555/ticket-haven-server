@@ -3,7 +3,7 @@ import { NotFoundException } from '@/exceptions/NotFoundException';
 import ActivityModel from '@/models/activity';
 import OrderModel from '@/models/order';
 import SeatReservationModel, {
-  ISeatReservation,
+  SeatReservation,
 } from '@/models/seatReservation';
 import { Document, Types } from 'mongoose';
 import { MongoServerError } from 'mongodb';
@@ -47,7 +47,7 @@ const addOrder = async (
   const areaSeatTotal = subarea.rows.reduce((total, num) => total + num, 0);
 
   let orderSeats: { row: number; seat: number }[] = [];
-  let reservationResult: Document<any, any, ISeatReservation>;
+  let reservationResult: Document<any, any, SeatReservation>;
   // eslint-disable-next-line no-constant-condition
   while (true) {
     const seatReservations = await SeatReservationModel.find({
@@ -97,7 +97,7 @@ const addOrder = async (
     user_id: userId,
     activity_id: data.activityId,
     event_id: data.eventId,
-    seat_reservation_id: reservationResult!._id,
+    seat_reservation_id: reservationResult._id,
     price: orderSeats.length * area.price,
   });
 

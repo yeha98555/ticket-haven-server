@@ -22,8 +22,8 @@ const ticketSchema = new Schema(
   },
 );
 
-export type ITicket = InferSchemaType<typeof ticketSchema>;
+export type Ticket = InferSchemaType<typeof ticketSchema>;
 
-const TicketModel = model<ITicket>('ticket', ticketSchema);
+const TicketModel = model('ticket', ticketSchema);
 
 export default TicketModel;

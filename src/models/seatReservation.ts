@@ -27,11 +27,8 @@ seatReservationSchema.index(
   { unique: true },
 );
 
-export type ISeatReservation = InferSchemaType<typeof seatReservationSchema>;
+export type SeatReservation = InferSchemaType<typeof seatReservationSchema>;
 
-const SeatReservationModel = model<ISeatReservation>(
-  'seat_reservation',
-  seatReservationSchema,
-);
+const SeatReservationModel = model('seat_reservation', seatReservationSchema);
 
 export default SeatReservationModel;
