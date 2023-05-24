@@ -31,4 +31,17 @@ orderRouter.post(
   orderController.addOrder,
 );
 
+orderRouter.patch(
+  '/:orderNo/seats',
+  isAuth,
+  validateRequestBody(
+    z.object({
+      areaId: z.string(),
+      subAreaId: z.string(),
+      amount: z.number().max(4),
+    }),
+  ),
+  orderController.addSeats,
+);
+
 export default orderRouter;
