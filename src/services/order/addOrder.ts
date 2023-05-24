@@ -130,7 +130,7 @@ const addOrder = async (
       eventStartTime: event?.start_at,
       eventEndTime: event?.end_at,
     },
-    tickets: orderSeats.map((s) => ({
+    seats: orderSeats.map((s) => ({
       subAreaId: subarea._id,
       subAreaName: subarea.name,
       price: area.price,
