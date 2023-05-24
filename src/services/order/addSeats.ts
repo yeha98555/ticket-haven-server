@@ -1,7 +1,7 @@
 import { OrderStatus } from '@/enums/orderStatus';
 import { NotFoundException } from '@/exceptions/NotFoundException';
 import { OrderCannotModifyException } from '@/exceptions/OrderCannotModify';
-import OrderModel, { Order } from '@/models/order';
+import { Order } from '@/models/order';
 import ActivityModel from '@/models/activity';
 import reserveSeats from '../reserveSeats';
 import { HydratedDocument } from 'mongoose';
@@ -20,6 +20,9 @@ const addSeats = async ({
   subAreaId: string;
   amount: number;
 }) => {
+  if (order.status !== OrderStatus.UNPAID)
+    throw new OrderCannotModifyException();
+
   const activity = await ActivityModel.findOne({
     _id: order.activity_id,
     is_published: true,

@@ -19,10 +19,10 @@ const orderController = {
     res.json(Body.success(orderInfo));
   }),
   addSeats: catchAsyncError(async (req, res) => {
-    const order = await OrderModel.findOne().byNo(req.params.orderNo);
+    const order = await OrderModel.findOne({ user_id: req.userId }).byNo(
+      req.params.orderNo,
+    );
     if (!order) throw new NotFoundException();
-    if (order.status !== OrderStatus.UNPAID)
-      throw new OrderCannotModifyException();
 
     const orderInfo = await orderService.addSeats({ order, ...req.body });
     res.json(Body.success(orderInfo));
