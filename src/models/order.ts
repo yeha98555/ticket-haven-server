@@ -16,7 +16,6 @@ const orderSchema = new Schema(
     transfer_from_order: Schema.Types.ObjectId,
     seat_reservation_id: {
       type: Schema.Types.ObjectId,
-      required: true,
       ref: 'seat_reservation',
     },
     status: {
