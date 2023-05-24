@@ -1,6 +1,6 @@
 import { Region } from '@/enums/region';
 import toValidate from '@/utils/toValidate';
-import { InferSchemaType, ObjectId, Schema, model } from 'mongoose';
+import { InferSchemaType, ObjectId, Schema, Types, model } from 'mongoose';
 import { z } from 'zod';
 
 const subAreaSchema = new Schema({
@@ -71,7 +71,7 @@ const activitySchema = new Schema(
 );
 
 export type Activity = InferSchemaType<typeof activitySchema> & {
-  _id: ObjectId;
+  _id: Types.ObjectId;
   create_at: Date;
   update_at: Date;
 };

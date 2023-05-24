@@ -1,6 +1,6 @@
 import { OrderStatus } from '@/enums/orderStatus';
 import toValidate from '@/utils/toValidate';
-import { InferSchemaType, Schema, model } from 'mongoose';
+import { InferSchemaType, Schema, Types, model } from 'mongoose';
 import { z } from 'zod';
 
 const orderSchema = new Schema(
@@ -40,7 +40,7 @@ const orderSchema = new Schema(
 );
 
 export type Order = InferSchemaType<typeof orderSchema> & {
-  _id: string;
+  _id: Types.ObjectId;
   create_at: Date;
   update_at: Date;
 };
