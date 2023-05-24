@@ -1,5 +1,6 @@
 import { OrderStatus } from '@/enums/orderStatus';
 import { OrderCannotModifyException } from '@/exceptions/OrderCannotModify';
+import { OrderNoSeatsException } from '@/exceptions/SeatsCannotLessThanOne';
 import { Order } from '@/models/order';
 import SeatReservationModel from '@/models/seatReservation';
 import { HydratedDocument } from 'mongoose';
@@ -25,7 +26,7 @@ const deleteSeat = async ({
   );
   if (!reservation) return true;
 
-  if (reservation.seats.length === 1) return false;
+  if (reservation.seats.length === 1) throw new OrderNoSeatsException();
 
   reservation.set(
     'seats',
