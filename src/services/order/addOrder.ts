@@ -5,11 +5,9 @@ import OrderModel from '@/models/order';
 import SeatReservationModel, {
   ISeatReservation,
 } from '@/models/seatReservation';
-import TicketModel from '@/models/ticket';
 import { Document, Types } from 'mongoose';
 import { MongoServerError } from 'mongodb';
 import createOrderNo from './createOrderNo';
-import ticketService from '../ticket';
 import UserModel from '@/models/user';
 import * as d from 'date-fns';
 import { EventNotOnSaleException } from '@/exceptions/EventNotOnSale';
@@ -103,34 +101,10 @@ const addOrder = async (
     price: orderSeats.length * area.price,
   });
 
-  const tickets = orderSeats.map((s) => {
-    const _id = new Types.ObjectId();
-    return {
-      _id,
-      ticket_no: ticketService.createTicketNo(_id, today, s.row, s.seat),
-      order_id: orderId,
-      original_order_id: orderId,
-      activity_id: data.activityId,
-      area_id: data.areaId,
-      event_id: data.eventId,
-      price: area.price,
-      row: s.row,
-      seat: s.seat,
-      subarea_id: data.subAreaId,
-    };
-  });
-
   try {
     await order.save();
-    await TicketModel.insertMany(tickets);
   } catch (error) {
-    Promise.all([
-      reservationResult.deleteOne(),
-      order.deleteOne(),
-      TicketModel.deleteMany()
-        .where('_id')
-        .in(tickets.map((t) => t._id)),
-    ]);
+    Promise.all([reservationResult.deleteOne(), order.deleteOne()]);
     throw error;
   }
 
@@ -156,14 +130,12 @@ const addOrder = async (
       eventStartTime: event?.start_at,
       eventEndTime: event?.end_at,
     },
-    tickets: tickets.map((t) => ({
-      id: t._id,
-      ticketNo: t.ticket_no,
-      subAreaId: t.subarea_id,
+    tickets: orderSeats.map((s) => ({
+      subAreaId: subarea._id,
       subAreaName: subarea.name,
-      price: t.price,
-      row: t.row,
-      seat: t.seat,
+      price: area.price,
+      row: s.row,
+      seat: s.seat,
     })),
   };
 };
