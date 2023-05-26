@@ -1,6 +1,6 @@
 import { OrderStatus } from '@/enums/orderStatus';
 import toValidate from '@/utils/toValidate';
-import { InferSchemaType, Schema, model } from 'mongoose';
+import { InferSchemaType, Schema, Types, model } from 'mongoose';
 import { z } from 'zod';
 
 const orderSchema = new Schema(
@@ -31,14 +31,20 @@ const orderSchema = new Schema(
       createdAt: 'create_at',
       updatedAt: 'update_at',
     },
+    query: {
+      byNo(orderNo: string) {
+        return this.where({ order_no: orderNo });
+      },
+    },
   },
 );
 
-export type IOrder = InferSchemaType<typeof orderSchema> & {
+export type Order = InferSchemaType<typeof orderSchema> & {
+  _id: Types.ObjectId;
   create_at: Date;
   update_at: Date;
 };
 
-const OrderModel = model<IOrder>('order', orderSchema);
+const OrderModel = model('order', orderSchema);
 
 export default OrderModel;

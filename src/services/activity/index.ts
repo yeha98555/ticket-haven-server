@@ -15,7 +15,7 @@ const activityService = {
         startTime: e.start_at,
         endTime: e.end_at,
         sellStartTime: e.sell_at,
-        sellEndTime: e?.sellend_at,
+        sellEndTime: e.sellend_at,
       };
     });
 
@@ -31,7 +31,7 @@ const activityService = {
       notice: activity.notice,
       seatMapUrl: activity.seat_big_img_url,
       events: returnEvents,
-    }
+    };
   },
 };
 
