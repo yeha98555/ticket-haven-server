@@ -1,6 +1,8 @@
+import { PermissionDeniedException } from '@/exceptions/PermissionDeniedException';
 import UserModel, { User } from '@/models/user';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+
 const saltRounds = 10;
 
 const userService = {
@@ -53,18 +55,16 @@ const userService = {
   },
   signin: async ({ email, password }: { email: string; password: string }) => {
     let token = '';
-    const foundUser = await UserModel.findOne({ email });
-    if (foundUser) {
-      const passwordCorrect = await bcrypt.compare(
-        password,
-        foundUser.password,
-      );
-      if (passwordCorrect) {
-        const tokenObj = { id: foundUser._id, email: foundUser.email };
-        const SECRET: string = process.env.JWT_SECRET;
-        token = `Bearer ${jwt.sign(tokenObj, SECRET, { expiresIn: '1d' })}`;
-      }
-    }
+    const user = await UserModel.findOne({ email });
+    if (!user) throw new PermissionDeniedException();
+
+    const isPwdCorrect = await bcrypt.compare(password, user.password);
+    if (!isPwdCorrect) throw new PermissionDeniedException();
+
+    const payload = { id: user._id, email: user.email };
+    const secret = process.env.JWT_SECRET;
+    token = jwt.sign(payload, secret, { expiresIn: '1d' });
+
     return token;
   },
   signup: async (req: {
