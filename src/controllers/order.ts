@@ -1,6 +1,4 @@
-import { OrderStatus } from '@/enums/orderStatus';
 import { NotFoundException } from '@/exceptions/NotFoundException';
-import { OrderCannotModifyException } from '@/exceptions/OrderCannotModify';
 import OrderModel from '@/models/order';
 import orderService from '@/services/order';
 import catchAsyncError from '@/utils/catchAsyncError';
@@ -24,8 +22,17 @@ const orderController = {
     );
     if (!order) throw new NotFoundException();
 
-    const orderInfo = await orderService.addSeats({ order, ...req.body });
-    res.json(Body.success(orderInfo));
+    const result = await orderService.addSeats({ order, ...req.body });
+    res.json(Body.success(result));
+  }),
+  deleteSeat: catchAsyncError(async (req, res) => {
+    const order = await OrderModel.findOne({ user_id: req.userId }).byNo(
+      req.params.orderNo,
+    );
+    if (!order) throw new NotFoundException();
+
+    const result = await orderService.deleteSeat({ order, ...req.body });
+    res.json(Body.success(result));
   }),
 };
 

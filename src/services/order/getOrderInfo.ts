@@ -1,7 +1,7 @@
 import { NotFoundException } from '@/exceptions/NotFoundException';
 import { Activity } from '@/models/activity';
 import OrderModel from '@/models/order';
-import TicketModel from '@/models/ticket';
+import SeatReservationModel from '@/models/seatReservation';
 import { User } from '@/models/user';
 
 const getOrderInfo = async (userId: string, orderNo: string) => {
@@ -14,26 +14,23 @@ const getOrderInfo = async (userId: string, orderNo: string) => {
 
   if (!order) throw new NotFoundException();
 
-  const tickets = await TicketModel.find({
-    $or: [{ order_id: order?._id }, { original_order_id: order?.id }],
-  });
-
   const event = order.activity_id.events.find((e) =>
     e._id?.equals(order.event_id),
   );
 
-  const returnTickets = tickets.map((t) => {
+  const reservation = await SeatReservationModel.findById(
+    order.seat_reservation_id,
+  );
+  const seats = (reservation?.seats || []).map((s) => {
+    const area = order.activity_id.areas.find((a) => a._id?.equals(s.area_id));
+    const subArea = area?.subareas.find((a) => a._id?.equals(s.subarea_id));
+
     return {
-      id: t._id,
-      ticketNo: t.ticket_no,
-      subAreaId: t.subarea_id,
-      subAreaName: order.activity_id.areas
-        .map((a) => a.subareas)
-        .flat()
-        .find((a) => a._id?.equals(t.subarea_id))?.name,
-      price: t.price,
-      seat: t.seat,
-      isUsed: t.is_used,
+      subAreaId: s.subarea_id,
+      subAreaName: subArea?.name,
+      price: area?.price,
+      row: s.row,
+      seat: s.seat,
     };
   });
 
@@ -57,7 +54,7 @@ const getOrderInfo = async (userId: string, orderNo: string) => {
       eventStartTime: event?.start_at,
       eventEndTime: event?.end_at,
     },
-    tickets: returnTickets,
+    seats,
   };
 };
 

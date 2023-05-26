@@ -44,4 +44,18 @@ orderRouter.patch(
   orderController.addSeats,
 );
 
+orderRouter.delete(
+  '/:orderNo/seats',
+  isAuth,
+  validateRequestBody(
+    z.object({
+      areaId: z.string(),
+      subAreaId: z.string(),
+      row: z.number(),
+      seat: z.number(),
+    }),
+  ),
+  orderController.deleteSeat,
+);
+
 export default orderRouter;
