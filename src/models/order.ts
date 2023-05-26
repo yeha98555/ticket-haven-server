@@ -14,12 +14,6 @@ const orderSchema = new Schema(
     event_id: { type: Schema.Types.ObjectId, required: true },
     order_no: { type: String, required: true, unique: true },
     transfer_from_order: Schema.Types.ObjectId,
-    original_ticket_ids: [
-      {
-        type: Schema.Types.ObjectId,
-        validate: (v: unknown) => Array.isArray(v) && v.length > 0,
-      },
-    ],
     seat_reservation_id: {
       type: Schema.Types.ObjectId,
       required: true,
@@ -30,20 +24,27 @@ const orderSchema = new Schema(
       default: OrderStatus.UNPAID,
       validate: toValidate(z.nativeEnum(OrderStatus)),
     },
+    price: { type: Number, required: true },
   },
   {
     timestamps: {
       createdAt: 'create_at',
       updatedAt: 'update_at',
     },
+    query: {
+      byNo(orderNo: string) {
+        return this.where({ order_no: orderNo });
+      },
+    },
   },
 );
 
-export type IOrder = InferSchemaType<typeof orderSchema> & {
+export type Order = InferSchemaType<typeof orderSchema> & {
+  _id: Types.ObjectId;
   create_at: Date;
   update_at: Date;
 };
 
-const OrderModel = model<IOrder>('order', orderSchema);
+const OrderModel = model('order', orderSchema);
 
 export default OrderModel;

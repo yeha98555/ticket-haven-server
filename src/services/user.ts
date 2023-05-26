@@ -1,4 +1,4 @@
-import UserModel, { IUser } from '@/models/user';
+import UserModel, { User } from '@/models/user';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 const saltRounds = 10;
@@ -23,7 +23,7 @@ const userService = {
     id: string,
     data: Partial<
       Pick<
-        IUser,
+        User,
         | 'username'
         | 'phone'
         | 'gender'
@@ -55,8 +55,11 @@ const userService = {
     let token = '';
     const foundUser = await UserModel.findOne({ email });
     if (foundUser) {
-      const passwordCorrect = await bcrypt.compare(password, foundUser.password);
-      if (passwordCorrect){
+      const passwordCorrect = await bcrypt.compare(
+        password,
+        foundUser.password,
+      );
+      if (passwordCorrect) {
         const tokenObj = { id: foundUser._id, email: foundUser.email };
         const SECRET: string = process.env.JWT_SECRET;
         token = `Bearer ${jwt.sign(tokenObj, SECRET, { expiresIn: '1d' })}`;
