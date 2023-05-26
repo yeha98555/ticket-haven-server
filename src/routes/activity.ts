@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import z from 'zod';
-import { processRequestQuery } from '@/middleware/paramsValidator';
+import { processRequestQuery, validateRequestParams } from '@/middleware/paramsValidator';
 import activityController from '@/controllers/activity';
 import parseSortString from '@/utils/parseSortString';
 import { Region } from '@/enums/region';
@@ -28,6 +28,12 @@ activityRouter.get(
     }),
   ),
   activityController.searchActivities,
+);
+
+activityRouter.get(
+  '/:activityId',
+  validateRequestParams(z.object({ activityId: z.string() })),
+  activityController.getActivityInfo,
 );
 
 export default activityRouter;

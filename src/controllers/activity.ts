@@ -14,6 +14,13 @@ const activityController = {
       ).pagination(pagination),
     );
   }),
+
+  getActivityInfo: catchAsyncError(async (req, res) => {
+    const activity = await activityService.getActivityInfo(
+      req.params.activityId,
+    );
+    res.json(Body.success(activity));
+  }),
 };
 
 export default activityController;

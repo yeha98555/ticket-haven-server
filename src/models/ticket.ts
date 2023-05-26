@@ -1,9 +1,10 @@
-import { InferSchemaType, Schema, Types, model } from 'mongoose';
+import { InferSchemaType, Schema, model } from 'mongoose';
 
 const ticketSchema = new Schema(
   {
-    ticket_no: { type: String, require: true },
+    ticket_no: { type: String, required: true, unique: true },
     order_id: { type: Schema.Types.ObjectId, required: true },
+    original_order_id: { type: Schema.Types.ObjectId, required: true },
     activity_id: { type: Schema.Types.ObjectId, required: true },
     event_id: { type: Schema.Types.ObjectId, required: true },
     area_id: { type: Schema.Types.ObjectId, required: true },
@@ -21,8 +22,8 @@ const ticketSchema = new Schema(
   },
 );
 
-export type ITicket = InferSchemaType<typeof ticketSchema>;
+export type Ticket = InferSchemaType<typeof ticketSchema>;
 
-const TicketModel = model<ITicket>('ticket', ticketSchema);
+const TicketModel = model('ticket', ticketSchema);
 
 export default TicketModel;
