@@ -15,7 +15,19 @@ const eventService = {
 
     // TODO: filter purchased seats
 
-    return { activity };
+    return {
+      seat_small_img_url: activity.seat_small_img_url,
+      seats: activity.areas.map(area => ({
+        id: area._id,
+        name: area.name,
+        price: area.price,
+        subAreas: area.subareas.map(subarea => ({
+          id: subarea._id,
+          name: subarea.name,
+          remainingSeats: subarea.rows.reduce((acc, cur) => acc + cur, 0),
+        })),
+      })),
+    };
   },
 };
 
