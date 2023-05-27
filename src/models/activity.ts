@@ -72,6 +72,10 @@ const activitySchema = new Schema(
 
 export type Activity = InferSchemaType<typeof activitySchema> & {
   _id: Types.ObjectId;
+  name: string;
+  address: string;
+  start_at: Date;
+  end_at: Date;
   create_at: Date;
   update_at: Date;
 };
