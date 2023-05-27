@@ -10,6 +10,7 @@ const subAreaSchema = new Schema({
     type: [{ type: Number, required: true }],
     validate: (v: unknown) => Array.isArray(v) && v.length > 0,
   },
+  color: { type: String, required: true },
 });
 
 const areaSchema = new Schema({

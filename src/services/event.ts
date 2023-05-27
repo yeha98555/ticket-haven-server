@@ -47,6 +47,7 @@ const eventService = {
           id: subarea._id,
           name: subarea.name,
           remainingSeats: totalSeats - purchased,
+          color: subarea.color,
         };
       }),
     }));
