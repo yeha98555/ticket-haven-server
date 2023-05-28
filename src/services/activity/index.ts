@@ -9,6 +9,7 @@ const activityService = {
   getActivityInfo: async (id: string) => {
     const activity = await ActivityModel.findById(id).select('-__v -create_at -update_at -deleted_at -seat_small_img_url -region -areas -events.qrcode_verify_link -events.create_at -events.update_at');
     if (!activity) throw new NotFoundException();
+    if (!activity.is_published) throw new NotFoundException();
 
     // Pre-convert event IDs to strings for subsequent queries and comparisons
     const eventIds = activity.events.map(event => event._id!.toString());
