@@ -1,6 +1,6 @@
 import { NotFoundException } from "@/exceptions/NotFoundException";
 import ActivityModel from "@/models/activity";
-import TicketModel from "@/models/ticket";
+import SeatReservationModel from "@/models/seatReservation";
 
 const eventService = {
   getSeatInfo: async (eventId: string) => {
@@ -13,24 +13,27 @@ const eventService = {
 
     if (!activity) throw new NotFoundException();
 
-    // Fetch purchased seats from the database
-    const purchasedSeats = await TicketModel.aggregate([
+    // Fetch reserved seats from the database
+    const reservedSeats = await SeatReservationModel.aggregate([
       {
         $match: {
-          subarea_id: { $in: activity.areas.flatMap(area => area.subareas.map(subarea => subarea._id)) },
+          'seats.subarea_id': { $in: activity.areas.flatMap(area => area.subareas.map(subarea => subarea._id)) },
         }
       },
       {
+        $unwind: '$seats',
+      },
+      {
         $group: {
-          _id: '$subarea_id',
-          purchasedSeats: { $sum: 1 }
+          _id: '$seats.subarea_id',
+          reservedSeats: { $sum: 1 }
         }
       }
     ]);
 
-    // Convert purchasedSeats to a map for easier lookup
-    const purchasedSeatsMap = purchasedSeats.reduce((acc, { _id, purchasedSeats }) => {
-      acc[_id.toString()] = purchasedSeats;
+    // Convert reservedSeats to a map for easier lookup
+    const reservedSeatsMap = reservedSeats.reduce((acc, { _id, reservedSeats }) => {
+      acc[_id.toString()] = reservedSeats;
       return acc;
     }, {});
 
@@ -41,11 +44,11 @@ const eventService = {
       price: area.price,
       subAreas: area.subareas.map(subarea => {
         const totalSeats = subarea.rows.reduce((acc, cur) => acc + cur, 0);
-        const purchased = subarea._id ? (purchasedSeatsMap[subarea._id.toString()] || 0) : 0;
+        const reserved = subarea._id ? (reservedSeatsMap[subarea._id.toString()] || 0) : 0;
         return {
           id: subarea._id,
           name: subarea.name,
-          remainingSeats: totalSeats - purchased,
+          remainingSeats: totalSeats - reserved,
           color: subarea.color,
         };
       }),
