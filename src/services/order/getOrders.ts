@@ -6,6 +6,8 @@ const getOrders = async (page: number) => {
   if (page < 1) throw new NotFoundException();
   const onePageLimit = 5;
   const ordersTotal = await OrderModel.countDocuments();
+
+  if(ordersTotal === 0) return { nextPage: null, totalPage: 0, orders: [] };
   const totalPage = ordersTotal > onePageLimit ? Math.floor(ordersTotal / onePageLimit) : 1;
 
   if(page > totalPage) throw new NotFoundException();
@@ -28,7 +30,7 @@ const getOrders = async (page: number) => {
   }
 
   if (!ordersIndex) throw new NotFoundException();
-  return {nextPage, totalPage, orders};
+  return { nextPage, totalPage, orders };
 };
 
 export default getOrders;
