@@ -3,22 +3,425 @@
     "_id": {
       "$oid": "61697b11c0cb54d45f7c8dcb"
     },
-    "address": "台北市南港區研究院路三段2號",
+    "address": "臺北市松山區南京東路4段2號",
     "areas": [
       {
         "_id": {
           "$oid": "646780cb2d0f3b114c2ee2dc"
         },
-        "name": "Area 1",
-        "price": 956,
+        "name": "全票 1",
+        "price": 3990,
         "subareas": [
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee2dd"
             },
-            "name": "Subarea 1",
-            "rows": [6],
-            "start_row": 1
+            "name": "特一區",
+            "rows": [
+              20,
+              22,
+              24,
+              26,
+              28,
+              30,
+              32,
+              34,
+              36,
+              38,
+              40,
+              42,
+              46,
+              46
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
+          },
+          {
+            "_id": {
+              "$oid": "646780cb2d0f3b114c2ee2de"
+            },
+            "name": "特二區",
+            "rows": [
+              42,
+              42,
+              42,
+              42,
+              42,
+              42,
+              42
+            ],
+            "start_row": 15,
+            "color": "#23AC38"
+          },
+          {
+            "_id": {
+              "$oid": "646780cb2d0f3b114c2ee2df"
+            },
+            "name": "特三區",
+            "rows": [
+              42,
+              42,
+              42,
+              42,
+              42,
+              42,
+              42,
+              42,
+              42,
+              42,
+              42,
+              42,
+              42,
+              42
+            ],
+            "start_row": 21,
+            "color": "#23AC38"
+          }
+        ]
+      },
+      {
+        "_id": {
+          "$oid": "646780cb2d0f2b114c2ee1dc"
+        },
+        "name": "全票 2",
+        "price": 3590,
+        "subareas": [
+          {
+            "_id": {
+              "$oid": "646780cb210f3b114c2112dd"
+            },
+            "name": "黃2C",
+            "rows": [
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              18,
+              18,
+              18,
+              18
+            ],
+            "start_row": 1,
+            "color": "#DF6A00"
+          },
+          {
+            "_id": {
+              "$oid": "646780cb210f3b114c2112de"
+            },
+            "name": "紫1B",
+            "rows": [
+              20,
+              20,
+              20,
+              20,
+              20
+            ],
+            "start_row": 1,
+            "color": "#5F1987"
+          },
+          {
+            "_id": {
+              "$oid": "646780cb210f3b114c2112df"
+            },
+            "name": "紅1C",
+            "rows": [
+              20,
+              20,
+              20,
+              20,
+              20
+            ],
+            "start_row": 1,
+            "color": "#C30D22"
+          },
+          {
+            "_id": {
+              "$oid": "646780cb210f3b114c2212df"
+            },
+            "name": "黃2D",
+            "rows": [
+              16,
+              17,
+              18,
+              20,
+              20,
+              22,
+              22
+            ],
+            "start_row": 1,
+            "color": "#DF6A00"
+          },
+          {
+            "_id": {
+              "$oid": "646780cb210f3b114c2211df"
+            },
+            "name": "紫1D",
+            "rows": [
+              20,
+              20,
+              20,
+              20,
+              20
+            ],
+            "start_row": 1,
+            "color": "#5F1987"
+          },
+          {
+            "_id": {
+              "$oid": "646780cb210f3b114c2211de"
+            },
+            "name": "黃2B",
+            "rows": [
+              16,
+              17,
+              18,
+              20,
+              20,
+              22,
+              22
+            ],
+            "start_row": 1,
+            "color": "#DF6A00"
+          },
+          {
+            "_id": {
+              "$oid": "646780cb210f3c114c2211de"
+            },
+            "name": "紫1C",
+            "rows": [
+              20,
+              20,
+              20,
+              20,
+              20
+            ],
+            "start_row": 1,
+            "color": "#5F1987"
+          },
+          {
+            "_id": {
+              "$oid": "646780cb210f3c114c2211da"
+            },
+            "name": "紅1B",
+            "rows": [
+              20,
+              20,
+              20,
+              20,
+              20
+            ],
+            "start_row": 1,
+            "color": "#C30D22"
+          },
+          {
+            "_id": {
+              "$oid": "646780cb210f3c114c2211db"
+            },
+            "name": "紅1D",
+            "rows": [
+              20,
+              20,
+              20,
+              20,
+              20
+            ],
+            "start_row": 1,
+            "color": "#C30D22"
+          }
+        ]
+      },
+      {
+        "_id": {
+          "$oid": "642780cb2d0f2b114c2ee1dc"
+        },
+        "name": "全票 3",
+        "price": 2990,
+        "subareas": [
+          {
+            "_id": {
+              "$oid": "646780cb2c0f3b114c2112dd"
+            },
+            "name": "紅2C",
+            "rows": [
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20
+            ],
+            "start_row": 1,
+            "color": "#DE4A94"
+          },
+          {
+            "_id": {
+              "$oid": "646c80cb210f3b114c2112de"
+            },
+            "name": "紫2B",
+            "rows": [
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20
+            ],
+            "start_row": 1,
+            "color": "#816BAB"
+          },
+          {
+            "_id": {
+              "$oid": "6b6780cb210f3b114c2112df"
+            },
+            "name": "紫2C",
+            "rows": [
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20
+            ],
+            "start_row": 1,
+            "color": "#816BAB"
+          },
+          {
+            "_id": {
+              "$oid": "64678bbb210f3b114c2212df"
+            },
+            "name": "紫1E",
+            "rows": [
+              14,
+              15,
+              16,
+              18,
+              18
+            ],
+            "start_row": 1,
+            "color": "#816BAB"
+          },
+          {
+            "_id": {
+              "$oid": "626480cb210f3b114c2211df"
+            },
+            "name": "紅1E",
+            "rows": [
+              14,
+              15,
+              16,
+              18,
+              18
+            ],
+            "start_row": 1,
+            "color": "#DE4A94"
+          },
+          {
+            "_id": {
+              "$oid": "642280cb210f3b114c2211de"
+            },
+            "name": "紅2B",
+            "rows": [
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20
+            ],
+            "start_row": 1,
+            "color": "#DE4A94"
+          },
+          {
+            "_id": {
+              "$oid": "646780cb210f5a114c2211de"
+            },
+            "name": "黃2A",
+            "rows": [
+              14,
+              15,
+              16,
+              18,
+              18,
+              20,
+              20
+            ],
+            "start_row": 1,
+            "color": "#F29200"
+          },
+          {
+            "_id": {
+              "$oid": "612780cb210f3c114c2211da"
+            },
+            "name": "黃2E",
+            "rows": [
+              14,
+              15,
+              16,
+              18,
+              18,
+              20,
+              20
+            ],
+            "start_row": 1,
+            "color": "#F29200"
+          },
+          {
+            "_id": {
+              "$oid": "646780cb2103fa114c2211db"
+            },
+            "name": "紅2D",
+            "rows": [
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20
+            ],
+            "start_row": 1,
+            "color": "#DE4A94"
+          },
+          {
+            "_id": {
+              "$oid": "655780cb2103fa114c2211db"
+            },
+            "name": "紫2D",
+            "rows": [
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20
+            ],
+            "start_row": 1,
+            "color": "#816BAB"
           }
         ]
       }
@@ -91,24 +494,39 @@
               "$oid": "646780cb2d0f3b114c2ee304"
             },
             "name": "Subarea 1",
-            "rows": [5, 3, 4],
-            "start_row": 1
+            "rows": [
+              5,
+              3,
+              4
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee305"
             },
             "name": "Subarea 2",
-            "rows": [2, 4, 2],
-            "start_row": 4
+            "rows": [
+              2,
+              4,
+              2
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee306"
             },
             "name": "Subarea 3",
-            "rows": [2, 4, 3],
-            "start_row": 7
+            "rows": [
+              2,
+              4,
+              3
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -124,24 +542,39 @@
               "$oid": "646780cb2d0f3b114c2ee308"
             },
             "name": "Subarea 1",
-            "rows": [2, 6, 9],
-            "start_row": 1
+            "rows": [
+              2,
+              6,
+              9
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee309"
             },
             "name": "Subarea 2",
-            "rows": [7, 8, 4],
-            "start_row": 4
+            "rows": [
+              7,
+              8,
+              4
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee30a"
             },
             "name": "Subarea 3",
-            "rows": [8, 9, 9],
-            "start_row": 7
+            "rows": [
+              8,
+              9,
+              9
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -157,24 +590,39 @@
               "$oid": "646780cb2d0f3b114c2ee30c"
             },
             "name": "Subarea 1",
-            "rows": [2, 3, 8],
-            "start_row": 1
+            "rows": [
+              2,
+              3,
+              8
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee30d"
             },
             "name": "Subarea 2",
-            "rows": [7, 7, 5],
-            "start_row": 4
+            "rows": [
+              7,
+              7,
+              5
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee30e"
             },
             "name": "Subarea 3",
-            "rows": [4, 6, 1],
-            "start_row": 7
+            "rows": [
+              4,
+              6,
+              1
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -190,24 +638,39 @@
               "$oid": "646780cb2d0f3b114c2ee310"
             },
             "name": "Subarea 1",
-            "rows": [7, 1, 2],
-            "start_row": 1
+            "rows": [
+              7,
+              1,
+              2
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee311"
             },
             "name": "Subarea 2",
-            "rows": [9, 1, 8],
-            "start_row": 4
+            "rows": [
+              9,
+              1,
+              8
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee312"
             },
             "name": "Subarea 3",
-            "rows": [7, 5, 9],
-            "start_row": 7
+            "rows": [
+              7,
+              5,
+              9
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -223,24 +686,39 @@
               "$oid": "646780cb2d0f3b114c2ee314"
             },
             "name": "Subarea 1",
-            "rows": [1, 3, 5],
-            "start_row": 1
+            "rows": [
+              1,
+              3,
+              5
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee315"
             },
             "name": "Subarea 2",
-            "rows": [4, 7, 8],
-            "start_row": 4
+            "rows": [
+              4,
+              7,
+              8
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee316"
             },
             "name": "Subarea 3",
-            "rows": [8, 6, 2],
-            "start_row": 7
+            "rows": [
+              8,
+              6,
+              2
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -256,24 +734,39 @@
               "$oid": "646780cb2d0f3b114c2ee318"
             },
             "name": "Subarea 1",
-            "rows": [2, 4, 5],
-            "start_row": 1
+            "rows": [
+              2,
+              4,
+              5
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee319"
             },
             "name": "Subarea 2",
-            "rows": [7, 6, 6],
-            "start_row": 4
+            "rows": [
+              7,
+              6,
+              6
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee31a"
             },
             "name": "Subarea 3",
-            "rows": [5, 6, 3],
-            "start_row": 7
+            "rows": [
+              5,
+              6,
+              3
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -289,24 +782,39 @@
               "$oid": "646780cb2d0f3b114c2ee31c"
             },
             "name": "Subarea 1",
-            "rows": [4, 5, 5],
-            "start_row": 1
+            "rows": [
+              4,
+              5,
+              5
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee31d"
             },
             "name": "Subarea 2",
-            "rows": [6, 5, 6],
-            "start_row": 4
+            "rows": [
+              6,
+              5,
+              6
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee31e"
             },
             "name": "Subarea 3",
-            "rows": [7, 6, 8],
-            "start_row": 7
+            "rows": [
+              7,
+              6,
+              8
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       }
@@ -397,24 +905,39 @@
               "$oid": "646780cb2d0f3b114c2ee322"
             },
             "name": "Subarea 1",
-            "rows": [6, 2, 8],
-            "start_row": 1
+            "rows": [
+              6,
+              2,
+              8
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee323"
             },
             "name": "Subarea 2",
-            "rows": [3, 7, 8],
-            "start_row": 4
+            "rows": [
+              3,
+              7,
+              8
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee324"
             },
             "name": "Subarea 3",
-            "rows": [4, 6, 3],
-            "start_row": 7
+            "rows": [
+              4,
+              6,
+              3
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -430,24 +953,39 @@
               "$oid": "646780cb2d0f3b114c2ee326"
             },
             "name": "Subarea 1",
-            "rows": [1, 9, 3],
-            "start_row": 1
+            "rows": [
+              1,
+              9,
+              3
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee327"
             },
             "name": "Subarea 2",
-            "rows": [1, 1, 7],
-            "start_row": 4
+            "rows": [
+              1,
+              1,
+              7
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee328"
             },
             "name": "Subarea 3",
-            "rows": [7, 6, 4],
-            "start_row": 7
+            "rows": [
+              7,
+              6,
+              4
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -463,24 +1001,39 @@
               "$oid": "646780cb2d0f3b114c2ee32a"
             },
             "name": "Subarea 1",
-            "rows": [5, 3, 4],
-            "start_row": 1
+            "rows": [
+              5,
+              3,
+              4
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee32b"
             },
             "name": "Subarea 2",
-            "rows": [1, 5, 7],
-            "start_row": 4
+            "rows": [
+              1,
+              5,
+              7
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee32c"
             },
             "name": "Subarea 3",
-            "rows": [9, 7, 8],
-            "start_row": 7
+            "rows": [
+              9,
+              7,
+              8
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -496,24 +1049,39 @@
               "$oid": "646780cb2d0f3b114c2ee32e"
             },
             "name": "Subarea 1",
-            "rows": [7, 3, 9],
-            "start_row": 1
+            "rows": [
+              7,
+              3,
+              9
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee32f"
             },
             "name": "Subarea 2",
-            "rows": [3, 6, 3],
-            "start_row": 4
+            "rows": [
+              3,
+              6,
+              3
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee330"
             },
             "name": "Subarea 3",
-            "rows": [8, 1, 7],
-            "start_row": 7
+            "rows": [
+              8,
+              1,
+              7
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       }
@@ -586,24 +1154,39 @@
               "$oid": "646780cb2d0f3b114c2ee335"
             },
             "name": "Subarea 1",
-            "rows": [9, 5, 3],
-            "start_row": 1
+            "rows": [
+              9,
+              5,
+              3
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee336"
             },
             "name": "Subarea 2",
-            "rows": [8, 5, 9],
-            "start_row": 4
+            "rows": [
+              8,
+              5,
+              9
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee337"
             },
             "name": "Subarea 3",
-            "rows": [7, 5, 7],
-            "start_row": 7
+            "rows": [
+              7,
+              5,
+              7
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -619,24 +1202,39 @@
               "$oid": "646780cb2d0f3b114c2ee339"
             },
             "name": "Subarea 1",
-            "rows": [7, 1, 9],
-            "start_row": 1
+            "rows": [
+              7,
+              1,
+              9
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee33a"
             },
             "name": "Subarea 2",
-            "rows": [2, 7, 1],
-            "start_row": 4
+            "rows": [
+              2,
+              7,
+              1
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee33b"
             },
             "name": "Subarea 3",
-            "rows": [6, 8, 6],
-            "start_row": 7
+            "rows": [
+              6,
+              8,
+              6
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -652,24 +1250,39 @@
               "$oid": "646780cb2d0f3b114c2ee33d"
             },
             "name": "Subarea 1",
-            "rows": [3, 9, 3],
-            "start_row": 1
+            "rows": [
+              3,
+              9,
+              3
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee33e"
             },
             "name": "Subarea 2",
-            "rows": [1, 6, 3],
-            "start_row": 4
+            "rows": [
+              1,
+              6,
+              3
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee33f"
             },
             "name": "Subarea 3",
-            "rows": [5, 9, 7],
-            "start_row": 7
+            "rows": [
+              5,
+              9,
+              7
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -685,24 +1298,39 @@
               "$oid": "646780cb2d0f3b114c2ee341"
             },
             "name": "Subarea 1",
-            "rows": [7, 3, 6],
-            "start_row": 1
+            "rows": [
+              7,
+              3,
+              6
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee342"
             },
             "name": "Subarea 2",
-            "rows": [5, 7, 3],
-            "start_row": 4
+            "rows": [
+              5,
+              7,
+              3
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee343"
             },
             "name": "Subarea 3",
-            "rows": [7, 8, 4],
-            "start_row": 7
+            "rows": [
+              7,
+              8,
+              4
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -718,24 +1346,39 @@
               "$oid": "646780cb2d0f3b114c2ee345"
             },
             "name": "Subarea 1",
-            "rows": [1, 1, 5],
-            "start_row": 1
+            "rows": [
+              1,
+              1,
+              5
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee346"
             },
             "name": "Subarea 2",
-            "rows": [6, 7, 7],
-            "start_row": 4
+            "rows": [
+              6,
+              7,
+              7
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee347"
             },
             "name": "Subarea 3",
-            "rows": [2, 4, 6],
-            "start_row": 7
+            "rows": [
+              2,
+              4,
+              6
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -751,24 +1394,39 @@
               "$oid": "646780cb2d0f3b114c2ee349"
             },
             "name": "Subarea 1",
-            "rows": [7, 5, 4],
-            "start_row": 1
+            "rows": [
+              7,
+              5,
+              4
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee34a"
             },
             "name": "Subarea 2",
-            "rows": [8, 8, 5],
-            "start_row": 4
+            "rows": [
+              8,
+              8,
+              5
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee34b"
             },
             "name": "Subarea 3",
-            "rows": [3, 1, 3],
-            "start_row": 7
+            "rows": [
+              3,
+              1,
+              3
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -784,24 +1442,39 @@
               "$oid": "646780cb2d0f3b114c2ee34d"
             },
             "name": "Subarea 1",
-            "rows": [9, 4, 5],
-            "start_row": 1
+            "rows": [
+              9,
+              4,
+              5
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee34e"
             },
             "name": "Subarea 2",
-            "rows": [5, 3, 5],
-            "start_row": 4
+            "rows": [
+              5,
+              3,
+              5
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee34f"
             },
             "name": "Subarea 3",
-            "rows": [1, 7, 4],
-            "start_row": 7
+            "rows": [
+              1,
+              7,
+              4
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -817,24 +1490,39 @@
               "$oid": "646780cb2d0f3b114c2ee351"
             },
             "name": "Subarea 1",
-            "rows": [1, 1, 1],
-            "start_row": 1
+            "rows": [
+              1,
+              1,
+              1
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee352"
             },
             "name": "Subarea 2",
-            "rows": [6, 4, 6],
-            "start_row": 4
+            "rows": [
+              6,
+              4,
+              6
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee353"
             },
             "name": "Subarea 3",
-            "rows": [5, 7, 4],
-            "start_row": 7
+            "rows": [
+              5,
+              7,
+              4
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       },
@@ -850,24 +1538,39 @@
               "$oid": "646780cb2d0f3b114c2ee355"
             },
             "name": "Subarea 1",
-            "rows": [3, 8, 4],
-            "start_row": 1
+            "rows": [
+              3,
+              8,
+              4
+            ],
+            "start_row": 1,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee356"
             },
             "name": "Subarea 2",
-            "rows": [7, 1, 4],
-            "start_row": 4
+            "rows": [
+              7,
+              1,
+              4
+            ],
+            "start_row": 4,
+            "color": "#23AC38"
           },
           {
             "_id": {
               "$oid": "646780cb2d0f3b114c2ee357"
             },
             "name": "Subarea 3",
-            "rows": [6, 3, 3],
-            "start_row": 7
+            "rows": [
+              6,
+              3,
+              3
+            ],
+            "start_row": 7,
+            "color": "#23AC38"
           }
         ]
       }
