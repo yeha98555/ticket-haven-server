@@ -5,9 +5,10 @@ import { Request, Response } from 'express';
 
 const ticketController = {
   getTickets: catchAsyncError(async (req: Request, res: Response) => {
-    const { page = 1, pageSize = 10 } = req.query;
+    const { page = 1, pageSize = 10, isValid = 1 } = req.query;
     const { tickets, ...pagination } = await ticketService.getAllTickets({
       userId: req.userId!,
+      isValid: Boolean(+isValid),
       page: Number(page),
       pageSize: Number(pageSize),
     });
