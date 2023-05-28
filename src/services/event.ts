@@ -1,12 +1,11 @@
 import { NotFoundException } from "@/exceptions/NotFoundException";
 import ActivityModel from "@/models/activity";
 import TicketModel from "@/models/ticket";
-import { Types } from "mongoose";
 
 const eventService = {
   getSeatInfo: async (eventId: string) => {
     const activity = await ActivityModel.findOne({
-      'events._id': new Types.ObjectId(eventId)
+      'events._id': eventId
     }).select([
       'seat_small_img_url',
       'areas'
