@@ -10,6 +10,13 @@ import { z } from 'zod';
 const orderRouter = Router();
 
 orderRouter.get(
+  '/:page',
+  isAuth,
+  validateRequestParams(z.object({ page: z.string() })),
+  orderController.getOrders,
+  );
+
+orderRouter.get(
   '/:orderNo',
   isAuth,
   validateRequestParams(z.object({ orderNo: z.string() })),

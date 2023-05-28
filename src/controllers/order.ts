@@ -5,6 +5,11 @@ import catchAsyncError from '@/utils/catchAsyncError';
 import { Body } from '@/utils/response';
 
 const orderController = {
+  getOrders: catchAsyncError(async(req, res) => {
+    const { page } = req.params;
+    const orders = await orderService.getOrders(Number(page));
+    res.json(Body.success(orders));
+  }),
   getOrderInfo: catchAsyncError(async (req, res) => {
     const order = await orderService.getOrderInfo(
       req.userId!,
