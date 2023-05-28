@@ -34,6 +34,20 @@ const orderController = {
     const result = await orderService.deleteSeat({ order, ...req.body });
     res.json(Body.success(result));
   }),
+  payment: catchAsyncError(async (req, res) => {
+    const result = await orderService.payment(
+      req.userId!,
+      req.params.orderNo
+    );
+    res.json(Body.success(result));
+  }),
+  paymentNotify: catchAsyncError(async (req, res) => {
+    const result = await orderService.paymentNotify(req.body);
+    // TODO: parse result
+
+    // Respond to NewebPay
+    res.status(200).send('OK');
+  }),
 };
 
 export default orderController;
