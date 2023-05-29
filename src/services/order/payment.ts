@@ -24,11 +24,11 @@ const formatDesc = (name: string, quantity: number, start_at: Date) => {
   return `${formattedName} ${quantity} 張 [${formattedDate}]`;
 };
 
-function genDataChain(paymentData: NewebPayPaymentRequest) {
+const genDataChain = (paymentData: NewebPayPaymentRequest) => {
   return `MerchantID=${NEWEBPAY_MERCHANT_ID}&RespondType=${RespondType}&TimeStamp=${paymentData.TimeStamp}&Version=${NEWEBPAY_VERSION}&MerchantOrderNo=${paymentData.MerchantOrderNo}&Amt=${paymentData.Amt}&ItemDesc=${encodeURIComponent(paymentData.ItemDesc).replace(/%20/g, '+')}&Email=${encodeURIComponent(paymentData.Email)}`;//&ReturnURL=${NEWEBPAY_RETURN_URL}&NotifyURL=${NEWEBPAY_NOTIFY_URL}`;
 }
 
-function createAesEncrypt(tradeInfo: NewebPayPaymentRequest) {
+const createAesEncrypt = (tradeInfo: NewebPayPaymentRequest) => {
   if (!NEWEBPAY_HASH_KEY || !NEWEBPAY_HASH_IV) {
     throw appError(500, StatusCode.SERVER_ERROR, 'NEWEBPAY_HASH_KEY or NEWEBPAY_HASH_IV not found')
   }
@@ -37,7 +37,7 @@ function createAesEncrypt(tradeInfo: NewebPayPaymentRequest) {
   return encrypted;
 }
 
-function createShaEncrypt(aesEncrypt: string) {
+const createShaEncrypt = (aesEncrypt: string) => {
   if (!NEWEBPAY_HASH_KEY || !NEWEBPAY_HASH_IV) {
     throw appError(500, StatusCode.SERVER_ERROR, 'NEWEBPAY_HASH_KEY or NEWEBPAY_HASH_IV not found')
   }
