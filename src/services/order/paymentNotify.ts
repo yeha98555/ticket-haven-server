@@ -23,7 +23,7 @@ const paymentNotify = async (tradeInfo: string) => {
   const info = createAesDecrypt(tradeInfo);
 
   // Ensure info.Result.Status is not undefined
-  const status = info?.Result?.Status ? OrderStatus[info.Result.Status] : OrderStatus["FAIL"];
+  const status = info?.Result?.Status === 'SUCCESS' ? OrderStatus.PAID : OrderStatus.FAIL;
 
   // Find and update order status
   const order = await OrderModel.updateOne(
@@ -31,7 +31,7 @@ const paymentNotify = async (tradeInfo: string) => {
     { $set: { status: status } },
   );
 
-  // TODO: Save the payment info
+  // TODO: Save the payment info to neweb_paymethods
   // info.Result.PayTime
   // info.Result.PaymentType
   // info.Result.IP
