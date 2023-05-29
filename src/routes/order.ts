@@ -58,4 +58,21 @@ orderRouter.delete(
   orderController.deleteSeat,
 );
 
+orderRouter.get(
+  '/:orderNo/payment',
+  isAuth,
+  validateRequestParams(z.object({ orderNo: z.string() })),
+  orderController.payment,
+);
+
+orderRouter.post(
+  '/payment_notify',
+  validateRequestBody(
+    z.object({
+      TradeInfo: z.string(),
+    }),
+  ),
+  orderController.paymentNotify,
+);
+
 export default orderRouter;
