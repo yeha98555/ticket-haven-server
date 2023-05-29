@@ -5,6 +5,7 @@ import userRouter from './user';
 import activityRouter from './activity';
 import eventRouter from './event';
 import orderRouter from './order';
+import ticketRouter from './ticket';
 
 const router = Router();
 
@@ -62,5 +63,6 @@ router.use('/user', userRouter);
 router.use('/activities', activityRouter);
 router.use('/events', eventRouter);
 router.use('/orders', orderRouter);
+router.use('/tickets', ticketRouter);
 
 export default router;
