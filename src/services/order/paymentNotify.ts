@@ -31,7 +31,7 @@ const paymentNotify = async (tradeInfo: string) => {
     { $set: { status: status } },
   );
 
-  console.log(info);
+  console.log(status);
 
   // TODO: Save the payment info to neweb_paymethods
   // info.Result.PayTime
