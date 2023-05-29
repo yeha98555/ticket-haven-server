@@ -23,7 +23,7 @@ const paymentNotify = async (tradeInfo: string) => {
   const info = createAesDecrypt(tradeInfo);
 
   // Ensure info.Result.Status is not undefined
-  const status = info?.Result?.Status === 'SUCCESS' ? OrderStatus.PAID : OrderStatus.FAIL;
+  const status = info?.Status === 'SUCCESS' ? OrderStatus.PAID : OrderStatus.FAIL;
 
   // Find and update order status
   const order = await OrderModel.updateOne(
