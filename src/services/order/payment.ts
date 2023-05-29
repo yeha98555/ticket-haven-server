@@ -8,7 +8,7 @@ import { StatusCode } from '@/enums/statusCode';
 import TicketModel from '@/models/ticket';
 
 const RespondType = 'JSON';
-const { NEWEBPAY_VERSION, NEWEBPAY_MERCHANT_ID, NEWEBPAY_HASH_KEY, NEWEBPAY_HASH_IV } = process.env;
+const { NEWEBPAY_VERSION, NEWEBPAY_MERCHANT_ID, NEWEBPAY_HASH_KEY, NEWEBPAY_HASH_IV, NEWEBPAY_RETURN_URL, NEWEBPAY_NOTIFY_URL } = process.env;
 
 interface NewebPayPaymentRequest {
   MerchantOrderNo: string;
@@ -26,7 +26,7 @@ const formatDesc = (name: string, quantity: number, start_at: Date) => {
 };
 
 const genDataChain = (paymentData: NewebPayPaymentRequest) => {
-  return `MerchantID=${NEWEBPAY_MERCHANT_ID}&RespondType=${RespondType}&TimeStamp=${paymentData.TimeStamp}&Version=${NEWEBPAY_VERSION}&MerchantOrderNo=${paymentData.MerchantOrderNo}&Amt=${paymentData.Amt}&ItemDesc=${encodeURIComponent(paymentData.ItemDesc).replace(/%20/g, '+')}&Email=${encodeURIComponent(paymentData.Email)}`;//&ReturnURL=${NEWEBPAY_RETURN_URL}&NotifyURL=${NEWEBPAY_NOTIFY_URL}`;
+  return `MerchantID=${NEWEBPAY_MERCHANT_ID}&RespondType=${RespondType}&TimeStamp=${paymentData.TimeStamp}&Version=${NEWEBPAY_VERSION}&MerchantOrderNo=${paymentData.MerchantOrderNo}&Amt=${paymentData.Amt}&ItemDesc=${encodeURIComponent(paymentData.ItemDesc).replace(/%20/g, '+')}&Email=${encodeURIComponent(paymentData.Email)}&ReturnURL=${NEWEBPAY_RETURN_URL}&NotifyURL=${NEWEBPAY_NOTIFY_URL}`;
 }
 
 const createAesEncrypt = (tradeInfo: NewebPayPaymentRequest) => {
