@@ -12,7 +12,7 @@ const activityService = {
     if (!activity.is_published) throw new NotFoundException();
 
     // Pre-convert event IDs to strings for subsequent queries and comparisons
-    const eventIds = activity.events.map(event => event._id!.toString());
+    const eventIds = activity.events.map(event => event._id!);
 
     // Fetch purchased seats from the database
     const purchasedSeats = await TicketModel.aggregate([
