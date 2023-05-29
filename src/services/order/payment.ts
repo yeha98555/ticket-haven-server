@@ -5,6 +5,7 @@ import OrderModel from "@/models/order";
 import { User } from "@/models/user";
 import { appError } from '../appError';
 import { StatusCode } from '@/enums/statusCode';
+import TicketModel from '@/models/ticket';
 
 const RespondType = 'JSON';
 const { NEWEBPAY_VERSION, NEWEBPAY_MERCHANT_ID, NEWEBPAY_HASH_KEY, NEWEBPAY_HASH_IV } = process.env;
@@ -53,9 +54,14 @@ const payment = async (userId: string, orderNo: string) => {
   })
     .select('order_no price user_id activity_id')
     .populate<{ user_id: User }>('user_id', 'email')
-    .populate<{ activity_id: Activity }>('activity_id', 'name seat_total start_at');
+    .populate<{ activity_id: Activity }>('activity_id', 'name start_at');
 
   if (!order) throw new NotFoundException();
+
+  // Calculate the number of tickets
+  const ticketCount = await TicketModel.countDocuments({
+    order_id: order._id,
+  });
 
   const paymentData = {
     'MerchantOrderNo': order.order_no,
@@ -63,7 +69,7 @@ const payment = async (userId: string, orderNo: string) => {
     'TimeStamp': Math.floor(Date.now() / 1000),
     'Email': order.user_id.email,
     'Amt': order.price,
-    'ItemDesc': formatDesc(order.activity_id.name, order.activity_id.seat_total, order.activity_id.start_at),
+    'ItemDesc': formatDesc(order.activity_id.name, ticketCount, order.activity_id.start_at),
   };
 
   const aesEncrypt = createAesEncrypt(paymentData);
