@@ -42,11 +42,14 @@ const orderController = {
     res.json(Body.success(result));
   }),
   paymentNotify: catchAsyncError(async (req, res) => {
-    const result = await orderService.paymentNotify(req.body);
-    // TODO: parse result
+    const result = await orderService.paymentNotify(req.body.TradeInfo);
 
     // Respond to NewebPay
-    res.status(200).send('OK');
+    if (result) {
+      res.status(200).send('OK');
+    } else {
+      res.status(500).send('Failed');
+    }
   }),
 };
 

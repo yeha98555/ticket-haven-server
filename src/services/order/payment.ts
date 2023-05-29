@@ -7,7 +7,7 @@ import { appError } from '../appError';
 import { StatusCode } from '@/enums/statusCode';
 
 const RespondType = 'JSON';
-const { NEWEBPAY_VERSION, NEWEBPAY_MERCHANT_ID, NEWEBPAY_HASH_KEY, NEWEBPAY_HASH_IV, NEWEBPAY_HOST, NEWEBPAY_RETURN_URL, NEWEBPAY_NOTIFY_URL } = process.env;
+const { NEWEBPAY_VERSION, NEWEBPAY_MERCHANT_ID, NEWEBPAY_HASH_KEY, NEWEBPAY_HASH_IV } = process.env;
 
 interface NewebPayPaymentRequest {
   MerchantOrderNo: string;
@@ -32,8 +32,8 @@ const createAesEncrypt = (tradeInfo: NewebPayPaymentRequest) => {
   if (!NEWEBPAY_HASH_KEY || !NEWEBPAY_HASH_IV) {
     throw appError(500, StatusCode.SERVER_ERROR, 'NEWEBPAY_HASH_KEY or NEWEBPAY_HASH_IV not found')
   }
-  const cipher = crypto.createCipheriv('aes-256-cbc', NEWEBPAY_HASH_KEY, NEWEBPAY_HASH_IV);
-  const encrypted = cipher.update(genDataChain(tradeInfo), 'utf8', 'hex') + cipher.final('hex');
+  const encrypt = crypto.createCipheriv('aes-256-cbc', NEWEBPAY_HASH_KEY, NEWEBPAY_HASH_IV);
+  const encrypted = encrypt.update(genDataChain(tradeInfo), 'utf8', 'hex') + encrypt.final('hex');
   return encrypted;
 }
 

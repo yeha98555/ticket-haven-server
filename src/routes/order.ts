@@ -67,6 +67,11 @@ orderRouter.get(
 
 orderRouter.post(
   '/payment_notify',
+  validateRequestBody(
+    z.object({
+      TradeInfo: z.string(),
+    }),
+  ),
   orderController.paymentNotify,
 );
 
