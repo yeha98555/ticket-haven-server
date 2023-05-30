@@ -1,9 +1,9 @@
 import userController from '@/controllers/user';
 import { Router } from 'express';
-import { validateRequest } from 'zod-express-middleware';
 import z from 'zod';
 import { Gender } from '@/enums/gender';
 import { isAuth } from '@/middleware/auth';
+import { validateRequest } from '@/middleware/paramsValidator';
 
 const userRouter = Router();
 

@@ -8,7 +8,7 @@ const camelizeKeysPlugin = (
   schema.set('toJSON', {
     transform: (doc, ret, options) => {
       const camelize = options.camelize ?? opts.camelize;
-      return camelize ? camelizeKeys(ret) : ret;
+      return camelize ? camelizeKeys(JSON.parse(JSON.stringify(ret))) : ret;
     },
   });
 };
