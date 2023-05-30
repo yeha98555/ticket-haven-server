@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './swagger/swagger';
 import userRouter from './user';
+import mailService from '@/services/mail';
 
 const router = Router();
 
@@ -40,7 +41,16 @@ const headers = {
  *                   type: string
  *                   example: Welcome to the API
  */
-router.get('/', (req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
+  const mailOptions = {
+    from: 'duenzo1010@gmail.com',
+    to: 'bonnenuit1010@gmail.com',
+    subject: '',
+    text: 'Test',
+  };
+
+  await (await mailService).sendMail(mailOptions);
+
   res.writeHead(200, headers);
   res.write(
     JSON.stringify({
@@ -50,6 +60,27 @@ router.get('/', (req: Request, res: Response) => {
   );
   res.end();
   // res.send('Welcome to the API');
+});
+
+router.post('/mail', async (req: Request, res: Response) => {
+  const { subject, text } = req.body;
+  const mailOptions = {
+    from: 'duenzo1010@gmail.com',
+    to: 'bonnenuit1010@gmail.com',
+    subject,
+    text,
+  };
+
+  await mailService.sendMail(mailOptions);
+
+  res.writeHead(200, headers);
+  res.write(
+    JSON.stringify({
+      status: 'success',
+      message: 'Email sent successfully',
+    }),
+  );
+  res.end();
 });
 
 /* Swagger */
