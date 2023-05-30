@@ -4,14 +4,21 @@ import orderController from '@/controllers/order';
 import {
   validateRequestBody,
   validateRequestParams,
+  validateRequestQuery,
 } from '@/middleware/paramsValidator';
 import { z } from 'zod';
 
 const orderRouter = Router();
 
-orderRouter.get(
+orderRouter.post(
   '/',
   isAuth,
+  validateRequestQuery(
+    z.object({
+      page: z.string().refine((page) => Number(page) < 1),
+    })
+  ),
+  validateRequestBody(z.object({ userId: z.string() })),
   orderController.getOrders,
   );
 

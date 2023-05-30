@@ -1,35 +1,36 @@
 import { NotFoundException } from '@/exceptions/NotFoundException';
 import OrderModel from '@/models/order';
-import ActivityModel from '@/models/activity';
+import { Activity } from '@/models/activity';
 
-const getOrders = async (page: number) => {
-  if (page < 1) throw new NotFoundException();
+const getOrders = async (page: number, userId: string, status: string) => {
   const onePageLimit = 5;
-  const ordersTotal = await OrderModel.countDocuments();
+  const ordersTotal = await OrderModel.countDocuments({ user_id: userId , status: status });
 
   if(ordersTotal === 0) return { nextPage: null, totalPage: 0, orders: [] };
-  const totalPage = ordersTotal > onePageLimit ? Math.floor(ordersTotal / onePageLimit) : 1;
+  const totalPage = ordersTotal > onePageLimit ? Math.ceil(ordersTotal / onePageLimit) : 1;
 
   if(page > totalPage) throw new NotFoundException();
   const nextPage = totalPage < page ? page + 1 : null;
-  const ordersIndex = await OrderModel.find({}).skip((page - 1) * onePageLimit).limit(onePageLimit);
+  const ordersCatalog  = await OrderModel.find({ user_id: userId })
+    .skip((page - 1) * onePageLimit)
+    .limit(onePageLimit)
+    .populate<{ activity_id: Activity }>('activity_id');
+
   const orders: object[] = [];
 
-  for(let i = 0; i < ordersIndex.length; i++){
-    const orderId = ordersIndex[i]._id;
-    const activityId = ordersIndex[i].activity_id;
-    const activity = await ActivityModel.findOne(activityId);
+  for(let i = 0; i < ordersCatalog.length; i++){
+    const order = ordersCatalog[i];
+    const activity = ordersCatalog[i].activity_id;
 
-    if (!activity) continue;
     orders.push({
-      id: orderId,
+      id: order._id,
+      status: order.status,
       name: activity.name,
       location: activity.location,
       startTime: activity.start_at,
     })
   }
 
-  if (!ordersIndex) throw new NotFoundException();
   return { nextPage, totalPage, orders };
 };
 

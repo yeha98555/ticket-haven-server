@@ -7,7 +7,8 @@ import { Body } from '@/utils/response';
 const orderController = {
   getOrders: catchAsyncError(async(req, res) => {
     const { page } = req.query;
-    const orders = await orderService.getOrders(Number(page));
+    const { userId, status } = req.body;
+    const orders = await orderService.getOrders(Number(page), userId, status);
     res.json(Body.success(orders));
   }),
   getOrderInfo: catchAsyncError(async (req, res) => {
