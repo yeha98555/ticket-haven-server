@@ -1,9 +1,11 @@
 import nodemailer from 'nodemailer';
 import { google } from 'googleapis';
+import { v4 as uuidv4 } from 'uuid';
+import { generateVerificationCode } from '@/utils/comm';
 
 type MailOptions = {
   from: string;
-  to: string;
+  to: string | string[];
   subject: string;
   text: string;
 };
@@ -47,8 +49,25 @@ const sendMail = async (mailOptions: MailOptions) => {
   return result;
 };
 
+const sendVerificationCode = async (email: string) => {
+  const verificationCode = generateVerificationCode(6);
+
+  // TODO: save verification code to redis/db
+
+  const mailOptions = {
+    from: userMail,
+    to: email,
+    subject: 'Your Verification Code',
+    text: `Your verification code is ${verificationCode}`,
+  };
+
+  const result = await sendMail(mailOptions);
+  return { result, verificationCode };
+};
+
 const mailService = {
   sendMail,
+  sendVerificationCode,
 };
 
 export default mailService;

@@ -87,6 +87,22 @@ router.post('/mail', async (req: Request, res: Response) => {
   res.end();
 });
 
+router.post('/verifiycode', async (req: Request, res: Response) => {
+  const userMail = req.body?.email || process.env.USER_MAIL;
+
+  const { verificationCode } = await mailService.sendVerificationCode(userMail);
+
+  res.writeHead(200, headers);
+  res.write(
+    JSON.stringify({
+      status: 'success',
+      message: 'VerificationCode sent successfully',
+      verificationCode,
+    }),
+  );
+  res.end();
+});
+
 /* Swagger */
 router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
