@@ -75,4 +75,6 @@ orderRouter.post(
   orderController.paymentNotify,
 );
 
+orderRouter.delete('/:orderNo', isAuth, orderController.cancelOrder);
+
 export default orderRouter;
