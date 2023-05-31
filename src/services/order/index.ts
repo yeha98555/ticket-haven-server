@@ -1,5 +1,6 @@
 import addOrder from './addOrder';
 import addSeats from './addSeats';
+import cancelOrder from './cancelOrder';
 import createOrderNo from './createOrderNo';
 import deleteSeat from './deleteSeat';
 import getOrderInfo from './getOrderInfo';
@@ -14,6 +15,7 @@ const orderService = {
   deleteSeat,
   payment,
   paymentNotify,
+  cancelOrder,
 };
 
 export default orderService;
