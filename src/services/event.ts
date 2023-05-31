@@ -7,6 +7,7 @@ const eventService = {
     const activity = await ActivityModel.findOne({
       'events._id': eventId
     }).select([
+      'activity._id',
       'seat_small_img_url',
       'areas'
     ]);
@@ -55,6 +56,7 @@ const eventService = {
     }));
 
     return {
+      activityId: activity._id,
       seatImgUrl: activity.seat_small_img_url,
       seats: seats,
     };
