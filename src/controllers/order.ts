@@ -35,10 +35,7 @@ const orderController = {
     res.json(Body.success(result));
   }),
   payment: catchAsyncError(async (req, res) => {
-    const result = await orderService.payment(
-      req.userId!,
-      req.params.orderNo
-    );
+    const result = await orderService.payment(req.userId!, req.params.orderNo);
     res.json(Body.success(result));
   }),
   paymentNotify: catchAsyncError(async (req, res) => {
@@ -50,6 +47,13 @@ const orderController = {
     } else {
       res.status(500).send('Failed');
     }
+  }),
+  cancelOrder: catchAsyncError(async (req, res) => {
+    const result = await orderService.cancelOrder(
+      req.userId!,
+      req.params.orderNo,
+    );
+    res.json(Body.success(result));
   }),
 };
 
