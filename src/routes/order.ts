@@ -10,15 +10,15 @@ import { z } from 'zod';
 
 const orderRouter = Router();
 
-orderRouter.post(
-  '/',
+orderRouter.get(
+  '/:status',
   isAuth,
+  validateRequestParams(z.object({ status: z.string() })),
   validateRequestQuery(
     z.object({
       page: z.string().refine((page) => Number(page) < 1),
     })
   ),
-  validateRequestBody(z.object({ userId: z.string() })),
   orderController.getOrders,
   );
 

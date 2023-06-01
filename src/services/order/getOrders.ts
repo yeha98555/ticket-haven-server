@@ -2,7 +2,7 @@ import { NotFoundException } from '@/exceptions/NotFoundException';
 import OrderModel from '@/models/order';
 import { Activity } from '@/models/activity';
 
-const getOrders = async (page: number, userId: string, status: string) => {
+const getOrders = async (userId: string, status: string, page: number) => {
   const onePageLimit = 5;
   const ordersTotal = await OrderModel.countDocuments({ user_id: userId , status: status });
 
