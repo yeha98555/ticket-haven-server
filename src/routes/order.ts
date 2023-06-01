@@ -16,7 +16,7 @@ orderRouter.get(
   validateRequestParams(z.object({ status: z.string() })),
   validateRequestQuery(
     z.object({
-      page: z.string().refine((page) => Number(page) < 1),
+      page: z.string().refine((page)=> Number(page) >= 1, {message: 'wrong page input'}),
     })
   ),
   orderController.getOrders,
