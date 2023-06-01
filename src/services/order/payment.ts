@@ -81,7 +81,6 @@ const payment = async (userId: string, orderNo: string) => {
     order_no: orderNo,
     user_id: userId,
   })
-    .select('order_no price user_id activity_id')
     .populate<{ user_id: User }>('user_id', 'email')
     .populate<{ activity_id: Activity }>('activity_id', 'name start_at');
 

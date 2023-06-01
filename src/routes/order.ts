@@ -75,6 +75,16 @@ orderRouter.post(
   orderController.paymentNotify,
 );
 
+orderRouter.post(
+  '/payment_return',
+  validateRequestBody(
+    z.object({
+      TradeInfo: z.string(),
+    }),
+  ),
+  orderController.paymentReturn,
+);
+
 orderRouter.delete('/:orderNo', isAuth, orderController.cancelOrder);
 
 export default orderRouter;
