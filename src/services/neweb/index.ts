@@ -88,6 +88,7 @@ class NewebService {
 
 const { NEWEBPAY_MERCHANT_ID, NEWEBPAY_HASH_KEY, NEWEBPAY_HASH_IV } =
   process.env;
+
 const newebService = new NewebService({
   hashKey: NEWEBPAY_HASH_KEY,
   hashIv: NEWEBPAY_HASH_IV,

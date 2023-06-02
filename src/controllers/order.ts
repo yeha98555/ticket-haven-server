@@ -51,16 +51,12 @@ const orderController = {
   }),
   paymentReturn: catchAsyncError(async (req, res) => {
     const info = await newebService.decrypt(req.body.TradeInfo);
-    console.log('info', info);
-    if (info.Status === 'SUCCESS') {
-      res.redirect(
-        `http://localhost:3000/purchasing-process/complete?orderNo=${info.Result.MerchantOrderNo}&success=true`,
-      );
-    } else {
-      res.redirect(
-        `http://localhost:3000/purchasing-process/complete?orderNo=${info.Result.MerchantOrderNo}&success=false`,
-      );
-    }
+    const orderNo = info.Result.MerchantOrderNo;
+    const success = info.Status === 'SUCCESS';
+
+    res.redirect(
+      `http://localhost:3000/purchasing-process/completed?orderNo=${orderNo}&success=${success}`,
+    );
   }),
   cancelOrder: catchAsyncError(async (req, res) => {
     const result = await orderService.cancelOrder(
