@@ -50,13 +50,17 @@ const orderController = {
     }
   }),
   paymentReturn: catchAsyncError(async (req, res) => {
-    const result = await newebService.decrypt(req.body.TradeInfo);
-
-    if (result) {
-      res.set('OrderNo', JSON.stringify(result));
+    const info = await newebService.decrypt(req.body.TradeInfo);
+    console.log('info', info);
+    if (info.Status === 'SUCCESS') {
+      res.redirect(
+        `http://localhost:3000/purchasing-process/complete?orderNo=${info.Result.MerchantOrderNo}&success=true`,
+      );
+    } else {
+      res.redirect(
+        `http://localhost:3000/purchasing-process/complete?orderNo=${info.Result.MerchantOrderNo}&success=false`,
+      );
     }
-
-    res.redirect('http://localhost:3000/purchasing-process/complete');
   }),
   cancelOrder: catchAsyncError(async (req, res) => {
     const result = await orderService.cancelOrder(
