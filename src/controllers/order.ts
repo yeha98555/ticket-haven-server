@@ -55,7 +55,7 @@ const orderController = {
     const success = info.Status === 'SUCCESS';
 
     res.redirect(
-      `http://localhost:3000/purchasing-process/completed?orderNo=${orderNo}&success=${success}`,
+      `${process.env.PAYMENT_RETURN_URL}?orderNo=${orderNo}&success=${success}`,
     );
   }),
   cancelOrder: catchAsyncError(async (req, res) => {
