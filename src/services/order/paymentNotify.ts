@@ -3,6 +3,11 @@ import { StatusCode } from '@/enums/statusCode';
 import { appError } from '../appError';
 import OrderModel from '@/models/order';
 import { OrderStatus } from '@/enums/orderStatus';
+import SeatReservationModel from '@/models/seatReservation';
+import TicketModel from '@/models/ticket';
+import { Types } from 'mongoose';
+import createTicketNo from '../ticket/createTicketNo';
+import ActivityModel from '@/models/activity';
 
 const { NEWEBPAY_HASH_KEY, NEWEBPAY_HASH_IV } = process.env;
 
@@ -34,11 +39,44 @@ const paymentNotify = async (tradeInfo: string) => {
   const status =
     info.Status === 'SUCCESS' ? OrderStatus.PAID : OrderStatus.FAIL;
 
-  // Find and update order status
-  const order = await OrderModel.updateOne(
-    { order_no: info.Result.MerchantOrderNo },
-    { $set: { status: status } },
+  const order = await OrderModel.findOne({}).byNo(info);
+
+  const seatReservation = await SeatReservationModel.findById(
+    order?.seat_reservation_id,
   );
+  const seats = seatReservation?.seats;
+
+  order!.status = status;
+
+  await order?.save();
+
+  const activity = await ActivityModel.findById(order?.activity_id);
+
+  const date = new Date();
+
+  await TicketModel.insertMany(
+    seats?.map((s) => {
+      const ticketId = new Types.ObjectId();
+      const price = activity?.areas.find((a) =>
+        a._id?.equals(s.area_id),
+      )?.price;
+      return {
+        _id: ticketId,
+        ticket_no: createTicketNo(ticketId, date, s.row, s.seat),
+        order_id: order?._id,
+        original_order_id: order?._id,
+        activity_id: order?.activity_id,
+        event_id: order?.event_id,
+        area_id: s.area_id,
+        subarea_id: s.subarea_id,
+        row: s.row,
+        seat: s.seat,
+        price,
+      };
+    }),
+  );
+
+  await seatReservation?.deleteOne();
 
   // TODO: Save the payment info to neweb_paymethods
   // info.Result.PayTime
