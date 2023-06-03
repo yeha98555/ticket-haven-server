@@ -14,5 +14,6 @@ declare namespace NodeJS {
     NEWEBPAY_HASH_IV: string;
     NEWEBPAY_RETURN_URL: string;
     NEWEBPAY_NOTIFY_URL: string;
+    PAYMENT_RETURN_URL: string;
   }
 }

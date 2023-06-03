@@ -1,5 +1,6 @@
 import { NotFoundException } from '@/exceptions/NotFoundException';
 import OrderModel from '@/models/order';
+import newebService from '@/services/neweb';
 import orderService from '@/services/order';
 import catchAsyncError from '@/utils/catchAsyncError';
 import { Body } from '@/utils/response';
@@ -52,6 +53,15 @@ const orderController = {
     } else {
       res.status(500).send('Failed');
     }
+  }),
+  paymentReturn: catchAsyncError(async (req, res) => {
+    const info = await newebService.decrypt(req.body.TradeInfo);
+    const orderNo = info.Result.MerchantOrderNo;
+    const success = info.Status === 'SUCCESS';
+
+    res.redirect(
+      `${process.env.PAYMENT_RETURN_URL}?orderNo=${orderNo}&success=${success}`,
+    );
   }),
   cancelOrder: catchAsyncError(async (req, res) => {
     const result = await orderService.cancelOrder(
