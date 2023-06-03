@@ -87,8 +87,7 @@ const payment = async (userId: string, orderNo: string) => {
     .populate<{ activity_id: Activity }>('activity_id', 'name start_at');
 
   if (!order) throw new NotFoundException();
-  if (order.status !== OrderStatus.UNPAID)
-    throw new OrderCannotModifyException();
+  if (order.status !== OrderStatus.TEMP) throw new OrderCannotModifyException();
 
   // Calculate the number of tickets
   const seatReservation = await SeatReservationModel.findById(

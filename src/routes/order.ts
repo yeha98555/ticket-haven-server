@@ -1,26 +1,21 @@
 import { Router } from 'express';
 import { isAuth } from '@/middleware/auth';
-import orderController from '@/controllers/order';
+import orderController, { validations } from '@/controllers/order';
 import {
+  processRequestQuery,
   validateRequestBody,
   validateRequestParams,
-  validateRequestQuery,
 } from '@/middleware/paramsValidator';
 import { z } from 'zod';
 
 const orderRouter = Router();
 
 orderRouter.get(
-  '/:status',
+  '/',
   isAuth,
-  validateRequestParams(z.object({ status: z.string() })),
-  validateRequestQuery(
-    z.object({
-      page: z.string().refine((page)=> Number(page) >= 1, {message: 'wrong page input'}),
-    })
-  ),
+  processRequestQuery<any>(validations.getOrders),
   orderController.getOrders,
-  );
+);
 
 orderRouter.get(
   '/:orderNo',

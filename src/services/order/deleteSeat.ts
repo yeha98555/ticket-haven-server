@@ -18,8 +18,7 @@ const deleteSeat = async ({
   row: number;
   seat: number;
 }) => {
-  if (order.status !== OrderStatus.UNPAID)
-    throw new OrderCannotModifyException();
+  if (order.status !== OrderStatus.TEMP) throw new OrderCannotModifyException();
 
   const reservation = await SeatReservationModel.findById(
     order.seat_reservation_id,

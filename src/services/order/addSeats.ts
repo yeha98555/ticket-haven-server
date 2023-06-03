@@ -20,8 +20,7 @@ const addSeats = async ({
   subAreaId: string;
   amount: number;
 }) => {
-  if (order.status !== OrderStatus.UNPAID)
-    throw new OrderCannotModifyException();
+  if (order.status !== OrderStatus.TEMP) throw new OrderCannotModifyException();
 
   const activity = await ActivityModel.findOne({
     _id: order.activity_id,
