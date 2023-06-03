@@ -6,6 +6,8 @@ import { User } from '@/models/user';
 import { appError } from '../appError';
 import { StatusCode } from '@/enums/statusCode';
 import SeatReservationModel from '@/models/seatReservation';
+import { OrderStatus } from '@/enums/orderStatus';
+import { OrderCannotModifyException } from '@/exceptions/OrderCannotModify';
 
 const RespondType = 'JSON';
 const {
@@ -85,6 +87,8 @@ const payment = async (userId: string, orderNo: string) => {
     .populate<{ activity_id: Activity }>('activity_id', 'name start_at');
 
   if (!order) throw new NotFoundException();
+  if (order.status !== OrderStatus.UNPAID)
+    throw new OrderCannotModifyException();
 
   // Calculate the number of tickets
   const seatReservation = await SeatReservationModel.findById(
@@ -98,6 +102,7 @@ const payment = async (userId: string, orderNo: string) => {
     TimeStamp: Math.floor(Date.now() / 1000),
     Email: order.user_id.email,
     Amt: order.price,
+    Version: NEWEBPAY_VERSION,
     ItemDesc: formatDesc(
       order.activity_id.name,
       ticketCount,
@@ -109,9 +114,10 @@ const payment = async (userId: string, orderNo: string) => {
   const shaEncrypt = createShaEncrypt(aesEncrypt);
 
   return {
-    paymentData,
-    aesEncrypt,
-    shaEncrypt,
+    ...paymentData,
+    MerchantID: NEWEBPAY_MERCHANT_ID,
+    TradeInfo: aesEncrypt,
+    TradeSha: shaEncrypt,
   };
 };
 
