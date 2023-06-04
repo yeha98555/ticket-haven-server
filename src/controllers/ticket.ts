@@ -14,6 +14,11 @@ const ticketController = {
     });
     res.json(Body.success(tickets).pagination(pagination));
   }),
+  createTicketCode: catchAsyncError(async (req: Request, res: Response) => {
+    const { ticketNo } = req.body;
+    const code = await ticketService.createTicketCode(ticketNo);
+    res.json(Body.success(code));
+  }),
 };
 
 export default ticketController;

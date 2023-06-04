@@ -7,6 +7,7 @@ declare namespace NodeJS {
     MONGODB_DATABASE: string;
     MONGODB_CONNECT_STRING: string;
     JWT_SECRET: string;
+    TICKET_SECRET: string;
     LOG_FILE_DIR?: string;
     NEWEBPAY_VERSION: string;
     NEWEBPAY_MERCHANT_ID: string;
