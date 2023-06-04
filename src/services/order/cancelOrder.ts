@@ -8,8 +8,7 @@ const cancelOrder = async (userId: string, orderNo: string) => {
   const order = await OrderModel.findOne({ user_id: userId }).byNo(orderNo);
 
   if (!order) throw new NotFoundException();
-  if (order.status !== OrderStatus.UNPAID)
-    throw new OrderCannotModifyException();
+  if (order.status !== OrderStatus.TEMP) throw new OrderCannotModifyException();
 
   await SeatReservationModel.findByIdAndDelete(order.seat_reservation_id);
   await order.deleteOne();
