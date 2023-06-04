@@ -13,5 +13,12 @@ declare namespace NodeJS {
     GOOGLE_REDIRECT_URL: string;
     GOOGLE_AUTH_REFRESH_TOKEN: string;
     USER_MAIL: string;
+    NEWEBPAY_VERSION: string;
+    NEWEBPAY_MERCHANT_ID: string;
+    NEWEBPAY_HASH_KEY: string;
+    NEWEBPAY_HASH_IV: string;
+    NEWEBPAY_RETURN_URL: string;
+    NEWEBPAY_NOTIFY_URL: string;
+    PAYMENT_RETURN_URL: string;
   }
 }

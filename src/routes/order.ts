@@ -1,13 +1,21 @@
 import { Router } from 'express';
 import { isAuth } from '@/middleware/auth';
-import orderController from '@/controllers/order';
+import orderController, { validations } from '@/controllers/order';
 import {
+  processRequestQuery,
   validateRequestBody,
   validateRequestParams,
 } from '@/middleware/paramsValidator';
 import { z } from 'zod';
 
 const orderRouter = Router();
+
+orderRouter.get(
+  '/',
+  isAuth,
+  processRequestQuery<any>(validations.getOrders),
+  orderController.getOrders,
+);
 
 orderRouter.get(
   '/:orderNo',
@@ -74,5 +82,17 @@ orderRouter.post(
   ),
   orderController.paymentNotify,
 );
+
+orderRouter.post(
+  '/payment_return',
+  validateRequestBody(
+    z.object({
+      TradeInfo: z.string(),
+    }),
+  ),
+  orderController.paymentReturn,
+);
+
+orderRouter.delete('/:orderNo', isAuth, orderController.cancelOrder);
 
 export default orderRouter;

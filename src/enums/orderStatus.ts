@@ -1,6 +1,5 @@
 export enum OrderStatus {
-  UNPAID,
-  PAID,
+  TEMP,
+  SUCCESS,
   CANCELLED,
-  FAIL
 }
