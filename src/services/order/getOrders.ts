@@ -82,7 +82,7 @@ const getOrders = async ({
           from: 'activities',
           localField: 'activity_id',
           foreignField: '_id',
-          as: 'activity',
+          as: 'activities',
         },
       },
       {
