@@ -1,6 +1,6 @@
 import { Region } from '@/enums/region';
 import toValidate from '@/utils/toValidate';
-import { InferSchemaType, ObjectId, Schema, Types, model } from 'mongoose';
+import { InferSchemaType, Schema, Types, model } from 'mongoose';
 import { z } from 'zod';
 
 const subAreaSchema = new Schema({
