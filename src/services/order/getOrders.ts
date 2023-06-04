@@ -82,7 +82,7 @@ const getOrders = async ({
           from: 'activities',
           localField: 'activity_id',
           foreignField: '_id',
-          as: 'activity',
+          as: 'activities',
         },
       },
       {
@@ -109,16 +109,24 @@ const getOrders = async ({
   const totalPages = Math.floor(totalCount / pageSize) || 1;
 
   const data = orders.map((o) => {
-    const { order_no, price, status, activity, seats, create_at } = o;
+    const { _id, order_no, price, status, activity, seats, create_at } = o;
     const { name, location, address, areas } = activity;
+    const event = activity.events.find((e) => e._id?.equals(o.event_id));
     return {
-      name,
+      id: _id,
       orderNo: order_no,
-      location,
-      address,
       status,
       price,
       createAt: create_at,
+      activity: {
+        id: activity._id,
+        name,
+        location,
+        address,
+        eventId: event?._id,
+        eventStartTime: event?.start_at,
+        eventEndTime: event?.end_at,
+      },
       seats: seats.map((t) => {
         const subArea = areas
           .find((a) => a._id?.equals(t.area_id))
