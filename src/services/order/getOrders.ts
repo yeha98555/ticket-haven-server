@@ -1,37 +1,139 @@
-import { NotFoundException } from '@/exceptions/NotFoundException';
-import OrderModel from '@/models/order';
+import OrderModel, { Order } from '@/models/order';
 import { Activity } from '@/models/activity';
+import { OrderStatus } from '@/enums/orderStatus';
+import { Ticket } from '@/models/ticket';
+import { Types } from 'mongoose';
+import { SeatReservation } from '@/models/seatReservation';
 
-const getOrders = async (userId: string, status: string, page: number) => {
-  const onePageLimit = 5;
-  const ordersTotal = await OrderModel.countDocuments({ user_id: userId , status: status });
+const getOrders = async ({
+  userId,
+  status,
+  page,
+  pageSize,
+}: {
+  userId: string;
+  status: 'completed' | 'unpaid';
+  page: number;
+  pageSize: number;
+}) => {
+  const filter = {
+    user_id: new Types.ObjectId(userId),
+    status:
+      status === 'unpaid'
+        ? OrderStatus.TEMP
+        : { $in: [OrderStatus.SUCCESS, OrderStatus.CANCELLED] },
+  };
 
-  if(ordersTotal === 0) return { nextPage: null, totalPage: 0, orders: [] };
-  const totalPage = ordersTotal > onePageLimit ? Math.ceil(ordersTotal / onePageLimit) : 1;
+  let orders: (Order & {
+    activity: Activity;
+    seats: {
+      area_id: Types.ObjectId;
+      subarea_id: Types.ObjectId;
+      row: number;
+      seat: number;
+    }[];
+  })[];
 
-  if(page > totalPage) throw new NotFoundException();
-  const nextPage = totalPage < page ? page + 1 : null;
-  const ordersCatalog  = await OrderModel.find({ user_id: userId })
-    .skip((page - 1) * onePageLimit)
-    .limit(onePageLimit)
-    .populate<{ activity_id: Activity }>('activity_id');
-
-  const orders: object[] = [];
-
-  for(let i = 0; i < ordersCatalog.length; i++){
-    const order = ordersCatalog[i];
-    const activity = ordersCatalog[i].activity_id;
-
-    orders.push({
-      id: order._id,
-      status: order.status,
-      name: activity.name,
-      location: activity.location,
-      startTime: activity.start_at,
-    })
+  if (status === 'unpaid') {
+    orders = await OrderModel.aggregate<
+      Order & { activity: Activity; seats: SeatReservation['seats'] }
+    >([
+      { $match: filter },
+      {
+        $lookup: {
+          from: 'activities',
+          localField: 'activity_id',
+          foreignField: '_id',
+          as: 'activities',
+        },
+      },
+      {
+        $lookup: {
+          from: 'seat_reservations',
+          localField: 'seat_reservation_id',
+          foreignField: '_id',
+          as: 'seat_reservations',
+        },
+      },
+      {
+        $addFields: {
+          activity: { $first: '$activities' },
+          seats: {
+            $getField: {
+              field: 'seats',
+              input: {
+                $first: '$seat_reservations',
+              },
+            },
+          },
+        },
+      },
+    ])
+      .sort({ create_at: -1 })
+      .skip((page - 1) * pageSize)
+      .limit(pageSize);
+  } else {
+    orders = await OrderModel.aggregate<
+      Order & { activity: Activity; seats: Ticket[] }
+    >([
+      { $match: filter },
+      {
+        $lookup: {
+          from: 'activities',
+          localField: 'activity_id',
+          foreignField: '_id',
+          as: 'activity',
+        },
+      },
+      {
+        $lookup: {
+          from: 'tickets',
+          localField: '_id',
+          foreignField: 'order_id',
+          as: 'seats',
+        },
+      },
+      {
+        $addFields: {
+          activity: { $first: '$activities' },
+        },
+      },
+    ])
+      .sort({ create_at: -1 })
+      .skip((page - 1) * pageSize)
+      .limit(pageSize);
   }
 
-  return { nextPage, totalPage, orders };
+  const totalCount = await OrderModel.countDocuments(filter);
+
+  const totalPages = Math.floor(totalCount / pageSize) || 1;
+
+  const data = orders.map((o) => {
+    const { order_no, price, status, activity, seats, create_at } = o;
+    const { name, location, address, areas } = activity;
+    return {
+      name,
+      orderNo: order_no,
+      location,
+      address,
+      status,
+      price,
+      createAt: create_at,
+      seats: seats.map((t) => {
+        const subArea = areas
+          .find((a) => a._id?.equals(t.area_id))
+          ?.subareas.find((sa) => sa._id?.equals(t.subarea_id));
+        return {
+          subAreaId: t.subarea_id,
+          subAreaName: subArea?.name,
+          row: t.row,
+          seat: t.seat,
+        };
+      }),
+    };
+  });
+
+  return { data, page, pageSize, totalPages, totalCount };
 };
 
 export default getOrders;

@@ -37,7 +37,7 @@ const paymentNotify = async (tradeInfo: string) => {
 
   // Ensure info.Result.Status is not undefined
   const status =
-    info.Status === 'SUCCESS' ? OrderStatus.PAID : OrderStatus.FAIL;
+    info.Status === 'SUCCESS' ? OrderStatus.SUCCESS : OrderStatus.TEMP;
 
   const order = await OrderModel.findOne({}).byNo(info);
 

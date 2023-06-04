@@ -4,12 +4,30 @@ import newebService from '@/services/neweb';
 import orderService from '@/services/order';
 import catchAsyncError from '@/utils/catchAsyncError';
 import { Body } from '@/utils/response';
+import { z } from 'zod';
+
+export const validations = {
+  getOrders: z.object({
+    page: z.coerce.number().min(1),
+    pageSize: z.coerce.number().min(1),
+    status: z.union([z.literal('completed'), z.literal('unpaid')]),
+  }),
+};
 
 const orderController = {
-  getOrders: catchAsyncError(async(req, res) => {
-    const { page } = req.query;
-    const orders = await orderService.getOrders(req.userId!, req.params.status, Number(page));
-    res.json(Body.success(orders));
+  getOrders: catchAsyncError(async (req, res) => {
+    const { page, pageSize, status } = req.query as unknown as z.infer<
+      typeof validations.getOrders
+    >;
+
+    const { data, ...pagination } = await orderService.getOrders({
+      userId: req.userId!,
+      status,
+      page,
+      pageSize,
+    });
+
+    res.json(Body.success(data).pagination(pagination));
   }),
   getOrderInfo: catchAsyncError(async (req, res) => {
     const order = await orderService.getOrderInfo(
