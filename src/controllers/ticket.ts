@@ -16,7 +16,7 @@ const ticketController = {
   }),
   createTicketCode: catchAsyncError(async (req: Request, res: Response) => {
     const { ticketNo } = req.body;
-    const code = ticketService.createTicketCode(ticketNo);
+    const code = ticketService.createTicketCode(req.userId!, ticketNo);
     res.json(Body.success(code));
   }),
 };
