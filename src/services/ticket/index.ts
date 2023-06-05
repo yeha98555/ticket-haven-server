@@ -1,11 +1,12 @@
 import createTicketNo from './createTicketNo';
 import getAllTickets from './getAllTickets';
-import createTicketCode from './createTicketCode';
+import checkingToken from './checkingToken';
 
 const ticketService = {
   getAllTickets,
   createTicketNo,
-  createTicketCode,
+  createTicketCode: checkingToken.create,
+  decodeTicketCode: checkingToken.decode,
 };
 
 export default ticketService;
