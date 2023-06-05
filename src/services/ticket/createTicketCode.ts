@@ -6,7 +6,7 @@ const createTicketCode = async (userId: string, ticketNo: string) => {
   const ticket = await TicketModel.findOne({
     ticket_no: ticketNo,
     user_id: userId,
-  });
+  }).select(['_id', 'token']);
 
   if (!ticket) throw new NotFoundException();
 
@@ -16,20 +16,17 @@ const createTicketCode = async (userId: string, ticketNo: string) => {
   const token = checkingToken.create(ticketNo);
 
   // Save to database
-  await TicketModel.updateOne(
-    {
-      ticket_no: ticketNo,
-      user_id: userId,
-    },
-    {
-      token: token,
-    },
+  const ticketUpdated = await TicketModel.findByIdAndUpdate(
+    ticket._id,
+    { token: token },
     {
       runValidators: true,
     },
-  );
+  ).select(['token']);
 
-  return token;
+  return {
+    token: ticketUpdated?.token,
+  };
 };
 
 export default createTicketCode;
