@@ -8,7 +8,7 @@ const ticketRouter = Router();
 
 ticketRouter.get('/', isAuth, ticketController.getTickets);
 ticketRouter.post(
-  '/ticketCode',
+  '/qrcode',
   validateRequestBody(
     z.object({
       ticketNo: z.string(),
