@@ -39,16 +39,12 @@ const paymentNotify = async (tradeInfo: string) => {
   const status =
     info.Status === 'SUCCESS' ? OrderStatus.SUCCESS : OrderStatus.TEMP;
 
-  const order = await OrderModel.findOne({}).byNo(info);
+  const order = await OrderModel.findOne({}).byNo(info.Result.MerchantOrderNo);
 
   const seatReservation = await SeatReservationModel.findById(
     order?.seat_reservation_id,
   );
   const seats = seatReservation?.seats;
-
-  order!.status = status;
-
-  await order?.save();
 
   const activity = await ActivityModel.findById(order?.activity_id);
 
@@ -77,6 +73,11 @@ const paymentNotify = async (tradeInfo: string) => {
   );
 
   await seatReservation?.deleteOne();
+
+  order!.status = status;
+  order!.seat_reservation_id = undefined;
+
+  await order?.save();
 
   // TODO: Save the payment info to neweb_paymethods
   // info.Result.PayTime
