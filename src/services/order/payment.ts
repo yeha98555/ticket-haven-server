@@ -93,6 +93,7 @@ const payment = async (userId: string, orderNo: string) => {
   const seatReservation = await SeatReservationModel.findById(
     order.seat_reservation_id,
   );
+
   const ticketCount = seatReservation!.seats.length;
 
   const paymentData = {
