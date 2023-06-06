@@ -2,7 +2,9 @@ import { NotFoundException } from '@/exceptions/NotFoundException';
 import { Activity } from '@/models/activity';
 import OrderModel from '@/models/order';
 import SeatReservationModel from '@/models/seatReservation';
+import TicketModel from '@/models/ticket';
 import { User } from '@/models/user';
+import { Types } from 'mongoose';
 
 const getOrderInfo = async (userId: string, orderNo: string) => {
   const order = await OrderModel.findOne({
@@ -18,21 +20,49 @@ const getOrderInfo = async (userId: string, orderNo: string) => {
     e._id?.equals(order.event_id),
   );
 
-  const reservation = await SeatReservationModel.findById(
-    order.seat_reservation_id,
-  );
-  const seats = (reservation?.seats || []).map((s) => {
-    const area = order.activity_id.areas.find((a) => a._id?.equals(s.area_id));
-    const subArea = area?.subareas.find((a) => a._id?.equals(s.subarea_id));
+  let seats: {
+    subAreaId: Types.ObjectId;
+    subAreaName: string;
+    price: number;
+    row: number;
+    seat: number;
+  }[] = [];
 
-    return {
-      subAreaId: s.subarea_id,
-      subAreaName: subArea?.name,
-      price: area?.price,
-      row: s.row,
-      seat: s.seat,
-    };
-  });
+  if (order.seat_reservation_id) {
+    const reservation = await SeatReservationModel.findById(
+      order.seat_reservation_id,
+    );
+    seats = reservation!.seats.map((s) => {
+      const area = order.activity_id.areas.find((a) =>
+        a._id?.equals(s.area_id),
+      );
+      const subArea = area!.subareas.find((a) => a._id?.equals(s.subarea_id));
+
+      return {
+        subAreaId: s.subarea_id,
+        subAreaName: subArea!.name,
+        price: area!.price,
+        row: s.row,
+        seat: s.seat,
+      };
+    });
+  } else {
+    const tickets = await TicketModel.find({ order_id: order._id });
+    seats = tickets.map((t) => {
+      const area = order.activity_id.areas.find((a) =>
+        a._id?.equals(t.area_id),
+      );
+      const subArea = area!.subareas.find((a) => a._id?.equals(t.subarea_id));
+
+      return {
+        subAreaId: t.subarea_id,
+        subAreaName: subArea!.name,
+        price: t.price,
+        row: t.row,
+        seat: t.seat,
+      };
+    });
+  }
 
   return {
     id: order._id,
