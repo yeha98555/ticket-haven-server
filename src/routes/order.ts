@@ -57,7 +57,6 @@ orderRouter.delete(
   isAuth,
   validateRequestBody(
     z.object({
-      areaId: z.string(),
       subAreaId: z.string(),
       row: z.number(),
       seat: z.number(),
