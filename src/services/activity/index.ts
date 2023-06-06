@@ -63,6 +63,7 @@ const activityService = {
       content: activity.content,
       notice: activity.notice,
       seatMapUrl: activity.seat_big_img_url,
+      selectSeatImageUrl: activity.seat_small_img_url,
       events: returnEvents,
     };
   },
