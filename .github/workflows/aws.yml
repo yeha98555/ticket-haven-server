@@ -28,7 +28,7 @@ jobs:
 
     - name: Create deployment package
       if: ${{ success() && github.event_name == 'push' }}
-      run: zip -r deploy.zip . -x ".git/*" -x ".github/*" -x ".vscode/*" -x ".hursky/*" -x ".mock/*" -x ".__test__/*"
+      run: zip -r deploy.zip . -x ".git/*" -x ".github/*" -x ".vscode/*" -x ".hursky/*" -x "mock/*" -x "__test__/*"
 
     - name: Deploy to AWS
       if: ${{ success() && github.event_name == 'push' }}

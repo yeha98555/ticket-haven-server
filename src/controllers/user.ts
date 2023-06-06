@@ -2,29 +2,29 @@ import userService from '@/services/user';
 import catchAsyncError from '@/utils/catchAsyncError';
 import { Body } from '@/utils/response';
 import { Request, Response, NextFunction } from 'express';
+import { appError } from '@/services/appError';
+import { StatusCode } from '@/enums/statusCode';
 import { decamelizeKeys } from 'humps';
 
 const userController = {
-  signup: async (req: Request, res: Response) => {
+  signup: catchAsyncError(async (req: Request, res: Response, next: NextFunction,) => {
     try {
-      const result = await userService.signup(req.body);
-      res.status(result.status);
-      res.send(result);
+      const isSignup = await userService.signup(req.body);
+      if(!isSignup) throw appError(400, StatusCode.FAIL, 'User already exists');
+      res.status(200).json(Body.success(''));
     } catch (error) {
-      res.status(500);
-      res.send({ message: '好像哪裡出錯了!' });
+      next(error);
     }
-  },
-  signin: async (req: Request, res: Response) => {
+  }),
+  signin: catchAsyncError(async (req: Request, res: Response, next: NextFunction,) => {
     try {
-      const result = await userService.signin(req.body);
-      res.status(result.status);
-      res.send(result);
+      const token = await userService.signin(req.body);
+      if(!token) throw appError(400, StatusCode.FAIL, 'Invalid request');
+      res.status(200).json(Body.success({token}));
     } catch (error) {
-      res.status(500);
-      res.send({ message: '好像哪裡出錯了!' });
+      next(error);
     }
-  },
+  }),
 
   getUser: catchAsyncError(async (req: Request, res: Response) => {
     const user = await userService.findUserById(req.userId!);

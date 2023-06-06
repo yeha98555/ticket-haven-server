@@ -5,5 +5,7 @@ declare module 'mongoose' {
     toJSON<T = Require_id<DocType>>(
       options?: ToObjectOptions & { camelize?: boolean },
     ): FlattenMaps<T>;
+    create_at?: Date;
+    update_at?: Date;
   }
 }

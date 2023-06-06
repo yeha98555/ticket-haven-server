@@ -3,7 +3,8 @@ import toValidate from '@/utils/toValidate';
 import { Schema, model } from 'mongoose';
 import z from 'zod';
 
-export interface IUser {
+export interface User {
+  _id: Schema.Types.ObjectId;
   g_uid?: string;
   username: string;
   email: string;
@@ -20,11 +21,11 @@ export interface IUser {
   delete_at?: Date;
 }
 
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema<User>(
   {
     g_uid: String,
     username: {
-      type:String,
+      type: String,
       required: [true, 'username invalid'],
     },
     email: {
@@ -45,7 +46,7 @@ const userSchema = new Schema<IUser>(
       default: false,
     },
     password: {
-      type:String,
+      type: String,
       required: [true, 'password invalid'],
     },
     bank_code: String,
@@ -63,6 +64,6 @@ const userSchema = new Schema<IUser>(
   },
 );
 
-const UserModel = model<IUser>('user', userSchema);
+const UserModel = model<User>('user', userSchema);
 
 export default UserModel;

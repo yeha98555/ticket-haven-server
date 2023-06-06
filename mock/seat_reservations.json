@@ -1,0 +1,88 @@
+[
+  {
+    "_id": {
+      "$oid": "6468a29579910b936877c194"
+    },
+    "activity_id": {
+      "$oid": "61697b11c0cb54d45f7c8dcb"
+    },
+    "event_id": {
+      "$oid": "6466812d6a4040db3709fc08"
+    },
+    "seats": [
+      {
+        "area_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dc"
+        },
+        "row": 1,
+        "seat": 2,
+        "subarea_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dd"
+        }
+      },
+      {
+        "area_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dc"
+        },
+        "row": 1,
+        "seat": 3,
+        "subarea_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dd"
+        }
+      },
+      {
+        "area_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dc"
+        },
+        "row": 1,
+        "seat": 4,
+        "subarea_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dd"
+        }
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "6468a29579910b936877c195"
+    },
+    "activity_id": {
+      "$oid": "61697b11c0cb54d45f7c8dcb"
+    },
+    "event_id": {
+      "$oid": "6466812d6a4040db3709fc08"
+    },
+    "seats": [
+      {
+        "area_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dc"
+        },
+        "row": 1,
+        "seat": 1,
+        "subarea_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dd"
+        }
+      },
+      {
+        "area_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dc"
+        },
+        "row": 1,
+        "seat": 5,
+        "subarea_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dd"
+        }
+      },
+      {
+        "area_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dc"
+        },
+        "row": 1,
+        "seat": 6,
+        "subarea_id": {
+          "$oid": "646780cb2d0f3b114c2ee2dd"
+        }
+      }
+    ]
+  }
+]
