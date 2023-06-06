@@ -44,7 +44,7 @@ const headers = {
  *                   type: string
  *                   example: Welcome to the API
  */
-router.get('/', (req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
   res.writeHead(200, headers);
   res.write(
     JSON.stringify({

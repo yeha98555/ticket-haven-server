@@ -3,11 +3,26 @@ import { Router } from 'express';
 import z from 'zod';
 import { Gender } from '@/enums/gender';
 import { isAuth } from '@/middleware/auth';
-import { validateRequest } from '@/middleware/paramsValidator';
+import {
+  validateRequest,
+  validateRequestParams,
+} from '@/middleware/paramsValidator';
 
 const userRouter = Router();
 
 userRouter.post('/signup', userController.signup);
+
+userRouter.get(
+  '/send-verification/email',
+  isAuth,
+  userController.sendVerificationEmail,
+);
+
+userRouter.get(
+  '/verify/:token',
+  validateRequestParams(z.object({ token: z.string() })),
+  userController.verify,
+);
 
 userRouter.post('/signin', userController.signin);
 
