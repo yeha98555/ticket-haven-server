@@ -7,23 +7,21 @@ import { StatusCode } from '@/enums/statusCode';
 import { decamelizeKeys } from 'humps';
 
 const userController = {
-  signup: catchAsyncError(async (req: Request, res: Response, next: NextFunction,) => {
-    try {
-      const isSignup = await userService.signup(req.body);
-      if(!isSignup) throw appError(400, StatusCode.FAIL, 'User already exists');
-      res.status(200).json(Body.success(''));
-    } catch (error) {
-      next(error);
-    }
-  }),
-  signin: catchAsyncError(async (req: Request, res: Response, next: NextFunction,) => {
-    try {
-      const token = await userService.signin(req.body);
-      if(!token) throw appError(400, StatusCode.FAIL, 'Invalid request');
-      res.status(200).json(Body.success({token}));
-    } catch (error) {
-      next(error);
-    }
+  signup: catchAsyncError(
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const isSignup = await userService.signup(req.body);
+        if (!isSignup)
+          throw appError(400, StatusCode.FAIL, 'User already exists');
+        res.status(200).json(Body.success(''));
+      } catch (error) {
+        next(error);
+      }
+    },
+  ),
+  signin: catchAsyncError(async (req: Request, res: Response) => {
+    const token = await userService.signin(req.body);
+    res.json(Body.success({ token }));
   }),
 
   getUser: catchAsyncError(async (req: Request, res: Response) => {
