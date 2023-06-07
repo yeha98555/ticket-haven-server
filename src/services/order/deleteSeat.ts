@@ -7,13 +7,11 @@ import { HydratedDocument } from 'mongoose';
 
 const deleteSeat = async ({
   order,
-  areaId,
   subAreaId,
   row,
   seat,
 }: {
   order: Pick<HydratedDocument<Order>, 'status' | 'seat_reservation_id'>;
-  areaId: string;
   subAreaId: string;
   row: number;
   seat: number;
@@ -31,12 +29,7 @@ const deleteSeat = async ({
     'seats',
     reservation.seats.filter(
       (s) =>
-        !(
-          s.area_id.equals(areaId) &&
-          s.subarea_id.equals(subAreaId) &&
-          s.row === row &&
-          s.seat === seat
-        ),
+        !(s.subarea_id.equals(subAreaId) && s.row === row && s.seat === seat),
     ),
   );
 
