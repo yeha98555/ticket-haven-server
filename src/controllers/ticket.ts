@@ -15,7 +15,7 @@ const ticketController = {
     res.json(Body.success(tickets).pagination(pagination));
   }),
   createTicketCode: catchAsyncError(async (req: Request, res: Response) => {
-    const { ticketNo } = req.body;
+    const { ticketNo } = req.params;
     const token = await ticketService.createTicketCode(req.userId!, ticketNo);
     res.json(Body.success(token));
   }),

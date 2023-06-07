@@ -1,20 +1,10 @@
 import { Router } from 'express';
 import { isAuth } from '@/middleware/auth';
-import { validateRequestBody } from '@/middleware/paramsValidator';
-import { z } from 'zod';
 import ticketController from '@/controllers/ticket';
 
 const ticketRouter = Router();
 
 ticketRouter.get('/', isAuth, ticketController.getTickets);
-ticketRouter.post(
-  '/qrcode',
-  validateRequestBody(
-    z.object({
-      ticketNo: z.string(),
-    }),
-  ),
-  ticketController.createTicketCode,
-);
+ticketRouter.post('/:ticketNo/qrcode', ticketController.createTicketCode);
 
 export default ticketRouter;
