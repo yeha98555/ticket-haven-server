@@ -1,9 +1,9 @@
 import TicketModel from '@/models/ticket';
-import checkingToken from './checkingToken';
+import checkInToken from './checkInToken';
 import { NotFoundException } from '@/exceptions/NotFoundException';
 import { ConflictException } from '@/exceptions/Conflict';
 
-const createTicketCode = async (userId: string, ticketNo: string) => {
+const generateCheckInToken = async (userId: string, ticketNo: string) => {
   const ticket = await TicketModel.findOne({
     ticket_no: ticketNo,
     user_id: userId,
@@ -14,7 +14,7 @@ const createTicketCode = async (userId: string, ticketNo: string) => {
   if (ticket.is_used) throw new ConflictException('票卷已使用');
 
   // Create token
-  const token = checkingToken.create(ticketNo);
+  const token = checkInToken.create(ticketNo);
 
   // Save to database
   ticket.token = token;
@@ -23,4 +23,4 @@ const createTicketCode = async (userId: string, ticketNo: string) => {
   return token;
 };
 
-export default createTicketCode;
+export default generateCheckInToken;

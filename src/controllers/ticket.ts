@@ -2,6 +2,7 @@ import catchAsyncError from '@/utils/catchAsyncError';
 import ticketService from '@/services/ticket';
 import { Body } from '@/utils/response';
 import { Request, Response } from 'express';
+import checkInService from '@/services/checkIn';
 
 const ticketController = {
   getTickets: catchAsyncError(async (req: Request, res: Response) => {
@@ -14,9 +15,12 @@ const ticketController = {
     });
     res.json(Body.success(tickets).pagination(pagination));
   }),
-  createTicketCode: catchAsyncError(async (req: Request, res: Response) => {
+  checkInToken: catchAsyncError(async (req: Request, res: Response) => {
     const { ticketNo } = req.params;
-    const token = await ticketService.createTicketCode(req.userId!, ticketNo);
+    const token = await checkInService.generateCheckInToken(
+      req.userId!,
+      ticketNo,
+    );
     res.json(Body.success(token));
   }),
 };

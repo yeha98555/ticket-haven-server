@@ -5,6 +5,10 @@ import ticketController from '@/controllers/ticket';
 const ticketRouter = Router();
 
 ticketRouter.get('/', isAuth, ticketController.getTickets);
-ticketRouter.post('/:ticketNo/qrcode', ticketController.createTicketCode);
+ticketRouter.post(
+  '/:ticketNo/check-in-token',
+  isAuth,
+  ticketController.checkInToken,
+);
 
 export default ticketRouter;
