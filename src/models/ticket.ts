@@ -17,6 +17,7 @@ const ticketSchema = new Schema(
     seat: { type: Number, required: true },
     price: { type: Number, required: true },
     is_used: { type: Boolean, default: false },
+    token: { type: String },
   },
   {
     timestamps: {
