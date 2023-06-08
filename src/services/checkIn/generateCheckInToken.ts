@@ -2,14 +2,17 @@ import TicketModel from '@/models/ticket';
 import checkInToken from './checkInToken';
 import { NotFoundException } from '@/exceptions/NotFoundException';
 import { ConflictException } from '@/exceptions/Conflict';
+import { Order } from '@/models/order';
+import UserModel from '@/models/user';
 
 const generateCheckInToken = async (userId: string, ticketNo: string) => {
   const ticket = await TicketModel.findOne({
     ticket_no: ticketNo,
-    user_id: userId,
-  }).select(['_id', 'token', 'is_used']);
+  }).populate<{ order_id: Order }>('order_id');
 
-  if (!ticket) throw new NotFoundException();
+  const isOwner = await UserModel.findById(ticket?.order_id.user_id);
+
+  if (!ticket || !isOwner) throw new NotFoundException();
 
   if (ticket.is_used) throw new ConflictException('票卷已使用');
 

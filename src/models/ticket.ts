@@ -3,8 +3,12 @@ import { InferSchemaType, Schema, model } from 'mongoose';
 const ticketSchema = new Schema(
   {
     ticket_no: { type: String, required: true, unique: true },
-    order_id: { type: Schema.Types.ObjectId, required: true },
-    original_order_id: { type: Schema.Types.ObjectId, required: true },
+    order_id: { type: Schema.Types.ObjectId, required: true, ref: 'order' },
+    original_order_id: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'order',
+    },
     activity_id: {
       type: Schema.Types.ObjectId,
       required: true,
