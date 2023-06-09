@@ -1,4 +1,5 @@
 import { createCipheriv, createDecipheriv, createHash } from 'crypto';
+import { add, isAfter } from 'date-fns';
 
 const algorithm = 'aes-192-cbc';
 const keyLength = 24;
@@ -51,6 +52,25 @@ const checkInToken = {
   decode(token: string) {
     const json = decrypt(token);
     return JSON.parse(json) as CheckingTokenPayload;
+  },
+  verify(token: string) {
+    let tokenPayload: CheckingTokenPayload;
+    try {
+      tokenPayload = this.decode(token);
+    } catch (error) {
+      return false;
+    }
+
+    const { timestamp } = tokenPayload;
+
+    const expireTime = add(new Date(timestamp), {
+      minutes: 15,
+    });
+    const isExpired = isAfter(new Date(), expireTime);
+
+    if (isExpired) return false;
+
+    return tokenPayload;
   },
 };
 

@@ -15,6 +15,14 @@ const checkInController = {
     );
     res.json(Body.success(checkInInfo));
   }),
+  checkIn: catchAsyncError(async (req: Request, res: Response) => {
+    const { inspectorToken, ticketToken } = req.body as {
+      inspectorToken: string;
+      ticketToken: string;
+    };
+    const result = await checkInService.checkIn(inspectorToken, ticketToken);
+    res.json(Body.success(result));
+  }),
 };
 
 export default checkInController;

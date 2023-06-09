@@ -1,6 +1,5 @@
 import ActivityModel from '@/models/activity';
-import checkInToken, { CheckingTokenPayload } from './checkInToken';
-import { add, isAfter } from 'date-fns';
+import checkInToken from './checkInToken';
 import { NotFoundException } from '@/exceptions/NotFoundException';
 import { ConflictException } from '@/exceptions/Conflict';
 import TicketModel from '@/models/ticket';
@@ -18,21 +17,11 @@ const getCheckInInfo = async (inspectorToken: string, ticketToken: string) => {
 
   if (!activity || !event) throw new NotFoundException();
 
-  let tokenPayload: CheckingTokenPayload;
-  try {
-    tokenPayload = checkInToken.decode(ticketToken);
-  } catch (error) {
-    throw new NotFoundException();
-  }
+  const tokenPayload = checkInToken.verify(ticketToken);
 
-  const { ticketNo, timestamp } = tokenPayload;
+  if (!tokenPayload) throw new ConflictException();
 
-  const expireTime = add(new Date(timestamp), {
-    minutes: 15,
-  });
-  const isExpired = isAfter(new Date(), expireTime);
-
-  if (isExpired) throw new ConflictException();
+  const { ticketNo } = tokenPayload;
 
   const ticket = await TicketModel.findOne({
     event_id: event._id,
