@@ -1,10 +1,10 @@
 import generateCheckInToken from './generateCheckInToken';
-import generateVerifyToken from './generateVerifyToken';
+import generateInspectorToken from './generateInspectorToken';
 import getCheckInInfo from './getCheckInInfo';
 
 const checkInService = {
   generateCheckInToken,
-  generateVerifyToken,
+  generateInspectorToken,
   getCheckInInfo,
 };
 

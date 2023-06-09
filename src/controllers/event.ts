@@ -8,8 +8,10 @@ const eventController = {
     const seats = await eventService.getSeatInfo(req.params.eventId);
     res.json(Body.success(seats));
   }),
-  generateCheckInVerifyToken: catchAsyncError(async (req, res) => {
-    const token = await checkInService.generateVerifyToken(req.params.eventId);
+  generateInspectorToken: catchAsyncError(async (req, res) => {
+    const token = await checkInService.generateInspectorToken(
+      req.params.eventId,
+    );
     res.json(Body.success(token));
   }),
 };

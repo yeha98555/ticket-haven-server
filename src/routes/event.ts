@@ -12,8 +12,8 @@ eventRouter.get(
 );
 
 eventRouter.post(
-  '/:eventId/check-in-verify-token',
-  eventController.generateCheckInVerifyToken,
+  '/:eventId/check-in-inspector-token',
+  eventController.generateInspectorToken,
 );
 
 export default eventRouter;
