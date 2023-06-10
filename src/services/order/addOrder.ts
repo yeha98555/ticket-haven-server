@@ -1,13 +1,17 @@
+import { Types } from 'mongoose';
+import * as d from 'date-fns';
+
 import { NotFoundException } from '@/exceptions/NotFoundException';
 import ActivityModel from '@/models/activity';
 import OrderModel from '@/models/order';
-
-import { Types } from 'mongoose';
-import createOrderNo from './createOrderNo';
 import UserModel from '@/models/user';
-import * as d from 'date-fns';
 import { EventNotOnSaleException } from '@/exceptions/EventNotOnSale';
+import { redis } from '@/connections/redis';
 import reserveSeats from '../reserveSeats';
+import createOrderNo from './createOrderNo';
+import { key } from '../../orderExpireSubscriber';
+
+const orderExpireTime = 1200; // seconds
 
 const addOrder = async (
   userId: string,
@@ -64,6 +68,8 @@ const addOrder = async (
     throw error;
   }
 
+  setOrderExpireEvent(order._id.toString(), orderExpireTime);
+
   const user = await UserModel.findById(userId);
 
   return {
@@ -95,5 +101,11 @@ const addOrder = async (
     })),
   };
 };
+
+function setOrderExpireEvent(orderId: string, expire: number) {
+  const k = key(orderId);
+  redis.set(k, '');
+  redis.expire(k, expire);
+}
 
 export default addOrder;
