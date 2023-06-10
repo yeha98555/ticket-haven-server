@@ -20,6 +20,7 @@ type GroupTickets = PartActivity & {
   orderId: string;
   eventId: string;
   activityId: string;
+  coverImageUrl: string;
   tickets: Ticket[];
 };
 
@@ -69,7 +70,7 @@ const getAllTickets = async ({
     event_id: { $in: eventNumbers },
   }).populate<{ activity_id: Activity }>(
     'activity_id',
-    'name address start_at end_at events',
+    'name address start_at end_at events cover_img_url',
   );
 
   const groupTickets = tickets.reduce<GroupTickets[]>((result, item) => {
@@ -79,7 +80,7 @@ const getAllTickets = async ({
       (g) =>
         String(orderId) === g.orderId && String(activityId) === g.activityId,
     );
-
+    console.log(item);
     const ticket = {
       isShare: String(item.order_id) !== String(item.original_order_id),
       isUsed: item.is_used,
@@ -97,6 +98,7 @@ const getAllTickets = async ({
         orderId: String(item.order_id),
         eventId: String(item.event_id),
         activityId: String(item.activity_id._id),
+        coverImageUrl: String(item.activity_id.cover_img_url),
         name: item.activity_id.name,
         startAt: String(targetEvent?.start_at.toISOString()),
         endAt: String(targetEvent?.end_at.toISOString()),
@@ -111,7 +113,7 @@ const getAllTickets = async ({
   // page
   const totalPages = Math.ceil(groupTickets.length / pageSize);
   const skipCount = (page - 1) * pageSize;
-  const data = groupTickets.slice(skipCount * pageSize, pageSize);
+  const data = groupTickets.slice(skipCount, page * pageSize);
 
   return {
     page,
