@@ -11,6 +11,7 @@ import uuid
 from bson.objectid import ObjectId
 from pymongo import MongoClient
 import re
+import platform
 
 # env variables
 load_dotenv()
@@ -21,9 +22,6 @@ COLLECTION = os.getenv("MONGODB_COLLECTION")
 # constants
 BASE_URL = 'https://tixcraft.com'
 ACTIVITY_URL = BASE_URL + '/activity'
-HREADERS = {
-    "user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
-}
 FIRM_ID = '61697b11c0cb54d45f7c8dcb'
 EXTEND_DAYS = 30  # 將開始時間往後延長幾天(活動、場次和售票時間都會延長)
 
@@ -34,6 +32,23 @@ taipei = pytz.timezone('Asia/Taipei')
 client = MongoClient(CLIENT)
 db = client[DB]
 collection = db[COLLECTION]
+
+def get_headers():
+    system = platform.system()
+    user_agent = ""
+
+    if system == "Windows":
+        user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+    elif system == "Darwin":  # Mac OS X
+        user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+    elif system == "Linux":
+        user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+    else:
+        user_agent = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/5.0)"
+
+    return {"user-agent": user_agent}
+
+HREADERS = get_headers()
 
 def convert_date_to_iso(date_string: str, end_of_day: bool=False):
     date_format = '%Y/%m/%d'
