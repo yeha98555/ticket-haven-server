@@ -12,6 +12,7 @@ from bson.objectid import ObjectId
 from pymongo import MongoClient
 import re
 import platform
+import time
 
 # env variables
 load_dotenv()
@@ -326,6 +327,7 @@ def add_or_update_activities():
             print(data['name'] + ", new document was inserted...")
 
         count += 1
+        time.sleep(3)
         # break
 
     print('Add or update all activities: ', count)
