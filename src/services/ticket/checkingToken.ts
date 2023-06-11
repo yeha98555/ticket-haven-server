@@ -1,12 +1,17 @@
 import { createCipheriv, createDecipheriv, createHash } from 'crypto';
 
+const {
+  TICKET_CHECKING_KEY,
+  TICKET_CHECKING_IV,
+} = process.env;
+
 const algorithm = 'aes-192-cbc';
 const keyLength = 24;
 
 const key = (() => {
   const hash = createHash('sha256');
   return hash
-    .update(process.env.TICKET_CHECKING_KEY)
+    .update(TICKET_CHECKING_KEY)
     .digest('base64')
     .substring(0, keyLength);
 })();
@@ -14,7 +19,7 @@ const key = (() => {
 const iv = (() => {
   const hash = createHash('sha256');
   return hash
-    .update(process.env.TICKET_CHECKING_IV)
+    .update(TICKET_CHECKING_IV)
     .digest('base64')
     .substring(0, 16);
 })();
