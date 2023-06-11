@@ -306,12 +306,12 @@ def add_or_update_activities():
 
         # 如果更新成功，則 `matched_count` 會大於 0
         if result.matched_count > 0:
-            print("Document was replaced.")
+            print(data['name'] + ", document was replaced...")
         else:
-            print("New document was inserted.")
+            print(data['name'] + ", new document was inserted...")
 
-        # break
         count += 1
+        # break
 
     print('Add or update all activities: ', count)
 
