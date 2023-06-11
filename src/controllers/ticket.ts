@@ -19,6 +19,14 @@ const ticketController = {
     const token = await ticketService.createTicketCode(req.userId!, ticketNo);
     res.json(Body.success(token));
   }),
+  generateSharedCode: catchAsyncError(async (req: Request, res: Response) => {
+    const { ticketNo } = req.params;
+    const result = await ticketService.generateSharedCode(
+      req.userId!,
+      ticketNo,
+    );
+    res.json(Body.success(result));
+  }),
 };
 
 export default ticketController;

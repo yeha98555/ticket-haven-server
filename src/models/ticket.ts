@@ -3,7 +3,7 @@ import { InferSchemaType, Schema, model } from 'mongoose';
 const ticketSchema = new Schema(
   {
     ticket_no: { type: String, required: true, unique: true },
-    order_id: { type: Schema.Types.ObjectId, required: true },
+    order_id: { type: Schema.Types.ObjectId, required: true, ref: 'order' },
     original_order_id: { type: Schema.Types.ObjectId, required: true },
     activity_id: {
       type: Schema.Types.ObjectId,
@@ -18,11 +18,18 @@ const ticketSchema = new Schema(
     price: { type: Number, required: true },
     is_used: { type: Boolean, default: false },
     token: { type: String },
+    shared_code: String,
+    shared_code_create_at: Date,
   },
   {
     timestamps: {
       createdAt: 'create_at',
       updatedAt: 'update_at',
+    },
+    query: {
+      byNo(ticketNo: string) {
+        return this.where({ ticket_no: ticketNo });
+      },
     },
   },
 );
