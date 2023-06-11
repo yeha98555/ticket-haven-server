@@ -39,7 +39,7 @@ jobs:
       - name: Rollback
         if: ${{ failure() && github.event_name == 'push' }}
         run: |
-          git reset HEAD~
+          git checkout ${{ github.sha }}^1
           git push --force
 
           # Post a comment on the pull request
