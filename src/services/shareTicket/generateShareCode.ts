@@ -1,20 +1,16 @@
 import { add, isAfter } from 'date-fns';
 import { ConflictException } from '@/exceptions/Conflict';
 import { NotFoundException } from '@/exceptions/NotFoundException';
-import { Order } from '@/models/order';
 import TicketModel from '@/models/ticket';
 import { randomString } from '@/utils/makeId';
 
+const shareCodeChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
 export const generateShareCode = async (userId: string, ticketNo: string) => {
-  const ticket = await TicketModel.findOne({})
-    .byNo(ticketNo)
-    .populate<{ order_id: Order }>('order_id');
+  const ticket = await TicketModel.findOne({ user_id: userId }).byNo(ticketNo);
 
-  if (!ticket || !ticket.order_id.user_id.equals(userId))
-    throw new NotFoundException();
-
-  if (!ticket.order_id._id.equals(ticket.original_order_id) || ticket.is_used)
-    throw new ConflictException();
+  if (!ticket) throw new NotFoundException();
+  if (ticket.is_shared || ticket.is_used) throw new ConflictException();
 
   if (ticket.share_code_create_at) {
     const isExpire = isAfter(
@@ -29,7 +25,7 @@ export const generateShareCode = async (userId: string, ticketNo: string) => {
       };
   }
 
-  const shareCode = randomString(8);
+  const shareCode = randomString(8, shareCodeChars);
 
   ticket.share_code = shareCode;
   ticket.share_code_create_at = new Date();

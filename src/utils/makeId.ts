@@ -1,13 +1,14 @@
 const characters =
   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-const charactersLength = characters.length;
 
-export function randomString(length: number) {
+export function randomString(length: number, chars = characters) {
+  const charsLength = chars.length;
+
   let result = '';
   let counter = 0;
 
   while (counter < length) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    result += chars.charAt(Math.floor(Math.random() * charsLength));
     counter += 1;
   }
 

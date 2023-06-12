@@ -3,8 +3,8 @@ import { InferSchemaType, Schema, model } from 'mongoose';
 const ticketSchema = new Schema(
   {
     ticket_no: { type: String, required: true, unique: true },
+    user_id: { type: Schema.Types.ObjectId, required: true, ref: 'user' },
     order_id: { type: Schema.Types.ObjectId, required: true, ref: 'order' },
-    original_order_id: { type: Schema.Types.ObjectId, required: true },
     activity_id: {
       type: Schema.Types.ObjectId,
       required: true,
@@ -18,6 +18,7 @@ const ticketSchema = new Schema(
     price: { type: Number, required: true },
     is_used: { type: Boolean, default: false },
     token: { type: String },
+    is_shared: { type: Boolean, default: false },
     share_code: String,
     share_code_create_at: Date,
   },
