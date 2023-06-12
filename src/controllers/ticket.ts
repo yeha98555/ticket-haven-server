@@ -2,6 +2,7 @@ import catchAsyncError from '@/utils/catchAsyncError';
 import ticketService from '@/services/ticket';
 import { Body } from '@/utils/response';
 import { Request, Response } from 'express';
+import shareTicketService from '@/services/shareTicket';
 
 const ticketController = {
   getTickets: catchAsyncError(async (req: Request, res: Response) => {
@@ -19,9 +20,9 @@ const ticketController = {
     const token = await ticketService.createTicketCode(req.userId!, ticketNo);
     res.json(Body.success(token));
   }),
-  generateSharedCode: catchAsyncError(async (req: Request, res: Response) => {
+  generateShareCode: catchAsyncError(async (req: Request, res: Response) => {
     const { ticketNo } = req.params;
-    const result = await ticketService.generateSharedCode(
+    const result = await shareTicketService.generateShareCode(
       req.userId!,
       ticketNo,
     );

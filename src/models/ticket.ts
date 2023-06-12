@@ -18,8 +18,8 @@ const ticketSchema = new Schema(
     price: { type: Number, required: true },
     is_used: { type: Boolean, default: false },
     token: { type: String },
-    shared_code: String,
-    shared_code_create_at: Date,
+    share_code: String,
+    share_code_create_at: Date,
   },
   {
     timestamps: {

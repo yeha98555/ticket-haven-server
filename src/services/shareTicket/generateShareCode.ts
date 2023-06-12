@@ -5,7 +5,7 @@ import { Order } from '@/models/order';
 import TicketModel from '@/models/ticket';
 import { randomString } from '@/utils/makeId';
 
-export const generateSharedCode = async (userId: string, ticketNo: string) => {
+export const generateShareCode = async (userId: string, ticketNo: string) => {
   const ticket = await TicketModel.findOne({})
     .byNo(ticketNo)
     .populate<{ order_id: Order }>('order_id');
@@ -16,28 +16,28 @@ export const generateSharedCode = async (userId: string, ticketNo: string) => {
   if (!ticket.order_id._id.equals(ticket.original_order_id) || ticket.is_used)
     throw new ConflictException();
 
-  if (ticket.shared_code_create_at) {
+  if (ticket.share_code_create_at) {
     const isExpire = isAfter(
       new Date(),
-      add(ticket.shared_code_create_at, { minutes: 15 }),
+      add(ticket.share_code_create_at, { minutes: 15 }),
     );
 
     if (!isExpire)
       return {
-        sharedCode: ticket.shared_code,
-        createAt: ticket.shared_code_create_at,
+        shareCode: ticket.share_code,
+        createAt: ticket.share_code_create_at,
       };
   }
 
-  const sharedCode = randomString(8);
+  const shareCode = randomString(8);
 
-  ticket.shared_code = sharedCode;
-  ticket.shared_code_create_at = new Date();
+  ticket.share_code = shareCode;
+  ticket.share_code_create_at = new Date();
 
   await ticket.save();
 
   return {
-    sharedCode,
-    createAt: ticket.shared_code_create_at,
+    shareCode,
+    createAt: ticket.share_code_create_at,
   };
 };

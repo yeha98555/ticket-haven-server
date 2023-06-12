@@ -7,9 +7,9 @@ const ticketRouter = Router();
 ticketRouter.get('/', isAuth, ticketController.getTickets);
 ticketRouter.post('/:ticketNo/qrcode', ticketController.createTicketCode);
 ticketRouter.post(
-  '/:ticketNo/shared-code',
+  '/:ticketNo/share-code',
   isAuth,
-  ticketController.generateSharedCode,
+  ticketController.generateShareCode,
 );
 
 export default ticketRouter;
