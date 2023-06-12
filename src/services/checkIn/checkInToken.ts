@@ -34,7 +34,7 @@ const decrypt = (encrypted: string) => {
   return decrypted;
 };
 
-export interface CheckingTokenPayload {
+export interface CheckInTokenPayload {
   ticketNo: string;
   timestamp: number;
 }
@@ -51,10 +51,10 @@ const checkInToken = {
   },
   decode(token: string) {
     const json = decrypt(token);
-    return JSON.parse(json) as CheckingTokenPayload;
+    return JSON.parse(json) as CheckInTokenPayload;
   },
   verify(token: string) {
-    let tokenPayload: CheckingTokenPayload;
+    let tokenPayload: CheckInTokenPayload;
     try {
       tokenPayload = this.decode(token);
     } catch (error) {
