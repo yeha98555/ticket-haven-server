@@ -7,9 +7,9 @@ import OrderModel from '@/models/order';
 import UserModel from '@/models/user';
 import { EventNotOnSaleException } from '@/exceptions/EventNotOnSale';
 import { redis } from '@/connections/redis';
+import { key } from '@/redis/orderExpireSubscriber';
 import reserveSeats from '../reserveSeats';
 import createOrderNo from './createOrderNo';
-import { key } from '../../orderExpireSubscriber';
 
 const orderExpireTime = 1200; // seconds
 

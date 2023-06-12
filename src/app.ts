@@ -1,6 +1,6 @@
 import './registerMongoosePlugins';
 import './connections';
-import './orderExpireSubscriber';
+import './redis/orderExpireSubscriber';
 import express, { Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
