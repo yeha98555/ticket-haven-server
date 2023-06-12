@@ -55,7 +55,8 @@ const getAllTickets = async ({
 
   const _toISOString = (date: Date) => date.toISOString();
   const eventNumbers = orders.reduce<string[][]>((acc, order) => {
-    const ids = order.activity_id.events
+    const events = (order.activity_id && order.activity_id.events) || [];
+    const ids = events
       .filter((e) =>
         isValid
           ? _toISOString(e.end_at) >= _toISOString(new Date())
@@ -80,7 +81,7 @@ const getAllTickets = async ({
       (g) =>
         String(orderId) === g.orderId && String(activityId) === g.activityId,
     );
-    console.log(item);
+
     const ticket = {
       isShare: String(item.order_id) !== String(item.original_order_id),
       isUsed: item.is_used,
