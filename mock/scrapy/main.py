@@ -313,10 +313,11 @@ def add_or_update_activities():
             "is_published": True,
         }
 
+        current_time = datetime.utcnow()
         # Save to db
-        result = collection.replace_one(
+        result = collection.update_one(
             {"name": data['name']},  # 查詢條件
-            data,  # 要插入或替換的新文檔
+            {"$set": {**data, "update_at": current_time}, "$setOnInsert": {"create_at": current_time}},  # 要插入或替換的新文檔
             upsert=True  # 如果查詢條件沒有匹配到任何文檔，則插入一個新的文檔
         )
 
