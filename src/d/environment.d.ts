@@ -15,7 +15,7 @@ declare namespace NodeJS {
     NEWEBPAY_RETURN_URL: string;
     NEWEBPAY_NOTIFY_URL: string;
     PAYMENT_RETURN_URL: string;
-    TICKET_CHECKING_KEY: string;
-    TICKET_CHECKING_IV: string;
+    TICKET_CHECKIN_KEY: string;
+    TICKET_CHECKIN_IV: string;
   }
 }

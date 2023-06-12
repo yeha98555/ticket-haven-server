@@ -7,7 +7,7 @@ const keyLength = 24;
 const key = (() => {
   const hash = createHash('sha256');
   return hash
-    .update(process.env.TICKET_CHECKING_KEY)
+    .update(process.env.TICKET_CHECKIN_KEY)
     .digest('base64')
     .substring(0, keyLength);
 })();
@@ -15,7 +15,7 @@ const key = (() => {
 const iv = (() => {
   const hash = createHash('sha256');
   return hash
-    .update(process.env.TICKET_CHECKING_IV)
+    .update(process.env.TICKET_CHECKIN_IV)
     .digest('base64')
     .substring(0, 16);
 })();
