@@ -60,7 +60,6 @@ const paymentNotify = async (tradeInfo: string) => {
         _id: ticketId,
         ticket_no: createTicketNo(ticketId, date, s.row, s.seat),
         order_id: order?._id,
-        original_order_id: order?._id,
         activity_id: order?.activity_id,
         event_id: order?.event_id,
         area_id: s.area_id,
