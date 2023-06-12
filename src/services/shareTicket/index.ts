@@ -1,9 +1,9 @@
 import { generateShareCode } from './generateShareCode';
-import { shareTicket } from './shareTicket';
+import { exchangeTicket } from './shareTicket';
 
 const shareTicketService = {
   generateShareCode,
-  shareTicket,
+  exchangeTicket,
 };
 
 export default shareTicketService;
