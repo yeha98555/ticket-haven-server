@@ -18,7 +18,7 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
-      - name: Copy .env.example to .env
+      - name: Copy .env.test to .env
         run: cp .env.test .env
 
       - name: Run tests
