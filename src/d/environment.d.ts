@@ -17,5 +17,6 @@ declare namespace NodeJS {
     PAYMENT_RETURN_URL: string;
     TICKET_CHECKIN_KEY: string;
     TICKET_CHECKIN_IV: string;
+    REDIS_CONNECT_STRING: string;
   }
 }

@@ -1,8 +1,13 @@
-/** @type {import('ts-jest').JestConfigWithTsJest} */
+/**
+ * @type {import('ts-jest').JestConfigWithTsJest}
+ */
 const { pathsToModuleNameMapper } = require('ts-jest');
 const { compilerOptions } = require('./tsconfig');
 
+require('dotenv').config();
+
 module.exports = {
+  setupFiles: ['dotenv/config'],
   coverageDirectory: 'coverage',
   preset: 'ts-jest',
   testEnvironment: 'node',

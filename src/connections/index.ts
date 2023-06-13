@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import connectToDocDB from './docdb';
+import './redis';
 
 if (process.env.NODE_ENV === 'development') {
   const DB = process.env.MONGODB_CONNECT_STRING.replace(
@@ -13,4 +14,3 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   connectToDocDB();
 }
-

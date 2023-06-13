@@ -20,7 +20,7 @@ const orderSchema = new Schema(
     },
     status: {
       type: Number,
-      default: OrderStatus.TEMP,
+      default: OrderStatus.PENDING,
       validate: toValidate(z.nativeEnum(OrderStatus)),
     },
     price: { type: Number, required: true },
