@@ -6,40 +6,78 @@ on:
       - main
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Repo
-      uses: actions/checkout@v3
+      - name: Checkout Repo
+        uses: actions/checkout@v3
 
-    - name: Use Node.js
-      uses: actions/setup-node@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
 
-    - name: Install Dependencies
-      run: yarn install
+      - name: Install Dependencies
+        run: yarn install
 
-    - name: Run tests
-      run: yarn test
+      - name: Copy .env.test to .env
+        run: cp .env.test .env
 
-    - name: Build
-      if: ${{ success() && github.event_name == 'push' }}
-      run: yarn build
+      - name: Run tests
+        run: yarn test
 
-    - name: Create deployment package
-      if: ${{ success() && github.event_name == 'push' }}
-      run: zip -r deploy.zip . -x ".git/*" -x ".github/*" -x ".vscode/*" -x ".hursky/*" -x "mock/*" -x "__test__/*"
+      - name: Rollback
+        if: ${{ failure() && github.event_name == 'push' }}
+        run: |
+          git checkout ${{ github.sha }}^1
+          git push --force
 
-    - name: Deploy to AWS
-      if: ${{ success() && github.event_name == 'push' }}
-      uses: einaregilsson/beanstalk-deploy@v21
-      with:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: ${{ secrets.AWS_APP_NAME }}
-        environment_name: ${{ secrets.AWS_APP_ENV_NAME }}
-        existing_bucket_name: ${{ secrets.AWS_BUCKET_NAME }}
-        version_label: ${{ github.run_id }}
-        region: ${{ secrets.AWS_REGION }}
-        deployment_package: deploy.zip
-        use_existing_version_if_available: true
+          # Post a comment on the pull request
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"body": "The CI job has failed. The last commit has been rolled back."}' \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${{ github.event.pull_request.number }}/comments"
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Create deployment package
+        run: zip -r deploy.zip . -x ".git/*" -x ".github/*" -x ".vscode/*" -x ".hursky/*" -x "mock/*" -x "__test__/*"
+
+      - name: Deploy to AWS
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: ${{ secrets.AWS_APP_NAME }}
+          environment_name: ${{ secrets.AWS_APP_ENV_NAME }}
+          existing_bucket_name: ${{ secrets.AWS_BUCKET_NAME }}
+          version_label: ${{ github.run_id }}
+          region: ${{ secrets.AWS_REGION }}
+          deployment_package: deploy.zip
+          use_existing_version_if_available: true
+
+      - name: Rollback
+        if: ${{ failure() && github.event_name == 'push' }}
+        run: |
+          git checkout ${{ github.sha }}^1
+          git push --force
+
+          # Post a comment on the pull request
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"body": "The CI job has failed. The last commit has been rolled back."}' \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${{ github.event.pull_request.number }}/comments"

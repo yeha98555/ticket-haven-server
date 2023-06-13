@@ -7,6 +7,7 @@ import eventRouter from './event';
 import orderRouter from './order';
 import ticketRouter from './ticket';
 import exchangeTicketRouter from './exchangeTicket';
+import checkInRouter from './checkIn';
 
 const router = Router();
 
@@ -66,5 +67,6 @@ router.use('/events', eventRouter);
 router.use('/orders', orderRouter);
 router.use('/tickets', ticketRouter);
 router.use('/exchange-ticket', exchangeTicketRouter);
+router.use('/check-in', checkInRouter);
 
 export default router;

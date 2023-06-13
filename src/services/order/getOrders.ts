@@ -20,7 +20,7 @@ const getOrders = async ({
     user_id: new Types.ObjectId(userId),
     status:
       status === 'unpaid'
-        ? OrderStatus.TEMP
+        ? OrderStatus.PENDING
         : { $in: [OrderStatus.SUCCESS, OrderStatus.CANCELLED] },
   };
 

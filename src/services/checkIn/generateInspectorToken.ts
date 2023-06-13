@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import ActivityModel from '@/models/activity';
 import { NotFoundException } from '@/exceptions/NotFoundException';
 
-const generateVerifyLink = async (eventId: string | Types.ObjectId) => {
+const generateInspectorToken = async (eventId: string | Types.ObjectId) => {
   const activity = await ActivityModel.findOne({})
     .where('events._id')
     .equals(eventId);
@@ -18,4 +18,4 @@ const generateVerifyLink = async (eventId: string | Types.ObjectId) => {
   return event.qrcode_verify_link;
 };
 
-export default generateVerifyLink;
+export default generateInspectorToken;
