@@ -18,7 +18,7 @@ const ticketSchema = new Schema(
     price: { type: Number, required: true },
     is_used: { type: Boolean, default: false },
     token: { type: String },
-    is_shared: { type: Boolean, default: false },
+    shared_by: Schema.Types.ObjectId,
     share_code: String,
     share_code_create_at: Date,
   },

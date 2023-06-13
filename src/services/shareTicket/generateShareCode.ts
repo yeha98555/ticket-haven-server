@@ -10,7 +10,7 @@ export const generateShareCode = async (userId: string, ticketNo: string) => {
   const ticket = await TicketModel.findOne({ user_id: userId }).byNo(ticketNo);
 
   if (!ticket) throw new NotFoundException();
-  if (ticket.is_shared || ticket.is_used) throw new ConflictException();
+  if (ticket.shared_by || ticket.is_used) throw new ConflictException();
 
   if (ticket.share_code_create_at) {
     const isExpire = isAfter(

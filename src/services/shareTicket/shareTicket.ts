@@ -17,8 +17,8 @@ export const exchangeTicket = async (
 
   if (!ticket) throw new NotFoundException();
 
+  ticket.shared_by = ticket.user_id;
   ticket.user_id = new Types.ObjectId(userId);
-  ticket.is_shared = true;
   ticket.share_code = '';
   ticket.share_code_create_at = undefined;
 

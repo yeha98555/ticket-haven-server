@@ -81,7 +81,7 @@ const getAllTickets = async ({
     );
 
     const ticket = {
-      isShare: item.is_shared,
+      isShare: !!item.shared_by,
       isUsed: item.is_used,
       ticketNo: item.ticket_no,
       seat: `${item.row}排 ${item.seat}號`,
