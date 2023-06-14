@@ -149,7 +149,7 @@ async function queryTicketGroups(
               is_used: '$is_used',
               shared_by: '$shared_by',
               is_shared: {
-                $eq: ['$user_id', new Types.ObjectId(userId)],
+                $ne: ['$user_id', new Types.ObjectId(userId)],
               },
             },
           },
