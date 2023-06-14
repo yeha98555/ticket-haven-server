@@ -1,128 +1,184 @@
 import { Activity } from '@/models/activity';
-import OrderModel from '@/models/order';
 import TicketModel from '@/models/ticket';
+import { Types } from 'mongoose';
+import '@/connections';
 
-type Ticket = {
-  isShare: boolean;
-  isUsed: boolean;
-  ticketNo: string;
-  seat: string;
-};
-
-type PartActivity = {
-  name: string;
-  address: string;
-  startAt: string;
-  endAt: string;
-};
-
-type GroupTickets = PartActivity & {
-  orderId: string;
-  eventId: string;
-  activityId: string;
-  coverImageUrl: string;
-  tickets: Ticket[];
-};
-
-interface TicketProps {
+const getTicketGroups = async ({
+  userId,
+  page,
+  pageSize,
+  isValid,
+}: {
   userId: string;
   page: number;
   pageSize: number;
   isValid: boolean;
-}
+}) => {
+  const result = await queryTicketGroups(userId, page, pageSize, isValid);
 
-const getAllTickets = async ({
-  userId,
-  page = 1,
-  pageSize = 10,
-  isValid = true,
-}: TicketProps) => {
-  // query order by user_id
-  const userFilter = { user_id: userId };
+  const ticketGroups = result.results.map(
+    ({ _id, activity, tickets: _tickets }) => {
+      const event = activity.events.find((e) => e._id?.equals(_id));
 
-  const orders = await OrderModel.find(userFilter).populate<{
-    activity_id: Activity;
-  }>('activity_id', 'events');
-
-  if (orders.length === 0)
-    return {
-      page,
-      pageSize,
-      totalCount: 0,
-      totalPages: 1,
-      tickets: [],
-    };
-
-  const _toISOString = (date: Date) => date.toISOString();
-  const eventNumbers = orders.reduce<string[][]>((acc, order) => {
-    const events = (order.activity_id && order.activity_id.events) || [];
-    const ids = events
-      .filter((e) =>
-        isValid
-          ? _toISOString(e.end_at) >= _toISOString(new Date())
-          : _toISOString(e.end_at) < _toISOString(new Date()),
-      )
-      .map((e) => e.id);
-    return [...acc, ...ids];
-  }, []);
-
-  // query tickets by order_id
-  const tickets = await TicketModel.find({
-    event_id: { $in: eventNumbers },
-  }).populate<{ activity_id: Activity }>(
-    'activity_id',
-    'name address start_at end_at events cover_img_url',
-  );
-
-  const groupTickets = tickets.reduce<GroupTickets[]>((result, item) => {
-    const activityId = item.activity_id._id;
-    const orderId = item.order_id;
-    const group = result.find(
-      (g) =>
-        String(orderId) === g.orderId && String(activityId) === g.activityId,
-    );
-
-    const ticket = {
-      isShare: !!item.shared_by,
-      isUsed: item.is_used,
-      ticketNo: item.ticket_no,
-      seat: `${item.row}排 ${item.seat}號`,
-    };
-
-    if (group) {
-      group.tickets.push(ticket);
-    } else {
-      const targetEvent = item.activity_id.events.find(
-        (event) => String(event._id) === String(item.event_id),
-      );
-      result.push({
-        orderId: String(item.order_id),
-        eventId: String(item.event_id),
-        activityId: String(item.activity_id._id),
-        coverImageUrl: String(item.activity_id.cover_img_url),
-        name: item.activity_id.name,
-        startAt: String(targetEvent?.start_at.toISOString()),
-        endAt: String(targetEvent?.end_at.toISOString()),
-        address: item.activity_id.address,
-        tickets: [ticket],
+      const tickets = _tickets.map((t) => {
+        const area = activity.areas.find((a) => a._id?.equals(t.area_id));
+        const subArea = area?.subareas.find((a) => a._id?.equals(t.subarea_id));
+        return {
+          ticketNo: t.ticket_no,
+          orderId: t.order_id,
+          areaId: t.area_id,
+          subareaId: t.subarea_id,
+          areaName: area?.name,
+          subArea: subArea?.name,
+          row: t.row,
+          seat: t.seat,
+          isUsed: t.is_used,
+          isShared: t.is_shared,
+          sharedBy: t.shared_by,
+        };
       });
-    }
 
-    return result;
-  }, []);
-
-  // page
-  const totalPages = Math.ceil(groupTickets.length / pageSize);
-  const skipCount = (page - 1) * pageSize;
-  const data = groupTickets.slice(skipCount, page * pageSize);
+      return {
+        activity: {
+          id: activity._id,
+          eventId: _id,
+          name: activity.name,
+          coverImgUrl: activity.cover_img_url,
+          startAt: event?.start_at,
+          endAt: event?.end_at,
+          address: activity.address,
+          location: activity.location,
+        },
+        tickets,
+      };
+    },
+  );
 
   return {
     page,
     pageSize,
-    totalCount: groupTickets.length,
-    totalPages,
-    tickets: data,
+    totalCount: result.totalCount,
+    totalPages: Math.floor(result.totalCount / pageSize) || 1,
+    ticketGroups,
   };
 };
 
-export default getAllTickets;
+type QueryResult = {
+  results: {
+    _id: Types.ObjectId;
+    activity: Activity;
+    tickets: {
+      ticket_no: string;
+      order_id: Types.ObjectId;
+      area_id: Types.ObjectId;
+      subarea_id: Types.ObjectId;
+      row: number;
+      seat: number;
+      is_used: boolean;
+      is_shared: boolean;
+      shared_by: Types.ObjectId;
+    }[];
+  }[];
+  totalCount: { count: number }[];
+};
+
+async function queryTicketGroups(
+  userId: string,
+  page: number,
+  pageSize: number,
+  isValid: boolean,
+) {
+  const validFilter = isValid
+    ? {
+        $lt: [new Date(), '$activity.end_at'],
+      }
+    : {
+        $gte: [new Date(), '$activity.end_at'],
+      };
+
+  const result = (
+    await TicketModel.aggregate<QueryResult>([
+      {
+        $match: {
+          $expr: {
+            $or: [
+              {
+                $eq: ['$user_id', new Types.ObjectId(userId)],
+              },
+              {
+                $eq: ['$shared_by', new Types.ObjectId(userId)],
+              },
+            ],
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: 'activities',
+          localField: 'activity_id',
+          foreignField: '_id',
+          as: 'activities',
+        },
+      },
+      {
+        $addFields: {
+          activity: {
+            $first: '$activities',
+          },
+        },
+      },
+      {
+        $match: {
+          $expr: validFilter,
+        },
+      },
+      {
+        $group: {
+          _id: '$event_id',
+          activity: {
+            $first: '$activity',
+          },
+          tickets: {
+            $push: {
+              ticket_no: '$ticket_no',
+              order_id: '$order_id',
+              area_id: '$area_id',
+              subarea_id: '$subarea_id',
+              row: '$row',
+              seat: '$seat',
+              is_used: '$is_used',
+              shared_by: '$shared_by',
+              is_shared: {
+                $eq: ['$user_id', new Types.ObjectId(userId)],
+              },
+            },
+          },
+        },
+      },
+      {
+        $facet: {
+          results: [
+            {
+              $skip: (page - 1) * pageSize,
+            },
+            {
+              $limit: pageSize,
+            },
+          ],
+          totalCount: [
+            {
+              $count: 'count',
+            },
+          ],
+        },
+      },
+    ])
+  )[0];
+
+  return {
+    results: result.results,
+    totalCount: result.totalCount[0]?.count || 0,
+  };
+}
+
+export default getTicketGroups;
