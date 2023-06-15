@@ -10,5 +10,10 @@ ticketRouter.post(
   isAuth,
   ticketController.checkInToken,
 );
+ticketRouter.post(
+  '/:ticketNo/share-code',
+  isAuth,
+  ticketController.generateShareCode,
+);
 
 export default ticketRouter;

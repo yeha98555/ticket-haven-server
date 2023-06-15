@@ -1,8 +1,8 @@
 import createTicketNo from './createTicketNo';
-import getAllTickets from './getAllTickets';
+import getTicketGroups from './getTicketGroups';
 
 const ticketService = {
-  getAllTickets,
+  getTicketGroups,
   createTicketNo,
 };
 

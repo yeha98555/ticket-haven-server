@@ -198,7 +198,7 @@ const searchActivities = async ({
   );
 
   const totalCount = await ActivityModel.countDocuments(filter);
-  const totalPages = Math.floor(totalCount / pageSize) || 1;
+  const totalPages = Math.ceil(totalCount / pageSize) || 1;
 
   return {
     page,

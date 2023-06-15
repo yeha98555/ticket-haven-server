@@ -59,10 +59,10 @@ const paymentNotify = async (tradeInfo: string) => {
       return {
         _id: ticketId,
         ticket_no: createTicketNo(ticketId, date, s.row, s.seat),
-        order_id: order?._id,
-        original_order_id: order?._id,
-        activity_id: order?.activity_id,
-        event_id: order?.event_id,
+        user_id: order!.user_id,
+        order_id: order!._id,
+        activity_id: order!.activity_id,
+        event_id: order!.event_id,
         area_id: s.area_id,
         subarea_id: s.subarea_id,
         row: s.row,
@@ -77,7 +77,7 @@ const paymentNotify = async (tradeInfo: string) => {
   order!.status = status;
   order!.seat_reservation_id = undefined;
 
-  await order?.save();
+  await order!.save();
 
   // TODO: Save the payment info to neweb_paymethods
   // info.Result.PayTime
