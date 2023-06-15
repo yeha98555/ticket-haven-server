@@ -125,6 +125,23 @@ async function queryTicketGroups(
           activity: {
             $first: '$activities',
           },
+          event: {
+            $first: {
+              $filter: {
+                input: {
+                  $getField: {
+                    field: 'events',
+                    input: {
+                      $first: '$activities',
+                    },
+                  },
+                },
+                cond: {
+                  $eq: ['$$this._id', '$event_id'],
+                },
+              },
+            },
+          },
         },
       },
       {
@@ -137,6 +154,9 @@ async function queryTicketGroups(
           _id: '$event_id',
           activity: {
             $first: '$activity',
+          },
+          event: {
+            $first: '$event',
           },
           tickets: {
             $push: {
@@ -153,6 +173,11 @@ async function queryTicketGroups(
               },
             },
           },
+        },
+      },
+      {
+        $sort: {
+          'event.start_at': 1,
         },
       },
       {
