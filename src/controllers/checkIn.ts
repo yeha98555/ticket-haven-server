@@ -23,6 +23,13 @@ const checkInController = {
     const result = await checkInService.checkIn(inspectorToken, ticketToken);
     res.json(Body.success(result));
   }),
+  getEventInfo: catchAsyncError(async (req: Request, res: Response) => {
+    const { authId } = req.params as {
+      authId: string;
+    };
+    const eventInfo = await checkInService.getEventInfo(authId);
+    res.json(Body.success(eventInfo));
+  }),
 };
 
 export default checkInController;

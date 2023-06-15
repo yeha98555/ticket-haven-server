@@ -8,11 +8,11 @@ import UserModel from '@/models/user';
 
 const getCheckInInfo = async (inspectorToken: string, ticketToken: string) => {
   const activity = await ActivityModel.findOne({})
-    .where('events.qrcode_verify_link')
+    .where('events.qrcode_verify_id')
     .equals(inspectorToken);
 
   const event = activity?.events.find(
-    (e) => e.qrcode_verify_link === inspectorToken,
+    (e) => e.qrcode_verify_id === inspectorToken,
   );
 
   if (!activity || !event) throw new NotFoundException();
