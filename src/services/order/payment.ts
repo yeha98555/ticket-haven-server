@@ -10,7 +10,7 @@ import { OrderStatus } from '@/enums/orderStatus';
 import { OrderCannotModifyException } from '@/exceptions/OrderCannotModify';
 
 const RespondType = 'JSON';
-const LimitTime = 300;
+const LimitTime = 300;  // 5 minutes
 const {
   NEWEBPAY_VERSION,
   NEWEBPAY_MERCHANT_ID,
@@ -36,8 +36,7 @@ const formatDesc = (name: string, quantity: number, start_at: Date) => {
 };
 
 const genDataChain = (paymentData: NewebPayPaymentRequest) => {
-  return `MerchantID=${NEWEBPAY_MERCHANT_ID}&RespondType=${RespondType}&TradeLimit=${LimitTime
-    }&TimeStamp=${paymentData.TimeStamp
+  return `MerchantID=${NEWEBPAY_MERCHANT_ID}&RespondType=${RespondType}&TradeLimit=${LimitTime}&TimeStamp=${paymentData.TimeStamp
     }&Version=${NEWEBPAY_VERSION}&MerchantOrderNo=${paymentData.MerchantOrderNo
     }&Amt=${paymentData.Amt}&ItemDesc=${encodeURIComponent(
       paymentData.ItemDesc,
