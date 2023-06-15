@@ -106,7 +106,7 @@ const getOrders = async ({
 
   const totalCount = await OrderModel.countDocuments(filter);
 
-  const totalPages = Math.floor(totalCount / pageSize) || 1;
+  const totalPages = Math.ceil(totalCount / pageSize) || 1;
 
   const data = orders.map((o) => {
     const { _id, order_no, price, status, activity, seats, create_at } = o;

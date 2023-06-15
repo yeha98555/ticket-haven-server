@@ -58,7 +58,7 @@ const getTicketGroups = async ({
     page,
     pageSize,
     totalCount: result.totalCount,
-    totalPages: Math.floor(result.totalCount / pageSize) || 1,
+    totalPages: Math.ceil(result.totalCount / pageSize) || 1,
     ticketGroups,
   };
 };
