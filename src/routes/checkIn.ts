@@ -20,7 +20,7 @@ checkInRouter.post(
 );
 
 checkInRouter.get(
-  '/info',
+  '/ticket',
   validateRequestQuery(
     z.object({
       inspectorToken: z.string(),
@@ -28,6 +28,16 @@ checkInRouter.get(
     }),
   ),
   checkInController.getCheckInInfo,
+);
+
+checkInRouter.get(
+  '/event',
+  validateRequestQuery(
+    z.object({
+      authId: z.string(),
+    }),
+  ),
+  checkInController.getEventInfo,
 );
 
 export default checkInRouter;

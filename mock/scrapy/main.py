@@ -230,7 +230,7 @@ def parse_activity(activity: Tag):
             "end_at": datetime.fromisoformat(event_end),
             "sell_at": datetime.fromisoformat(activity_sell_at),
             "sellend_at": datetime.fromisoformat(activity_sellend_at),
-            "qrcode_verify_link": uuid.uuid4().hex[:24]
+            "qrcode_verify_id": uuid.uuid4().hex[:24]
         }
         events_info_list.append(event_dict)
 
