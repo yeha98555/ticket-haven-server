@@ -80,16 +80,3 @@ jobs:
           region: ${{ secrets.AWS_REGION }}
           deployment_package: deploy.zip
           use_existing_version_if_available: true
-
-      - name: Rollback
-        if: ${{ failure() && github.event_name == 'push' }}
-        run: |
-          git checkout ${{ github.sha }}^1
-          git push --force
-
-          # Post a comment on the pull request
-          curl -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{"body": "The CI job has failed. The last commit has been rolled back."}' \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${{ github.event.pull_request.number }}/comments"

@@ -77,16 +77,3 @@ jobs:
         with:
           service-id: ${{ secrets.SERVICE_ID_DEVELOP }} # Can be found as part of the Deploy Hook
           api-key: ${{ secrets.RENDER_API_KEY }} # Create your API key in Render Dashboard > Account Settings
-
-      - name: Rollback
-        if: ${{ failure() && github.event_name == 'push' }}
-        run: |
-          git checkout ${{ github.sha }}^1
-          git push --force
-
-          # Post a comment on the pull request
-          curl -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{"body": "The CI job has failed. The last commit has been rolled back."}' \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${{ github.event.pull_request.number }}/comments"
