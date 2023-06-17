@@ -3,8 +3,7 @@ name: Deploy to Render
 on:
   push:
     branches:
-      - main
-      - develop
+      - fix/github-actions-rollback
 
 jobs:
   test:
@@ -31,7 +30,15 @@ jobs:
       - name: Rollback
         if: ${{ failure() && github.event_name == 'push' }}
         run: |
-          git checkout ${{ github.sha }}^1
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            MERGE_COMMIT_SHA=$(git log --merges --pretty=format:"%H" -1)
+            git revert -m 1 --no-edit --message "Revert PR merge" $MERGE_COMMIT_SHA
+          elif [[ "${{ steps.determine_event.outputs.event }}" == "push" ]]; then
+            MERGE_COMMIT_SHA=$(git log --pretty=format:"%H" -1)
+            git revert -n HEAD --no-edit --message "Revert PR merge" $MERGE_COMMIT_SHA
+          else
+            echo "Unknown event type"
+          fi
           git push --force
 
           # Post a comment on the pull request
