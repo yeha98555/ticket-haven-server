@@ -26,7 +26,7 @@ jobs:
         run: cp .env.test .env
 
       - name: Run tests
-        run: yarn test
+        run: yarn test --detectOpenHandles
 
       - name: Rollback
         if: ${{ failure() && github.event_name == 'push' }}
