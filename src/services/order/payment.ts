@@ -99,7 +99,7 @@ const payment = async (userId: string, orderNo: string) => {
   const paymentData = {
     MerchantOrderNo: order.order_no,
     RespondType: RespondType,
-    TimeStamp: Math.floor(Date.now() / 1000),
+    TimeStamp: Math.floor((order.create_at instanceof Date ? order.create_at.getTime() : Date.now()) / 1000),
     Email: order.user_id.email,
     Amt: order.price,
     Version: NEWEBPAY_VERSION,
