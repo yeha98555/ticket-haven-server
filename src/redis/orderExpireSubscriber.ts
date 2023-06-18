@@ -1,10 +1,8 @@
-import { Redis } from 'ioredis';
-import { redis } from '@/connections/redis';
+import { redis, sub } from '@/connections/redis';
 import OrderModel from '@/models/order';
 import { OrderStatus } from '@/enums/orderStatus';
 import SeatReservationModel from '@/models/seatReservation';
 
-const sub = new Redis(redis.options);
 const redisDB = redis.options.db;
 
 const channel = `__keyevent@${redisDB}__:expired`;

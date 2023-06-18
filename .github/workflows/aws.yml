@@ -21,8 +21,13 @@ jobs:
       - name: Copy .env.test to .env
         run: cp .env.test .env
 
+      - name: Copy SSL CA certificate
+        run: |
+          mkdir -p /tmp
+          echo "$SSL_CA_CERT" | base64 --decode > /tmp/rds-combined-ca-bundle.pem
+
       - name: Run tests
-        run: yarn test
+        run: yarn test --detectOpenHandles
 
       - name: Rollback
         if: ${{ failure() && github.event_name == 'push' }}
