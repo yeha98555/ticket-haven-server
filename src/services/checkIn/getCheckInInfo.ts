@@ -3,8 +3,7 @@ import checkInToken from './checkInToken';
 import { NotFoundException } from '@/exceptions/NotFoundException';
 import { ConflictException } from '@/exceptions/Conflict';
 import TicketModel from '@/models/ticket';
-import { Order } from '@/models/order';
-import UserModel from '@/models/user';
+import { User } from '@/models/user';
 
 const getCheckInInfo = async (inspectorToken: string, ticketToken: string) => {
   const activity = await ActivityModel.findOne({})
@@ -26,11 +25,14 @@ const getCheckInInfo = async (inspectorToken: string, ticketToken: string) => {
   const ticket = await TicketModel.findOne({
     event_id: event._id,
     ticket_no: ticketNo,
-  }).populate<{ order_id: Order }>('order_id');
+  }).populate<{ user_id: User }>('user_id');
 
   if (!ticket) throw new NotFoundException();
 
-  const user = await UserModel.findById(ticket.order_id.user_id);
+  const user = ticket.user_id;
+  const subarea = activity.areas
+    .flatMap((a) => a.subareas)
+    .find((sa) => sa._id?.equals(ticket.subarea_id));
 
   return {
     user: {
@@ -39,6 +41,7 @@ const getCheckInInfo = async (inspectorToken: string, ticketToken: string) => {
     },
     activityName: activity.name,
     ticketNo: ticket.ticket_no,
+    subAreaName: subarea?.name,
     row: ticket.row,
     seat: ticket.seat,
     isUsed: ticket.is_used,
