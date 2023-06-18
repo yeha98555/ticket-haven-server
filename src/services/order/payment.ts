@@ -10,7 +10,7 @@ import { OrderStatus } from '@/enums/orderStatus';
 import { OrderCannotModifyException } from '@/exceptions/OrderCannotModify';
 
 const RespondType = 'JSON';
-const LimitTime = 300;  // 5 minutes
+const LimitTime = 900;  // 5 minutes
 const {
   NEWEBPAY_VERSION,
   NEWEBPAY_MERCHANT_ID,
