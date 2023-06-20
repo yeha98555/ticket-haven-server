@@ -24,7 +24,7 @@ const checkInController = {
     res.json(Body.success(result));
   }),
   getEventInfo: catchAsyncError(async (req: Request, res: Response) => {
-    const { authId } = req.params as {
+    const { authId } = req.query as {
       authId: string;
     };
     const eventInfo = await checkInService.getEventInfo(authId);
