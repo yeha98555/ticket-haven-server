@@ -1,3 +1,4 @@
+import { OrderStatus } from '@/enums/orderStatus';
 import { NotFoundException } from '@/exceptions/NotFoundException';
 import { Activity } from '@/models/activity';
 import OrderModel from '@/models/order';
@@ -28,7 +29,7 @@ const getOrderInfo = async (userId: string, orderNo: string) => {
     seat: number;
   }[] = [];
 
-  if (order.seat_reservation_id) {
+  if (order.status === OrderStatus.PENDING) {
     const reservation = await SeatReservationModel.findById(
       order.seat_reservation_id,
     );

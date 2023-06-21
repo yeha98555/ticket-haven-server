@@ -19,9 +19,7 @@ const getOrders = async ({
   const filter = {
     user_id: new Types.ObjectId(userId),
     status:
-      status === 'unpaid'
-        ? OrderStatus.PENDING
-        : { $in: [OrderStatus.SUCCESS, OrderStatus.CANCELLED] },
+      status === 'unpaid' ? OrderStatus.PENDING : { $ne: OrderStatus.PENDING },
   };
 
   let orders: (Order & {
