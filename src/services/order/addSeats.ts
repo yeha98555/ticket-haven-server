@@ -1,22 +1,26 @@
 import { OrderStatus } from '@/enums/orderStatus';
 import { NotFoundException } from '@/exceptions/NotFoundException';
 import { OrderCannotModifyException } from '@/exceptions/OrderCannotModify';
-import { Order } from '@/models/order';
+import OrderModel from '@/models/order';
 import ActivityModel from '@/models/activity';
 import reserveSeats from '../reserveSeats';
-import { HydratedDocument } from 'mongoose';
 
 const addSeats = async ({
-  order,
+  orderNo,
+  userId,
   areaId,
   subAreaId,
   amount,
 }: {
-  order: HydratedDocument<Order>;
+  orderNo: string;
+  userId: string;
   areaId: string;
   subAreaId: string;
   amount: number;
 }) => {
+  const order = await OrderModel.findOne({ user_id: userId }).byNo(orderNo);
+  if (!order) throw new NotFoundException();
+
   if (order.status !== OrderStatus.PENDING)
     throw new OrderCannotModifyException();
 
@@ -38,6 +42,10 @@ const addSeats = async ({
     areaId: areaId,
     subAreaId: subAreaId,
   });
+
+  order.price = order.price + amount * area.price;
+
+  await order.save();
 
   return newSeats.map((s) => ({
     subAreaId: subarea._id,
