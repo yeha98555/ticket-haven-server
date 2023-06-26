@@ -5,9 +5,6 @@ import { Order } from '@/models/order';
 import ActivityModel from '@/models/activity';
 import reserveSeats from '../reserveSeats';
 import { HydratedDocument } from 'mongoose';
-import SeatReservationModel, {
-  SeatReservation,
-} from '@/models/seatReservation';
 
 const addSeats = async ({
   order,
@@ -33,12 +30,8 @@ const addSeats = async ({
   const subarea = area?.subareas.find((a) => a._id?.equals(subAreaId));
   if (!area || !subarea) throw new NotFoundException('area not found');
 
-  const reservation = (await SeatReservationModel.findById(
-    order.seat_reservation_id,
-  )) as HydratedDocument<SeatReservation>;
-
   const { seats: newSeats } = await reserveSeats({
-    reservation,
+    reservationId: order.seat_reservation_id,
     activity,
     eventId: order.event_id,
     seatAmount: amount,
