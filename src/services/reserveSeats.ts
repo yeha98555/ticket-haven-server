@@ -1,33 +1,35 @@
 import { NotFoundException } from '@/exceptions/NotFoundException';
 import { RemainingSeatsInsufficientException } from '@/exceptions/RemainingSeatsInsufficient';
-import SeatReservationModel, {
-  SeatReservation,
-} from '@/models/seatReservation';
+import SeatReservationModel from '@/models/seatReservation';
 import { HydratedDocument, Types } from 'mongoose';
 import { MongoServerError } from 'mongodb';
 import { Activity } from '@/models/activity';
 import { OrderExceedSeatLimitException } from '@/exceptions/OrderExceedsSeatLimit';
 
 const reserveSeats = async ({
-  reservation,
+  reservationId,
   activity,
   eventId,
   areaId,
   subAreaId,
   seatAmount,
 }: {
-  reservation?: HydratedDocument<SeatReservation>;
+  reservationId?: Types.ObjectId | string;
   activity: Pick<HydratedDocument<Activity>, '_id' | 'areas'>;
   eventId: Types.ObjectId | string;
   areaId: Types.ObjectId | string;
   subAreaId: Types.ObjectId | string;
   seatAmount: number;
 }) => {
-  reservation ??= new SeatReservationModel({
-    activity_id: activity._id,
-    event_id: eventId,
-    seats: [],
-  });
+  const reservation = reservationId
+    ? await SeatReservationModel.findById(reservationId)
+    : new SeatReservationModel({
+        activity_id: activity._id,
+        event_id: eventId,
+        seats: [],
+      });
+
+  if (!reservation) throw new Error('reservation not found');
 
   const area = activity.areas.find((a) => a._id?.equals(areaId));
   const subarea = area?.subareas.find((a) => a._id?.equals(subAreaId));
