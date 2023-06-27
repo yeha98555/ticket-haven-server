@@ -59,3 +59,79 @@ variable "sshrestrict" {
 variable "aws_route53_zone" {
   type = string
 }
+
+variable "NODE_ENV" {
+  type    = string
+  default = "production"
+}
+
+variable "MONGODB_USER" {
+  type = string
+}
+
+variable "MONGODB_PASSWORD" {
+  type = string
+}
+
+variable "MONGODB_DATABASE" {
+  type = string
+}
+
+variable "MONGODB_CONNECT_STRING" {
+  type = string
+}
+
+variable "JWT_SECRET" {
+  type = string
+}
+
+variable "LOG_FILE_DIR" {
+  type    = string
+  default = "logs"
+}
+
+variable "NEWEBPAY_VERSION" {
+  type    = string
+  default = "1.5"
+}
+
+variable "NEWEBPAY_MERCHANT_ID" {
+  type = string
+}
+
+variable "NEWEBPAY_HASH_KEY" {
+  type = string
+}
+
+variable "NEWEBPAY_HASH_IV" {
+  type = string
+}
+
+variable "PORT" {
+  type    = string
+  default = "3000"
+}
+
+variable "NEWEBPAY_NOTIFY_URL" {
+  type = string
+}
+
+variable "NEWEBPAY_RETURN_URL" {
+  type = string
+}
+
+variable "PAYMENT_RETURN_URL" {
+  type = string
+}
+
+variable "TICKET_CHECKIN_KEY" {
+  type = string
+}
+
+variable "TICKET_CHECKIN_IV" {
+  type = string
+}
+
+variable "REDIS_CONNECT_STRING" {
+  type = string
+}

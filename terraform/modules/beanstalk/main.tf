@@ -368,6 +368,97 @@ resource "aws_elastic_beanstalk_environment" "beanstalkappenv" {
     value     = "true"
   }
 
+  ###=========================== Env variables ========================== ###
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "NODE_ENV"
+    value     = var.NODE_ENV
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "PORT"
+    value     = var.PORT
+  }
+  setting { // TODO: use var.docdbcluster_username
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "MONGODB_USER"
+    value     = var.MONGODB_USER
+  }
+  setting { // TODO: use var.docdbcluster_password
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "MONGODB_PASSWORD"
+    value     = var.MONGODB_PASSWORD
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "MONGODB_DATABASE"
+    value     = var.MONGODB_DATABASE
+  }
+  setting { // TODO: replace render mongodb with aws docdb
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "MONGODB_CONNECT_STRING"
+    value     = var.MONGODB_CONNECT_STRING
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "JWT_SECRET"
+    value     = var.JWT_SECRET
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "LOG_FILE_DIR"
+    value     = var.LOG_FILE_DIR
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "NEWEBPAY_VERSION"
+    value     = var.NEWEBPAY_VERSION
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "NEWEBPAY_MERCHANT_ID"
+    value     = var.NEWEBPAY_MERCHANT_ID
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "NEWEBPAY_HASH_KEY"
+    value     = var.NEWEBPAY_HASH_KEY
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "NEWEBPAY_HASH_IV"
+    value     = var.NEWEBPAY_HASH_IV
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "NEWEBPAY_NOTIFY_URL"
+    value     = var.NEWEBPAY_NOTIFY_URL
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "NEWEBPAY_RETURN_URL"
+    value     = var.NEWEBPAY_RETURN_URL
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "PAYMENT_RETURN_URL"
+    value     = var.PAYMENT_RETURN_URL
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "TICKET_CHECKIN_KEY"
+    value     = var.TICKET_CHECKIN_KEY
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "TICKET_CHECKIN_IV"
+    value     = var.TICKET_CHECKIN_IV
+  }
+  setting { // TODO: replace render redis with aws elasticache
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "REDIS_CONNECT_STRING"
+    value     = var.REDIS_CONNECT_STRING
+  }
 }
 
 
