@@ -63,21 +63,14 @@ resource "aws_elastic_beanstalk_environment" "beanstalkappenv" {
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "IamInstanceProfile"
-    # value     = "aws-elasticbeanstalk-ec2-role"
-    value = aws_iam_instance_profile.iamuser.name
+    value     = aws_iam_instance_profile.iamuser.name
   }
   setting {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "ServiceRole"
-    # value     = "aws-elasticbeanstalk-service-role"
-    value = aws_iam_instance_profile.iamuser.name
+    value     = aws_iam_instance_profile.iamuser.name
   }
 
-  # setting {
-  #   namespace = "aws:ec2:vpc"
-  #   name      = "VPCId"
-  #   value     = var.vpc_id
-  # }
   setting {
     namespace = "aws:ec2:vpc"
     name      = "VPCId"
@@ -95,21 +88,11 @@ resource "aws_elastic_beanstalk_environment" "beanstalkappenv" {
     value     = "true"
   }
 
-  # setting {
-  #   namespace = "aws:ec2:vpc"
-  #   name      = "Subnets"
-  #   value     = var.ec2_subnets
-  # }
   setting {
     namespace = "aws:ec2:vpc"
     name      = "Subnets"
     value     = aws_subnet.subnet_a.id
   }
-  # setting {
-  #   namespace = "aws:ec2:vpc"
-  #   name      = "ELBSubnets"
-  #   value     = join(",", var.elb_subnets)
-  # }
   setting {
     namespace = "aws:ec2:vpc"
     name      = "ELBSubnets"

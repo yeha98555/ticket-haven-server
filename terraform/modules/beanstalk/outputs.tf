@@ -1,11 +1,3 @@
-# output "cname" {
-#   value = aws_elastic_beanstalk_environment.beanstalkappenv.cname
-# }
-
-# output "zone" {
-#   value = data.aws_elastic_beanstalk_hosted_zone.current.id
-# }
-
 output "envName" {
   value = aws_elastic_beanstalk_environment.beanstalkappenv.name
 }

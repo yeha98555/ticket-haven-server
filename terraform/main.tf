@@ -6,8 +6,6 @@ module "dns_and_ssl" {
   source = "./modules/dns_and_ssl/"
 
   domain_name = var.domain_name
-  # cname       = module.eb.cname
-  # zone        = module.eb.zone
 }
 
 module "eb" {
