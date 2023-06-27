@@ -30,3 +30,6 @@ override.tf.json
 
 # Ignore lock files
 *.lock.*
+
+# Ignore source file for the application deployment package
+*.zip
