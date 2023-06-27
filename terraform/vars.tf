@@ -45,3 +45,27 @@ variable "sshrestrict" {
 variable "alarm_sns_topic" {
 
 }
+
+variable "docdb_username" {
+
+}
+
+variable "docdb_password" {
+
+}
+
+variable "docdb_port" {
+
+}
+
+variable "backup_retention_period" {
+
+}
+
+variable "preferred_backup_window" {
+
+}
+
+variable "instance_class" {
+
+}

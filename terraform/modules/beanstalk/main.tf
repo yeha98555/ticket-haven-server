@@ -1,38 +1,3 @@
-# create vpc
-resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
-}
-
-resource "aws_internet_gateway" "gw" {
-  vpc_id = aws_vpc.main.id
-}
-
-resource "aws_route_table" "main" {
-  vpc_id = aws_vpc.main.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.gw.id
-  }
-}
-
-resource "aws_main_route_table_association" "a" {
-  vpc_id         = aws_vpc.main.id
-  route_table_id = aws_route_table.main.id
-}
-
-# create subnet
-resource "aws_subnet" "subnet_a" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "${var.region}a"
-}
-resource "aws_subnet" "subnet_b" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.2.0/24"
-  availability_zone = "${var.region}b"
-}
-
 # create IAM
 resource "aws_iam_instance_profile" "iamuser" {
   name = var.iam_user
@@ -74,7 +39,7 @@ resource "aws_elastic_beanstalk_environment" "beanstalkappenv" {
   setting {
     namespace = "aws:ec2:vpc"
     name      = "VPCId"
-    value     = aws_vpc.main.id
+    value     = var.vpc_id
   }
   setting {
     namespace = "aws:ec2:vpc"
@@ -91,12 +56,12 @@ resource "aws_elastic_beanstalk_environment" "beanstalkappenv" {
   setting {
     namespace = "aws:ec2:vpc"
     name      = "Subnets"
-    value     = aws_subnet.subnet_a.id
+    value     = var.subnet_a_id
   }
   setting {
     namespace = "aws:ec2:vpc"
     name      = "ELBSubnets"
-    value     = join(",", [aws_subnet.subnet_a.id, aws_subnet.subnet_b.id])
+    value     = join(",", [var.subnet_a_id, var.subnet_b_id])
   }
 
   setting {
@@ -379,25 +344,25 @@ resource "aws_elastic_beanstalk_environment" "beanstalkappenv" {
     name      = "PORT"
     value     = var.PORT
   }
-  setting { // TODO: use var.docdbcluster_username
+  setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "MONGODB_USER"
-    value     = var.MONGODB_USER
+    value     = var.db_username
   }
-  setting { // TODO: use var.docdbcluster_password
+  setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "MONGODB_PASSWORD"
-    value     = var.MONGODB_PASSWORD
+    value     = var.db_password
   }
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "MONGODB_DATABASE"
     value     = var.MONGODB_DATABASE
   }
-  setting { // TODO: replace render mongodb with aws docdb
+  setting {
     namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "MONGODB_CONNECT_STRING"
-    value     = var.MONGODB_CONNECT_STRING
+    name      = "MONGODB_ENDPOINT"
+    value     = var.db_endpoint
   }
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"

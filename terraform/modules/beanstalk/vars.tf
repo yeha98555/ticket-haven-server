@@ -1,12 +1,20 @@
-variable "region" {
-  type = string
-}
-
 variable "domain_name" {
   type = string
 }
 
 variable "backend_domain" {
+  type = string
+}
+
+variable "subnet_a_id" {
+  type = string
+}
+
+variable "vpc_id" {
+  type = string
+}
+
+variable "subnet_b_id" {
   type = string
 }
 
@@ -65,19 +73,20 @@ variable "NODE_ENV" {
   default = "production"
 }
 
-variable "MONGODB_USER" {
+variable "db_username" {
   type = string
 }
 
-variable "MONGODB_PASSWORD" {
+variable "db_password" {
   type = string
 }
 
 variable "MONGODB_DATABASE" {
-  type = string
+  type    = string
+  default = "concert"
 }
 
-variable "MONGODB_CONNECT_STRING" {
+variable "db_endpoint" {
   type = string
 }
 
