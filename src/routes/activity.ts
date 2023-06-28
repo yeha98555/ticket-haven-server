@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import z from 'zod';
-import { processRequestQuery, validateRequestParams } from '@/middleware/paramsValidator';
+import {
+  processRequestQuery,
+  validateRequestParams,
+} from '@/middleware/paramsValidator';
 import activityController from '@/controllers/activity';
 import parseSortString from '@/utils/parseSortString';
 import { Region } from '@/enums/region';
@@ -20,6 +23,8 @@ activityRouter.get(
         .optional(),
       startAfter: z.coerce.date().optional(),
       startBefore: z.coerce.date().optional(),
+      sellStartAfter: z.coerce.date().optional(),
+      sellStartBefore: z.coerce.date().optional(),
       q: z.string().optional(),
       sort: z
         .string()
