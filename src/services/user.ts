@@ -18,6 +18,7 @@ const userService = {
       'bank_account',
       'activity_region',
       'birthday',
+      'avatar_url',
     ]);
     return user;
   },
