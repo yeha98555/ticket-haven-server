@@ -1,5 +1,5 @@
 export enum OrderStatus {
-  TEMP,
+  PENDING,
   SUCCESS,
   CANCELLED,
 }

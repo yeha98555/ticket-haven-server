@@ -133,6 +133,8 @@ const searchActivities = async ({
   region,
   startAfter,
   startBefore,
+  sellStartBefore,
+  sellStartAfter,
   q,
   sort,
 }: {
@@ -141,12 +143,15 @@ const searchActivities = async ({
   region?: Region;
   startAfter?: Date;
   startBefore?: Date;
+  sellStartBefore?: Date;
+  sellStartAfter?: Date;
   q?: string;
   sort?: SortRules;
 }) => {
   const filter: {
     region?: Region;
     start_at?: { $gte?: Date; $lt?: Date };
+    sell_at?: { $gte?: Date; $lt?: Date };
     name?: { $regex: string };
   } = {};
 
@@ -160,6 +165,15 @@ const searchActivities = async ({
     filter.start_at = {
       ...(filter.start_at || {}),
       $lt: d.add(startBefore, { days: 1 }),
+    };
+  }
+  if (sellStartAfter) {
+    filter.sell_at = { $gte: sellStartAfter };
+  }
+  if (sellStartBefore) {
+    filter.sell_at = {
+      ...(filter.sell_at || {}),
+      $lt: d.add(sellStartBefore, { days: 1 }),
     };
   }
 
@@ -198,7 +212,7 @@ const searchActivities = async ({
   );
 
   const totalCount = await ActivityModel.countDocuments(filter);
-  const totalPages = Math.floor(totalCount / pageSize) || 1;
+  const totalPages = Math.ceil(totalCount / pageSize) || 1;
 
   return {
     page,

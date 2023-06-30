@@ -24,7 +24,7 @@ const eventSchema = new Schema({
   sellend_at: { type: Date, required: true },
   start_at: { type: Date, required: true },
   end_at: { type: Date, required: true },
-  qrcode_verify_link: String,
+  qrcode_verify_id: String,
 });
 
 const activitySchema = new Schema(

@@ -19,9 +19,7 @@ const getOrders = async ({
   const filter = {
     user_id: new Types.ObjectId(userId),
     status:
-      status === 'unpaid'
-        ? OrderStatus.TEMP
-        : { $in: [OrderStatus.SUCCESS, OrderStatus.CANCELLED] },
+      status === 'unpaid' ? OrderStatus.PENDING : { $ne: OrderStatus.PENDING },
   };
 
   let orders: (Order & {
@@ -106,7 +104,7 @@ const getOrders = async ({
 
   const totalCount = await OrderModel.countDocuments(filter);
 
-  const totalPages = Math.floor(totalCount / pageSize) || 1;
+  const totalPages = Math.ceil(totalCount / pageSize) || 1;
 
   const data = orders.map((o) => {
     const { _id, order_no, price, status, activity, seats, create_at } = o;

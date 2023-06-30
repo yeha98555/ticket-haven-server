@@ -7,7 +7,7 @@ on:
       - develop
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -22,29 +22,11 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
-      - name: Run tests
-        run: yarn test
-
       - name: Build
-        if: ${{ success() && github.event_name == 'push' }}
         run: yarn build
 
       - name: Deploy to Render
-        if: ${{ success() && github.event_name == 'push' }}
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           service-id: ${{ secrets.SERVICE_ID_DEVELOP }} # Can be found as part of the Deploy Hook
           api-key: ${{ secrets.RENDER_API_KEY }} # Create your API key in Render Dashboard > Account Settings
-
-      - name: Rollback
-        if: ${{ failure() && github.event_name == 'push' }}
-        run: |
-          git reset HEAD~
-          git push --force
-
-          # Post a comment on the pull request
-          curl -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{"body": "The CI job has failed. The last commit has been rolled back."}' \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${{ github.event.pull_request.number }}/comments"

@@ -13,14 +13,13 @@ const orderSchema = new Schema(
     },
     event_id: { type: Schema.Types.ObjectId, required: true },
     order_no: { type: String, required: true, unique: true },
-    transfer_from_order: Schema.Types.ObjectId,
     seat_reservation_id: {
       type: Schema.Types.ObjectId,
       ref: 'seat_reservation',
     },
     status: {
       type: Number,
-      default: OrderStatus.TEMP,
+      default: OrderStatus.PENDING,
       validate: toValidate(z.nativeEnum(OrderStatus)),
     },
     price: { type: Number, required: true },

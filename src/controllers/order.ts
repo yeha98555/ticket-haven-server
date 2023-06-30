@@ -41,22 +41,32 @@ const orderController = {
     res.json(Body.success(orderInfo));
   }),
   addSeats: catchAsyncError(async (req, res) => {
-    const order = await OrderModel.findOne({ user_id: req.userId }).byNo(
+    await orderService.addSeats({
+      userId: req.userId,
+      orderNo: req.params.orderNo,
+      ...req.body,
+    });
+
+    const orderInfo = await orderService.getOrderInfo(
+      req.userId!,
       req.params.orderNo,
     );
-    if (!order) throw new NotFoundException();
 
-    const result = await orderService.addSeats({ order, ...req.body });
-    res.json(Body.success(result));
+    res.json(Body.success(orderInfo));
   }),
   deleteSeat: catchAsyncError(async (req, res) => {
-    const order = await OrderModel.findOne({ user_id: req.userId }).byNo(
+    await orderService.deleteSeat({
+      userId: req.userId,
+      orderNo: req.params.orderNo,
+      ...req.body,
+    });
+
+    const orderInfo = await orderService.getOrderInfo(
+      req.userId!,
       req.params.orderNo,
     );
-    if (!order) throw new NotFoundException();
 
-    const result = await orderService.deleteSeat({ order, ...req.body });
-    res.json(Body.success(result));
+    res.json(Body.success(orderInfo));
   }),
   payment: catchAsyncError(async (req, res) => {
     const result = await orderService.payment(req.userId!, req.params.orderNo);

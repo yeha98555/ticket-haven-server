@@ -13,4 +13,5 @@ export const enum StatusCode {
   SEATS_AUTO_SELECTION_FAIL = '0011',
   EVENT_NOT_ON_SALE = '0012',
   ORDER_NO_SEATS = '0013',
+  CONFLICT = '0014',
 }

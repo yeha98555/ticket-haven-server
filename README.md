@@ -83,6 +83,7 @@ Technologies used in this project
 ├── tsconfig.json            // TypeScript configuration file
 ├── .commitlintrc.json       // CommitLint configuration file, used for checking the format of Git commit messages
 ├── .env.sample              // .env template file, storing sample environment variables
+├── .env.test                // .env file for testing
 ├── .eslintignore            // ESLint ignore configuration, specifying files that don't need syntax checking
 ├── .eslintrc.json           // ESLint configuration file, used for setting syntax checking rules
 ├── .gitignore               // Git ignore configuration, specifying files that don't need version control
